@@ -122,7 +122,7 @@ var siteFunc = {
 
     getPicNews: function(q){
         console.log(q,'这是查询图片新闻')
-        var contents = Content.find({ 'category' : 'HkxqBlvsf' },'title discription date sImg dateSeted').sort({'dateSeted': -1}).skip(0).limit(q).exec(function(err,data) {
+        var contents = Content.find({ 'keyName' : 'publicWork' },'title discription date sImg dateSeted').sort({'dateSeted': -1}).skip(0).limit(q).exec(function(err,data) {
             console.log(data, 'query data')
         });
         return contents
