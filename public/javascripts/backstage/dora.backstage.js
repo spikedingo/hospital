@@ -29,6 +29,7 @@ function setContainerPosition(obj){
 
 //将后台获取的list解析为tree对象所需的json数据
 function changeToTreeJson(result,key,oldValue){
+    console.log(result, key)
     var arrTree = [];
     var treeItem;
     for(var i=0;i<result.length;i++){
@@ -50,7 +51,7 @@ function changeToTreeJson(result,key,oldValue){
         }else if(key === "allThemeFolderTree"){
             treeItem = new TempsTree(result[i]._id,result[i].name,result[i].alias);
         }else{
-            treeItem = new TreeInfo(result[i]._id,result[i].parentID,result[i].name,result[i].sortPath,result[i].homePage,result[i].contentTemp,true,false);
+            treeItem = new TreeInfo(result[i]._id,result[i].parentID,result[i].name,result[i].sortPath,result[i].homePage,result[i].contentTemp,result[i].key,true,false);
         }
         arrTree.push(treeItem);
     }
@@ -74,13 +75,14 @@ function getCateNameById(result,id){
 
 
 //    创建树对象结构
-function TreeInfo(id,pId,name,sortPath,homePage,contentTemp,open,click){
+function TreeInfo(id,pId,name,sortPath,homePage,contentTemp,key,open,click){
     this.id = id;
     this.pId = pId;
     this.name = name;
     this.contentTemp = contentTemp;
     this.sortPath = sortPath;
     this.homePage = homePage;
+    this.key = key;
     this.open = open;
     this.click = click;
 }
@@ -449,6 +451,7 @@ function getTargetPostUrl($scope,bigCategory){
 function initTreeDataByType($scope,$http,type){
 
     var params = getTreeParams($scope,type);
+    console.log(params, 'tree params')
     $http.get(params.url).success(function(result){
         //回选指定值
         if(type == 'allThemeFolderTree'){
@@ -458,6 +461,9 @@ function initTreeDataByType($scope,$http,type){
             $("#"+params.listId).html(getCateNameById(result,params.currentId));
         }
         var arrTree = changeToTreeJson(result,params.treeObjId);
+
+        console.log(result, arrTree, 'result')
+
         var setting = {
             view: {
                 dblClickExpand: false,
@@ -484,6 +490,7 @@ function initTreeDataByType($scope,$http,type){
                 v = "",
                 vid = "",
                 sortPath = "",
+                key = "",
                 alias = "";
 
             nodes.sort(function compare(a,b){return a.id-b.id;});
@@ -492,12 +499,14 @@ function initTreeDataByType($scope,$http,type){
                 vid += nodes[i].id ;
                 sortPath += nodes[i].sortPath ;
                 alias += nodes[i].alias ;
+                key += nodes[i].key;
             }
             if(type == "adminGroup"){
                 $scope.formData.group = vid;
             }else if(type == "contentCategories"){
                 $scope.formData.category = vid;
                 $scope.formData.sortPath = sortPath;
+                $scope.formData.keyName = key;
                 // 针对顶级类别的文章做标记
                 if(sortPath.split(',').length == 2){
                     $scope.formData.type = "singer";
