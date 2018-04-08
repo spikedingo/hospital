@@ -726,8 +726,6 @@ var returnAdminRouter = function(io) {
 
     });
 
-
-
 //------------------------------------------文档分类管理开始
 //文档类别列表页面
     router.get('/manage/contentCategorys', function(req, res, next) {
@@ -761,6 +759,8 @@ var returnAdminRouter = function(io) {
                     console.log(err);
                 }else{
 //            组合类别路径
+                    newObj.key = newObj.homePage;
+
                     if(newObj.parentID == "0"){
                         newObj.defaultUrl = newObj.homePage;
                     }else{
