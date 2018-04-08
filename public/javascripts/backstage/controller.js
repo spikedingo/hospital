@@ -454,6 +454,7 @@ doraApp.controller("systemLogs",['$scope','$http',function($scope,$http){
 
 //文档新增/编辑
 doraApp.controller("addContent",['$scope','$http','pageData','getItemService',function($scope,$http,pageData,getItemService){
+    console.log('adding contenat')
     $scope.formData = {};
     // 初始化文章分类
     initTreeDataByType($scope,$http,"contentCategories");
@@ -471,6 +472,7 @@ doraApp.controller("addContent",['$scope','$http','pageData','getItemService',fu
         });
 
     });
+
     // 通过访问地址获取文章id
     $scope.targetID = window.location.href.split("/")[8];
     if($scope.targetID){
@@ -481,22 +483,68 @@ doraApp.controller("addContent",['$scope','$http','pageData','getItemService',fu
             $("#myImg").attr("src",$scope.formData.sImg)
         })
     }
+
+
+    $scope.formData.from = "1"
+    console.log($scope.formData)
+
+    $('#content-from').change(function() {
+        console.log($scope.formData)
+    })
+    
+
     // 添加或修改文章
     $scope.processForm = function(isValid){
         $scope.formData.state = true;
-        if(!$scope.formData.category){
+        var isWX = $scope.formData.from == 3
+
+        if (!isValid) {
             $.tipsShow({
-                message : '请选择文档类别',
+                message : '请填写文章各必填项',
                 type : 'warning' ,
                 callBack : function(){
                     return;
                 }
             });
-        }else{
-            angularHttpPost($http,isValid,getTargetPostUrl($scope,pageData.bigCategory),$scope.formData,function(data){
-                window.location = "/admin/manage/contentList";
-            });
+            return false
         }
+
+        if (isWX) {
+            if (!$scope.formData.originUrl) {
+                $.tipsShow({
+                    message : '请填写来源网址',
+                    type : 'warning' ,
+                    callBack : function(){
+                        return;
+                    }
+                });
+                return false
+            }
+        }else{
+            if (!$scope.formData.comments) {
+                $.tipsShow({
+                    message : '请填写正文',
+                    type : 'warning' ,
+                    callBack : function(){
+                        return;
+                    }
+                });
+                return false
+            }else if(!$scope.formData.category){
+                $.tipsShow({
+                    message : '请选择文档类别',
+                    type : 'warning' ,
+                    callBack : function(){
+                        return;
+                    }
+                });
+                return false
+            }
+        }
+
+        angularHttpPost($http,isValid,getTargetPostUrl($scope,pageData.bigCategory),$scope.formData,function(data){
+            //window.location = "/admin/manage/contentList";
+        });
     };
     //  存草稿
     $scope.saveAsDraft = function(){
