@@ -14,6 +14,7 @@ var ContentCategorySchema = new Schema({
         unique: true,
         'default': shortid.generate
     },
+    key: { type: String, unique: true },
     uid : { type: Number, default: 0 },
     name:  String,
     keywords : String,

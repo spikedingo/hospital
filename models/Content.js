@@ -18,7 +18,8 @@ var ContentSchema = new Schema({
     title:  String,
     stitle : String,
     type: { type: String, default: "content" }, // 发布形式 默认为普通文档,约定 singer 为单页面文档
-    category : { type : String , ref : 'ContentCategory'}, //文章类别
+    category : { type : String , ref : 'ContentCategory'}, //文章所属栏目
+    keyName : { type: String, default: "hospital_news" },
     sortPath : String, //存储所有父节点结构
     tags : String, // 标签
     keywords : String,
@@ -35,7 +36,8 @@ var ContentSchema = new Schema({
     commentNum : { type: Number, default: 0 }, // 评论数
     likeNum : { type: Number, default: 0 }, // 喜欢数
     likeUserIds : String, // 喜欢该文章的用户ID集合
-    from : { type: String, default: '1' }, // 来源 1为原创 2为转载
+    originUrl : String,  // 文章来源网址
+    from : { type: String, default: '1' }, // 来源 1为原创 2为转载 3为微信
 
 
 //    插件信息相关属性
