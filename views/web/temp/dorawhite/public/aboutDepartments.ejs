@@ -1,0 +1,36 @@
+<script type="text/javascript">
+    function textBeautiful(obj){
+        
+        $(obj).find('.dDescription').each(function(i,x){
+            var splitedText = x.innerHTML.split('br');
+            $(x).html(splitedText.join('<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'));
+        });
+    }
+    window.onload = function(){
+        textBeautiful($('.depTable'));
+    }
+</script>
+
+<div class="aboutDepartments container">
+    <div class="innerBanner" style="display:none;"><img src="/themes/<%=staticforder%>/images/aboutDepartments.jpg" style="width:100%; margin:20px 0 20px 0 ;"></div>
+    <div class="table-responsive tableDiv">
+            <tbody>
+                <%if(departmentsList.length>0){%>
+                    <%departmentsList.forEach(function(item){%>
+                        <div style="margin-bottom:20px;">
+                            <table class="table table-bordered depTable">
+                                <tr>
+                                    <td rowspan="2" class="depType" style="background-color:#6298ed; color:white; width:100px;"><%=item.department%></td>
+                                    <td style="background-color:#4b77bc; color:white;"><%=item.mainDoctor%></td>
+                                </tr>
+                                <tr>
+                                    <td class="dDescription" style="text-align:left; font-size:14px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<%=item.discription%></td>
+                                </tr>
+                            </table>
+                        </div>
+                    <%})%>
+                <%}%>
+            </tbody>
+        <p class="pageIntro" style=""><a href="/aboutDoctors" style="color:white;">点击查看医护团队</a></p>
+    </div>
+</div>

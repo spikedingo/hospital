@@ -1,0 +1,63 @@
+<div class="aboutDoctors container">
+    <div class="innerBanner" style="display:none;"><img src="/themes/<%=staticforder%>/images/aboutDoctors.jpg" style="width:100%;"></div>
+    <%if(doctorList.length>0){%>
+        <div class="row aboutExpert">
+        <h2 class="pageIntro" style="background-color:#F95738;">专家介绍</h2>
+            <%doctorList.forEach(function(item){%>
+                <%if(item.departmentType == 3 ){%>
+                    <div class="col-sm-6 col-md-6 col-lg-4">
+                        <div class="doctorCell">
+                            <img src="<%=item.sImg%>">
+                            <div class="introCell">
+                                <h3 style=" margin-top:16px;"><span style="color:#1B998B; font-weight:bold">专家：</span><%=item.doctor%></h3>
+                                <h3><span style=" color:#3e92cc;">科室：</span><%=item.department%></h3>
+                                <h3 ><span style=" color:#E84855;">职称：</span><%=item.skillLevel%></h3>
+                                <h3><span style=" color:#ff8c42;">专长：</span><%=item.professional%></h3>
+                                <p style="height:118px; overflow:hidden;"><span style=" color:#1A535C;">医生简介：</span><%=item.discription%></p>
+                            </div>
+                        </div>
+                    </div>
+                <%}%>
+            <%})%>
+        </div>
+        <div class="row">
+            <h2 class="pageIntro" style="background-color:#EE964B;">临床科室</h2>
+            <%doctorList.forEach(function(item){%>
+                <%if(item.departmentType == 0 ){%>
+                    <div class="col-sm-6 col-md-6 col-lg-4">
+                        <div class="doctorCell">
+                            <img src="<%=item.sImg%>">
+                            <div class="introCell">
+                                <h3 style=" margin-top:16px;"><span style="color:#1B998B; font-weight:bold">医生：</span><%=item.doctor%></h3>
+                                <h3><span style=" color:#3e92cc;">科室：</span><%=item.department%></h3>
+                                <h3 ><span style=" color:#E84855;">职称：</span><%=item.skillLevel%></h3>
+                                <h3><span style=" color:#ff8c42;">专长：</span><%=item.professional%></h3>
+                                <p><span style=" color:#1A535C;">医生简介：</span><%=item.discription%></p>
+                            </div>
+                        </div>
+                    </div>
+                <%}%>
+            <%})%>
+        </div>
+        <div class="row">
+            <h2 class="pageIntro" style="background-color:#2EC4B6;">医技科室</h2>
+            <%doctorList.forEach(function(item){%>
+                <%if(item.departmentType == 1 ){%>
+                    <div class="col-sm-6 col-md-6 col-lg-4">
+                        <div class="doctorCell">
+                            <img src="<%=item.sImg%>">
+                            <div class="introCell">
+                                <h3 style=" margin-top:16px;"><span style="color:#1B998B; font-weight:bold">医生：</span><%=item.doctor%></h3>
+                                <h3><span style=" color:#3e92cc;">科室：</span><%=item.department%></h3>
+                                <h3 ><span style=" color:#E84855;">职称：</span><%=item.skillLevel%></h3>
+                                <h3><span style=" color:#ff8c42;">专长：</span><%=item.professional%></h3>
+                                <p><span style=" color:#1A535C;">医生简介：</span><%=item.discription%></p>
+                            </div>
+                        </div>
+                    </div>
+                <%}%>
+            <%})%>
+        </div>
+    <%}%>
+    <p class="pageIntro" style=""><a href="/aboutDepartments" style="color:white;">点击查看科室一览</a></p>
+</div>

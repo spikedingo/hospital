@@ -1,0 +1,51 @@
+<div class="row" ng-controller="doctorList">
+	<% include public/modal %>
+    <div class="col-xs-12">
+        <div class="panel">
+            <div class="btn-group">
+                <button class="btn btn-primary btn-sm" type="button"><span class="fa fa-plus-square" aria-hidden="true">&nbsp;</span>添加文档</button>
+                <button data-toggle="dropdown" class="btn btn-primary btn-sm dropdown-toggle" type="button" aria-expanded="false">
+                    <span class="caret"></span>
+                    <span class="sr-only">请选择文档类型</span>
+                </button>
+                <ul role="menu" class="dropdown-menu">
+                    <li><a href="/admin/manage/doctor/add/doctor">添加医生</a></li>
+                </ul>
+            </div>
+            <% include public/tableTool %>
+            <div class="pull-right">
+                <% include public/searchBox %>
+            </div>
+        </div>
+        <div class="box">
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                    <tr>
+                        <th><input type="checkbox" class="mini" id="selectAll"/></th>
+                        <th>医生姓名</th>
+                        <th>添加时间</th>
+                        <th>所属科室</th>
+                        <th>医生职称</th>
+                        <th>专业项目</th>
+                    </tr>
+                    <tr class="datalist" ng-repeat="doctors in data">
+                        <td><input type="checkbox" name="listItem" class="mini" value="{{doctors._id}}" ng-click="getNewIds()"/></td>
+
+                        <td ng-switch on="doctors.type"><span ng-switch-default>{{doctors.doctor}}</span></td>
+                        <td>{{doctors.updateDate | date : "yyyy-MM-dd"}}</td>
+                        <td>{{doctors.department}}</td>
+                        <td>{{doctors.skillLevel}}</td>
+                        <td>{{doctors.professional}}</td>
+                        <td>
+                            <a href="/admin/manage/doctor/edit/{{doctors._id}}" role="button"  title="编辑" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>
+                            <button class="btn btn-default btn-xs" type="button" title="删除" ng-click="delOneItem(doctors._id)"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                    </tr>
+                </table>
+            </div><!-- /.box-body -->
+            <% include public/tableFooter %>
+        </div><!-- /.box -->
+    </div>
+
+
+</div>

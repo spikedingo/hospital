@@ -1,0 +1,49 @@
+<div class="container indexDoctor">
+    <div class="row typeButton">
+        <div class="col-sm-4 col-md-4 col-lg-4" style=" height:40px;">
+            <div class="typeSwitch" style="background-color:#F95738;">
+                <p style="">专家介绍</p>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4" style=" height:40px;">
+            <div class="typeSwitch">
+                <p>临床科室</p>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4" style=" height:40px;">
+            <div class="typeSwitch">
+                <p>医技科室</p>
+            </div>
+        </div>
+    </div>
+    <h2 class="pageIntro switchBtn visible-xs" style="margin-bottom:20px; width:40%;">换一组</h2>
+    <div class="expertCell bigCell activeCell">
+        <%if(doctorList.length>0){%> 
+            <%for(var i=0; i<Math.ceil(doctorList.length/6); i++){%>
+                <div class="row docListCell" style="display:none;">
+                    <%for(var j=0; j<6; j++){%>
+                        <%if(doctorList[j+i*6]){%>
+                            <div class="col-sm-6 col-md-6 col-lg-6" style="height:224px;">
+                               <div class="doctorCell">
+                                    <img src="<%=doctorList[j+i*6].sImg%>">
+                                    <div class="introCell">
+                                        <h3 style=" margin-top:16px;"><span style="color:#1B998B; font-weight:bold">专家：</span><%=doctorList[j+i*6].doctor%></h3>
+                                        <h3><span style=" color:#3e92cc;">科室：</span><%=doctorList[j+i*6].department%></h3>
+                                        <h3 ><span style=" color:#E84855;">职称：</span><%=doctorList[j+i*6].skillLevel%></h3>
+                                        <h3><span style=" color:#ff8c42;">专长：</span><%=doctorList[j+i*6].professional%></h3>
+                                        <p style="height:118px; overflow:hidden;"><span style=" color:#1A535C;">医生简介：</span><%=doctorList[j+i*6].discription%></p>
+                                    </div>
+                                </div>
+                            </div>
+                        <%}else{%>
+                            
+                        <%}%>
+                    <%}%>
+                </div>
+            <%}%>
+        <%}%>
+    </div>
+    <div class="clinicalCell bigCell"></div>
+    <div class="technologyCell bigCell"></div>
+    <h2 class="pageIntro switchBtn hidden-xs" style="margin-top:20px; width:40%;">换一组</h2>
+</div>

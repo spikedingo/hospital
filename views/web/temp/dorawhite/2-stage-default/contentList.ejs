@@ -1,0 +1,31 @@
+<div class="container newsCenter">
+    <div class="innerBanner" style="display:none;"><img src="/themes/<%=staticforder%>/images/newsCenter.jpg" style="width:100%; margin:0 0 20px 0 ;"></div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-2 right-frame">
+                <% include ../public/searchBoardShort %>
+                <ul>
+                    <%if(cateTypes.length>0){%>
+                        <%cateTypes.forEach(function(item){%>
+                            <%if(item.defaultUrl == currentCateList[0].defaultUrl){%>
+                                <li class="active"><a data-value="<%=item._id%>" href="/<%=item.defaultUrl%>___<%=item._id%>"><%=item.name%></a></li>
+                            <%}else{%>
+                                <li><a data-value="<%=item._id%>" href="/<%=item.defaultUrl%>___<%=item._id%>"><%=item.name%></a></li>
+                            <%}%>
+                        <%})%>
+                    <%}else{%>
+                        <li><a href="">图片新闻</a></li>
+                        <li><a href="">通知公告</a></li>
+                        <li><a href="">护理园地</a></li>
+                        <li><a href="">党建工作</a></li>     
+                    <%}%>
+                </ul>
+            </div>
+            <div class="col-md-10 right-frame">
+                <h3 class="pageIntro"><%=cateInfo.name%> 下的文章</h3>
+                <% include ../public/itemListTemp %>
+                <% include ../public/pagination %>
+            </div>
+        </div>
+    </div>
+</div>

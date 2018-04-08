@@ -1,0 +1,28 @@
+<div class="picNews">
+    <h3>图片新闻</h3>
+    <div id="myCarousel1" class="carousel slide"> 
+        <ul class="carousel-indicators sImgUl">
+            <%if(picNews.length>0){%>
+                <%picNews.forEach(function(item,i){%>
+                    <li data-target="#myCarousel1" data-slide-to="<%=i%>">
+                        <img src="<%=item.sImg%>"  alt="<%=item.title%>" title="<%= item.title%>">
+                    </li>
+                <%})%>
+            <%}%>
+        </ul> 
+        <div class="carousel-inner">
+            <%if(picNews.length>0){%>
+                <%picNews.forEach(function(item){%>
+                    <div class="item picDiv">
+                        <img src="<%= item.sImg %>">
+                        <div class="progressBar">
+                            <p>
+                                <a href="/details/<%=item._id%>.html" target="_blank"><%=item.title%></a>
+                            </p>
+                        </div>
+                    </div>
+                <%})%>
+            <%}%>
+        </div>
+    </div>
+</div>
