@@ -51,6 +51,9 @@ module.exports = {
 
     CONTENTMANAGE : new Array('contentManage','内容管理'), // 后台模块(内容管理)
     CONTENTLIST : new Array('contentManage_content','文档管理'),
+    TOPICCONTENTLIST : new Array('contentManage_topicContent','专栏管理'),
+    PUBLICCONTENTLIST : new Array('contentManage_publicContent','党建管理'),
+    NOTICESLIST : new Array('contentManage_notices','通知管理'),
     CONTENTCATEGORYS : new Array('contentManage_cateGory','文档类别管理'),
     DEPARTMENTLIST: new Array('contentManage_department','科室管理'),  //科室管理
     DOCTORLIST: new Array('contentManage_doctor','医生管理'),  //医生管理

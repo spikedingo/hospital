@@ -11,7 +11,10 @@ var AdminUser = require("../AdminUser");
 //管理员用户组对象
 var AdminGroup = require("../AdminGroup");
 // 文档对象
-var Content = require("../Content");
+var Content = require("../Content");  //普通文档
+var TopicContent = require("../TopicContent");  //首页文档
+var PublicContent = require("../PublicContent");  //党建工作
+var Notices = require("../Notices");  //通知公告
 // 科室对象
 var Department = require("../Department");
 // 医生对象
@@ -189,6 +192,12 @@ var adminFunc = {
             targetObj = SystemOptionLog;
         }else if(currentPage.indexOf(settings.CONTENTLIST[0]) >=0 ){
             targetObj = Content;
+        }else if(currentPage.indexOf(settings.NOTICESLIST[0]) >=0 ){
+            targetObj = Notices;
+        }else if(currentPage.indexOf(settings.TOPICCONTENTLIST[0]) >=0 ){
+            targetObj = TopicContent;
+        }else if(currentPage.indexOf(settings.PUBLICCONTENTLIST[0]) >=0 ){
+            targetObj = PublicContent;
         }else if(currentPage.indexOf(settings.DEPARTMENTLIST[0]) >=0 ){
             targetObj = Department;
         }else if(currentPage.indexOf(settings.DOCTORLIST[0]) >= 0 ){
