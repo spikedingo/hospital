@@ -9,7 +9,7 @@ var Schema = mongoose.Schema;
 var shortid = require('shortid');
 var ContentCategory = require('./ContentCategory');
 var AdminUser = require('./AdminUser');
-var ContentSchema = new Schema({
+var TopicContentSchema = new Schema({
     _id: {
         type: String,
         unique: true,
@@ -19,7 +19,7 @@ var ContentSchema = new Schema({
     stitle : String,
     type: { type: String, default: "content" }, // 发布形式 默认为普通文档,约定 singer 为单页面文档
     category : { type : String , ref : 'ContentCategory'}, //文章所属栏目
-    keyName : { type: String, default: "hospital_news" },
+    keyName : { type: String, default: "topic_content" },
     sortPath : String, //存储所有父节点结构
     tags : String, // 标签
     keywords : String,
@@ -42,7 +42,7 @@ var ContentSchema = new Schema({
 
 
 
-ContentSchema.statics = {
+TopicContentSchema.statics = {
 //更新评论数
     updateCommentNum : function(contentId,key,callBack){
         Content.findOne({'_id' : contentId},'commentNum',function(err,doc){
@@ -65,7 +65,7 @@ ContentSchema.statics = {
 
 
 
-var Content = mongoose.model("Content",ContentSchema);
+var TopicContent = mongoose.model("TopicContent",TopicContentSchema);
 
-module.exports = Content;
+module.exports = TopicContent;
 

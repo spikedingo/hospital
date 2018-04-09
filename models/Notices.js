@@ -9,7 +9,7 @@ var Schema = mongoose.Schema;
 var shortid = require('shortid');
 var ContentCategory = require('./ContentCategory');
 var AdminUser = require('./AdminUser');
-var ContentSchema = new Schema({
+var NoticesSchema = new Schema({
     _id: {
         type: String,
         unique: true,
@@ -18,8 +18,8 @@ var ContentSchema = new Schema({
     title:  String,
     stitle : String,
     type: { type: String, default: "content" }, // 发布形式 默认为普通文档,约定 singer 为单页面文档
-    category : { type : String , ref : 'ContentCategory'}, //文章所属栏目
-    keyName : { type: String, default: "hospital_news" },
+    category : { type : String }, //文章所属栏目
+    keyName : { type: String, default: "noticess" },
     sortPath : String, //存储所有父节点结构
     tags : String, // 标签
     keywords : String,
@@ -36,13 +36,12 @@ var ContentSchema = new Schema({
     commentNum : { type: Number, default: 0 }, // 评论数
     likeNum : { type: Number, default: 0 }, // 喜欢数
     likeUserIds : String, // 喜欢该文章的用户ID集合
-    originUrl : String,  // 文章来源网址
-    from : { type: String, default: '1' }, // 来源 1为原创 2为转载 3为微信
+
 });
 
 
 
-ContentSchema.statics = {
+NoticesSchema.statics = {
 //更新评论数
     updateCommentNum : function(contentId,key,callBack){
         Content.findOne({'_id' : contentId},'commentNum',function(err,doc){
@@ -65,7 +64,7 @@ ContentSchema.statics = {
 
 
 
-var Content = mongoose.model("Content",ContentSchema);
+var Notices = mongoose.model("Notices",NoticesSchema);
 
-module.exports = Content;
+module.exports = Notices;
 
