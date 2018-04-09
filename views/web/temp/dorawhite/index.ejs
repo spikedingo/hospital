@@ -1,3 +1,5 @@
+<!-- 首页轮播 -->
+<link rel="stylesheet" href="/themes/<%=staticforder%>/css/index.css?vesion=<%=siteConfig.version%>">
 <div id="myCarousel" class="carousel slide">
     <div class="carousel-inner">
         <div class="item active">
@@ -16,19 +18,22 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-<div class=" mainbody">
-    <div style="background-color:#fff; padding:20px 0;">
+
+<div class=" mainbody" style="width: 1000px; margin: 0 auto;">
+    
+
+    <% include public/departmentNav %>
+    <% include public/variousBlocks %>
+
+<!--     <div style="background-color:#fff; padding:20px 0;">
         <div class="hotNews">
             <p class="titleIntro">热点新闻</p>
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 left-frame">
-                        <% include public/picNews %>
                     </div>
                     <div class="col-md-6 right-frame">
                         <div style="">
-                            <% include public/hotNewsListFull %>
-                            <% include public/searchBoard %>
                         </div>
                     </div>
                 </div>
@@ -38,8 +43,6 @@
     <div style="background-color:#f9f9f9; padding:20px 0;">
         <div class="doctors">
             <p class="titleIntro">医疗骨干</p>
-            <% include public/doctorList %>
-            <!-- 科室专家 -->
         </div>
     </div>
     <div style="padding:20px 0;">
@@ -59,14 +62,8 @@
                     </div>
                 </div>
                 <div class="patientsContent">
-                      <% include public/patientsService %>
                 </div>
                 <div class="row">
- <!--                    <div class="" style="width:60%; margin:0 auto;">
-                        <div class="innerBoard" style="background-color:#7182b2;;">
-                            <p>联系我们</p>
-                        </div>
-                    </div> -->
                     <div class="col-sm-6 col-md-6 col-lg-6">
                         <div class="innerBoard" style="background-color:#caa378;">
                             <p>交通指南</p>
@@ -79,13 +76,11 @@
                     </div>
                 </div>
             </div>
-            <!-- 患者通道 -->
         </div>
     </div>
     <div style="background-color:#f9f9f9; padding:20px 0;">
         <div class="departments">
             <p class="titleIntro">科室一览</p>
-            <% include public/departments %>
         </div>
-    </div>
+    </div> -->
 </div>
