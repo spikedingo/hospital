@@ -22,7 +22,7 @@ module.exports = {
 
 
 //    站点基础信息配置
-    SITETITLE : '旌德县中医医院', // 站点名称
+    SITETITLE : '旌德县人民医院', // 站点名称
     SITEDOMAIN : 'http://www.html-js.cn', // 站点域名
     SITEICP : '粤ICP备15038960号-2', // 站点备案号
     SITEVERSION : '', // 静态资源版本戳

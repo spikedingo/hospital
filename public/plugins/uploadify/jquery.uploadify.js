@@ -599,7 +599,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 			if (settings.onDialogClose) settings.onDialogClose.call(this, this.queueData);
 
 			// Upload the files if auto is true
-			if (settings.auto) $('#' + settings.id).uploadify('upload', '*');
+			if (settings.auto) $('#' + settings.id).Huploadify('upload', '*');
 		},
 
 		// Triggered once for each file added to the queue
@@ -657,7 +657,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 			if (settings.itemTemplate == false) {
 				settings.itemTemplate = '<div id="${fileID}" class="uploadify-queue-item">\
 					<div class="cancel">\
-						<a href="javascript:$(\'#${instanceID}\').uploadify(\'cancel\', \'${fileID}\')">X</a>\
+						<a href="javascript:$(\'#${instanceID}\').Huploadify(\'cancel\', \'${fileID}\')">X</a>\
 					</div>\
 					<span class="fileName">${fileName} (${fileSize})</span><span class="data"></span>\
 					<div class="uploadify-progress">\

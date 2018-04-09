@@ -52,7 +52,7 @@
                     <div ng-show="formData.from == 3" class="form-group">
                         <label class="control-label col-sm-3">来源URL</label>
                         <div class="col-sm-3">
-                            <input type="text" class="form-control input-sm" name="originUrl" ng-minlength="2" ng-model="formData.originUrl" required/>
+                            <input type="text" class="form-control input-sm" name="originUrl" ng-minlength="2" ng-model="formData.originUrl"/>
                             <label for="inputError" class="control-label text-danger" ng-show="myForm.originUrl.$invalid && !myForm.originUrl.$pristine"><i class="fa fa-times-circle-o"></i> 5-40个非特殊字符</label>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
                     <div class="form-group">
                         <label class="control-label col-sm-3">缩略图</label>
                         <div class="col-sm-3">
-                            <input type="file" name="uploadify" id="uploadContentImg" />
+                            <div name="uploadify" id="uploadContentImg"></div>
                             <img src="" alt="" width="120" height="120" class="img-thumbnail" id="myImg">
                         </div>
                     </div>

@@ -36,6 +36,7 @@ var app = express();
 
 //ueditor注册
 var ueditor = require('ueditor-nodejs');
+var lessMiddleware = require("less-middleware");
 app.use('/ueditor/ue', ueditor({//这里的/ueditor/ue是因为文件件重命名为了ueditor,如果没改名，那么应该是/ueditor版本号/ue
     configFile: '/ueditor/jsp/config.json',//如果下载的是jsp的，就填写/ueditor/jsp/config.json
     mode: 'local', //本地存储填写local
@@ -45,7 +46,12 @@ app.use('/ueditor/ue', ueditor({//这里的/ueditor/ue是因为文件件重命�
     dynamicPath: '/upload/blogpicture' //动态目录，以/开头，bcs填写buckect名字，开头没有/.路径可以根据req动态变化，可以是一个函数，function(req) { return '/xx'} req.query.action是请求的行为，uploadimage表示上传图片，具体查看config.json.
 }));
 
-
+//注册less
+app.use(lessMiddleware({
+    src: __dirname + "/less",
+    dest: __dirname + "/public/css",
+    force: true
+}));
 // view engine setup
 //静态压缩
 app.use(compression());

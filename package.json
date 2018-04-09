@@ -35,5 +35,9 @@
     "ueditor-nodejs": "^0.1.0",
     "unzip": "^0.1.11",
     "validator": "^3.37.0"
+  },
+  "devDependencies": {
+    "less": "^3.0.1",
+    "less-middleware": "^2.2.1"
   }
 }
