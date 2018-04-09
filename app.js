@@ -47,11 +47,11 @@ app.use('/ueditor/ue', ueditor({//这里的/ueditor/ue是因为文件件重命�
 }));
 
 //注册less
-app.use(lessMiddleware({
-    src: __dirname + "/less",
-    dest: __dirname + "/public/css",
-    force: true
-}));
+// app.use(lessMiddleware({
+//     src: __dirname + "/less",
+//     dest: __dirname + "/public/css",
+//     force: true
+// }));
 // view engine setup
 //静态压缩
 app.use(compression());
