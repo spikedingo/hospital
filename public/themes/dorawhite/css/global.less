@@ -69,10 +69,11 @@ p {
 	}
 
 	.main-nav {
-		height: 112px;
 
 		.navbar-header {
 			height: 112px;
+			margin-right: 0;
+			margin-left: 0;
 
 			.hospital-logo {
 				width: 86px;
@@ -93,14 +94,17 @@ p {
 
 			.navbar-nav {
 				margin-top: 0;
+				margin-right: 0;
+				margin-left: 0;
+				margin: 0;
 
 				@media screen and (min-width: 768px) {
 					li.first-nav {
-						height: 112px;
+						//height: 112px;
 
 						>a {
 							box-sizing: border-box;
-							height: 112px;
+							//height: 112px;
 							padding: 0 13px;
 							line-height: 112px;
 							font-size: 16px;
@@ -115,6 +119,10 @@ p {
 
 				li.first-nav {
 					background: white;
+
+					a {
+						color: #000;
+					}
 				}
 			}
 		}
