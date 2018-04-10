@@ -1,2 +1,49 @@
-.mainbody {
+
+#myCarousel {
+	margin-bottom: 70px;
 }
+
+.mainbody {
+	
+	.function-blocks {
+		margin-bottom: 60px;
+
+		.fun-block {
+			float: left;
+			width: 291px;
+			height: 210px;
+			background: rgba(0, 100, 148, 1);
+			box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+		}
+		.fun-block+.fun-block {
+			margin-left: 12px;
+		}
+	}
+
+	.index-news {
+		margin-bottom: 60px;
+
+		.news-block {
+			float: left;
+			width: 380px;
+			*border: 1px solid #b2b2b2;
+
+			box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+			//behavior: url(css/PIE.htc);
+
+			img {
+				width: 100%;
+			}
+
+			.content {
+				height: 210px;
+			}
+		}
+
+		.news-block+.news-block {
+			margin-left: 30px;
+		}
+	}
+}
+
+
