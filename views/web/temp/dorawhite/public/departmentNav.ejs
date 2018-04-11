@@ -2,9 +2,9 @@
 
 <div class="department-nav">
 	<div class="container">
-		<h3>科室一览</h3>
+		<h3 class="title">科室一览</h3>
 
-		<div class="row">
+		<div class="row whole-departments">
 			<div class="left col-md-5 col-sm-12">
 				<div class="img-wrap">
 					<img src="/themes/<%=staticforder%>/images/news3.jpg" alt="">
@@ -13,9 +13,9 @@
 			<div class="right col-md-7 col-sm-12">
 				<div class="nav-line">
 					<ul class="row">
-						<li class="col-md-3 col-sm-3 col-xs-3"><a class="nav-btn active" href="">专家门诊<i></i></a></li>
-						<li class="col-md-3 col-sm-3 col-xs-3"><a style="background: #55a5aa;" class="nav-btn" href="">临床科室<i style="border-top: 13px solid#55a5aa;"></i></a></li>
-						<li class="col-md-3 col-sm-3 col-xs-3"><a style="background: #e5ca8f;" class="nav-btn" href="">医技科室<i style="border-top: 13px solid #e5ca8f;"></i></a></li>
+						<li class="col-md-3 col-sm-3 col-xs-3"><a data-target="expert" class="nav-btn active" href="javascript:;">专家门诊<i></i></a></li>
+						<li class="col-md-3 col-sm-3 col-xs-3"><a data-target="clinical" style="background: #55a5aa;" class="nav-btn" href="javascript:;">临床科室<i style="border-top: 13px solid#55a5aa;"></i></a></li>
+						<li class="col-md-3 col-sm-3 col-xs-3"><a data-target="skill" style="background: #e5ca8f;" class="nav-btn" href="javascript:;">医技科室<i style="border-top: 13px solid #e5ca8f;"></i></a></li>
 						<li class="col-md-3 col-sm-3 col-xs-3"><a style="background: #01763a;" class="nav-btn" href="">更多科室</a></li>
 					</ul>
 				</div>
@@ -39,40 +39,58 @@
 					</div>
 					<div class="department-group clinical">
 						<ul class="row">
-							<li class="department col-md-3 col-sm-3">临床科室</li>
-							<li class="department col-md-3 col-sm-3">临床科室</li>
-							<li class="department col-md-3 col-sm-3">临床科室</li>
-							<li class="department col-md-3 col-sm-3">临床科室</li>
-							<li class="department col-md-3 col-sm-3">临床科室</li>
-							<li class="department col-md-3 col-sm-3">临床科室</li>
-							<li class="department col-md-3 col-sm-3">临床科室</li>
-							<li class="department col-md-3 col-sm-3">临床科室</li>
-							<li class="department col-md-3 col-sm-3">临床科室</li>
-							<li class="department col-md-3 col-sm-3">临床科室</li>
-							<li class="department col-md-3 col-sm-3">临床科室</li>
-							<li class="department col-md-3 col-sm-3">临床科室</li>
-							<li class="department col-md-3 col-sm-3">临床科室</li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
 						</ul>
 					</div>
 					<div class="department-group skill">
 						<ul class="row">
-							<li class="department col-md-3 col-sm-3">医技科室</li>
-							<li class="department col-md-3 col-sm-3">医技科室</li>
-							<li class="department col-md-3 col-sm-3">医技科室</li>
-							<li class="department col-md-3 col-sm-3">医技科室</li>
-							<li class="department col-md-3 col-sm-3">医技科室</li>
-							<li class="department col-md-3 col-sm-3">医技科室</li>
-							<li class="department col-md-3 col-sm-3">医技科室</li>
-							<li class="department col-md-3 col-sm-3">医技科室</li>
-							<li class="department col-md-3 col-sm-3">医技科室</li>
-							<li class="department col-md-3 col-sm-3">医技科室</li>
-							<li class="department col-md-3 col-sm-3">医技科室</li>
-							<li class="department col-md-3 col-sm-3">医技科室</li>
-							<li class="department col-md-3 col-sm-3">医技科室</li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
 						</ul>
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row special-departments">
+	<div class="col-md-4 col-sm-12 col-xs-12">
+		<div class="special">
+			<img src="/themes/<%=staticforder%>/images/chinese_med.jpg" alt="">
+		</div>
+	</div>
+	<div class="col-md-4 col-sm-12 col-xs-12">
+		<div class="special">
+			<img src="/themes/<%=staticforder%>/images/express.jpg" alt="">
+		</div>
+	</div>
+	<div class="col-md-4 col-sm-12 col-xs-12">
+		<div class="special">
+			<img src="/themes/<%=staticforder%>/images/equipments.jpg" alt="">
 		</div>
 	</div>
 </div>
