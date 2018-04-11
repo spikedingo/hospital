@@ -13,6 +13,8 @@
 @color4: rgba(27, 152, 224, 1);
 @color5: rgba(232, 241, 242, 1);
 
+.basicBlue { color: rgba(27, 152, 224, 1); }
+
 body {
     line-height: 120%;
     min-height: 100px;
@@ -32,19 +34,17 @@ p {
 	margin: 0;
 }
 
+.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
 @media screen and (max-width: 750px) {
     html { min-width: 320px; }
 }
 
-.dropdown-menu {
-	display: block;
-	visibility: hidden;
-	opacity: 0;
-
-    a {
-    	font-size: 14px;
-    }
-}
 
 .header-wrap {
 	border: 1px solid #ddd;
@@ -69,25 +69,50 @@ p {
 	}
 
 	.main-nav {
-
-		.navbar-header {
-			height: 112px;
-			margin-right: 0;
-			margin-left: 0;
-
-			.hospital-logo {
-				width: 86px;
+		
+		.navbar-toggle {
+			.icon-bar {
+				background: @color2;
 			}
+		}
 
-			.navbar-toggle {
-				margin-top: 40px;
-				transform: scale(1.5);
+		@media screen and (min-width: 992px) {
+			.navbar-header {
+				height: 112px;
+				margin-right: 0;
+				margin-left: 0;
 
-				.icon-bar {
-					background: @color2;
+				.hospital-logo {
+					width: 86px;
+				}
+
+				.navbar-toggle {
+					margin-top: 40px;
+					transform: scale(1.5);
 				}
 			}
 		}
+
+		@media screen and (max-width: 991px) {
+			.navbar-header {
+				height: 60px;
+
+				.hospital-logo {
+					width: 45px;
+				}
+
+				.navbar-toggle {
+					margin-top: 14px;
+					transform: scale(1.3);
+				}
+			}
+
+			
+			.navbar-brand {
+				padding: 7px 15px;
+			}
+		}
+
 
 		.navbar-collapse {
 			padding: 0;
@@ -98,7 +123,7 @@ p {
 				margin-left: 0;
 				margin: 0;
 
-				@media screen and (min-width: 768px) {
+				@media screen and (min-width: 992px) {
 					li.first-nav {
 						//height: 112px;
 
@@ -131,8 +156,7 @@ p {
 
 
 .department-nav {
-	height: 150px;
-	background: @color2;
+	min-height: 150px;
 }
 
 .various-blocks {
@@ -142,6 +166,7 @@ p {
 
 #footer {
 	background: rgba(0,0,0,0.8);
+	padding: 0 15px;
 
 	.link {
 		padding: 26px 0;

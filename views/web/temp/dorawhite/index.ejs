@@ -1,54 +1,167 @@
 <!-- 首页轮播 -->
 <link rel="stylesheet" href="/themes/<%=staticforder%>/css/index.css?vesion=<%=siteConfig.version%>">
 
+<div id="myCarousel" class="carousel slide">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>  
+    <div class="carousel-inner">
+        <div style="background: url('/themes/<%=staticforder%>/images/hospital.jpg') no-repeat center right;" class="item active">
+        </div>
+        <div style="background: url('/themes/<%=staticforder%>/images/health.jpg') no-repeat center center;" class="item">
+        </div>
+        <div style="background: url('/themes/<%=staticforder%>/images/hospital3.jpg') no-repeat center center;" class="item"></div>
+    </div>
+</div>
 
 <div class="mainbody container">
 
-    <div id="myCarousel" class="carousel slide">
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-        </ol>  
-        <div class="carousel-inner">
-            <div style="background: url('/themes/<%=staticforder%>/images/hospital.jpg') no-repeat center right;" class="item active">
-            </div>
-            <div style="background: url('/themes/<%=staticforder%>/images/health.jpg') no-repeat center center;" class="item">
-            </div>
-            <div style="background: url('/themes/<%=staticforder%>/images/hospital3.jpg') no-repeat center center;" class="item"></div>
-        </div>
-    </div>
-
     <div class="function-blocks row clearfix">
-        <div style="background: #4ECDC4" class="fun-block col-md-6"></div>
-        <div style="background: #fff" class="fun-block col-md-6"></div>
-        <div style="background: #5bc0eb" class="fun-block col-md-6"></div>
-        <div style="background: #fff6cb" class="fun-block col-md-6"></div>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+            <div style="background: #3eb3ab;" class="fun-block">
+                <div class="info">
+                    <div class="icon">
+                        <i style="color: white;" class="fa fa-heartbeat"></i>
+                    </div>
+                    <h4 style="color: white;">体检中心</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+            <div style="background: #fff;" class="fun-block">
+                <div class="info">
+                    <div class="icon">
+                        <i class="fa fa-hospital-o"></i>
+                    </div>
+                    <h4>就医须知</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+            <div style="background: #5bc0eb;" class="fun-block">
+                <div class="info">
+                    <div class="icon">
+                        <i style="color: white;" class="fa fa-map-marker"></i>
+                    </div>
+                    <h4 style="color: white;">医院位置</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+            <div style="background: #fff6cb;" class="fun-block">
+                <div class="info">
+                    <div class="icon">
+                        <i style="color: #9c9676;" class="fa fa-medkit"></i>
+                    </div>
+                    <h4 style="color: #9c9676;">国医堂</h4>
+                </div>
+            </div>
+        </div>
     </div>
     
     <div class="index-news row clearfix">
-        <div class="news-block col-md-8">
-            <a class="image">
-                <img src="/themes/<%=staticforder%>/images/news1.jpg" alt="">
-            </a>
-            <div class="content">
-                
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <div class="news-block">
+                <a class="image">
+                    <img src="/themes/<%=staticforder%>/images/news1.jpg" alt="">
+                </a>
+                <div class="content">
+                    <div class="category">
+                        <h4>通知公告
+                            <span class="fr">查看更多</span>
+                        </h4>
+                        <ul>
+                            <li>
+                                <a class="ellipsis" href="">2018年清明、五一、端午节日门诊工作安排</a>
+                            </li>
+                            <li>
+                                <a class="ellipsis" href="">旌德县人民医院门诊挂号攻略</a>
+                            </li>
+                            <li>
+                                <a class="ellipsis" href="">2018年旌德县人民医院内分泌科骨质疏松症健康</a>
+                            </li>
+                            <li>
+                                <a class="ellipsis" href="">2018年清明、五一、端午节日门诊工作安排</a>
+                            </li>
+                            <li>
+                                <a class="ellipsis" href="">旌德县人民医院门诊挂号攻略</a>
+                            </li>
+                            <li>
+                                <a class="ellipsis" href="">2018年旌德县人民医院内分泌科骨质疏松症健康</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="news-block col-md-8">
-            <a class="image">
-                <img src="/themes/<%=staticforder%>/images/news2.jpg" alt="">
-            </a>
-            <div class="content">
-                
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <div class="news-block">
+                <a class="image">
+                    <img src="/themes/<%=staticforder%>/images/news2.jpg" alt="">
+                </a>
+                <div class="content">
+                    <div class="category">
+                        <h4>最新动态
+                            <span class="fr">查看更多</span>
+                        </h4>
+                        <ul>
+                            <li>
+                                <a class="ellipsis" href="">2018年清明、五一、端午节日门诊工作安排</a>
+                            </li>
+                            <li>
+                                <a class="ellipsis" href="">旌德县人民医院门诊挂号攻略</a>
+                            </li>
+                            <li>
+                                <a class="ellipsis" href="">2018年旌德县人民医院内分泌科骨质疏松症健康</a>
+                            </li>
+                            <li>
+                                <a class="ellipsis" href="">2018年清明、五一、端午节日门诊工作安排</a>
+                            </li>
+                            <li>
+                                <a class="ellipsis" href="">旌德县人民医院门诊挂号攻略</a>
+                            </li>
+                            <li>
+                                <a class="ellipsis" href="">2018年旌德县人民医院内分泌科骨质疏松症健康</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="news-block col-md-8">
-            <a class="image">
-                <img src="/themes/<%=staticforder%>/images/news3.jpg" alt="">
-            </a>
-            <div class="content">
-                
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <div class="news-block">
+                <a class="image">
+                    <img src="/themes/<%=staticforder%>/images/news3.jpg" alt="">
+                </a>
+                <div class="content">
+                    <div class="category">
+                        <h4>院务公开
+                            <span class="fr">查看更多</span>
+                        </h4>
+                        <ul>
+                            <li>
+                                <a class="ellipsis" href="">2018年清明、五一、端午节日门诊工作安排</a>
+                            </li>
+                            <li>
+                                <a class="ellipsis" href="">旌德县人民医院门诊挂号攻略</a>
+                            </li>
+                            <li>
+                                <a class="ellipsis" href="">2018年旌德县人民医院内分泌科骨质疏松症健康</a>
+                            </li>
+                            <li>
+                                <a class="ellipsis" href="">2018年清明、五一、端午节日门诊工作安排</a>
+                            </li>
+                            <li>
+                                <a class="ellipsis" href="">旌德县人民医院门诊挂号攻略</a>
+                            </li>
+                            <li>
+                                <a class="ellipsis" href="">2018年旌德县人民医院内分泌科骨质疏松症健康</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
