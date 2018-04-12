@@ -13,10 +13,12 @@
             localUrl = '/users/userReplies/p';
         }else if(pageType == 'notifies'){
             localUrl = '/users/userNotifies/p';
+        }else if(pageType == 'contentList'){
+            localUrl = '/contentList/' + category
         }
         %>
 
-        <%var totalItems = pageInfo.totalItems;var limit = pageInfo.limit%>
+        <%var totalItems = pageInfo.totalItems; var limit = pageInfo.limit%>
         <%var totalPage = Math.ceil(totalItems / limit) ;%>
 
         <%
@@ -25,7 +27,7 @@
         %>
 
         <%if(pageInfo.currentPage != 1){%>
-        <li><a href="<%=localUrl%>—1.html<%=param%>">«</a></li>
+        <li><a href="<%=localUrl%>/<%=param%>">«</a></li>
         <%}%>
 
         <% if (page_start > 1) { %>
@@ -36,16 +38,17 @@
             <%if(i == pageInfo.currentPage){%>
                  <li class="active"><a><%=i%></a></li>
             <%}else{%>
-                 <li><a href="<%=localUrl%>—<%=i%>.html<%=param%>"><%=i%></a></li>
+                 <li><a href="<%=localUrl%>/<%=i%><%=param%>"><%=i%></a></li>
             <%}%>
         <%}%>
 
-        <% if (page_end < totalPage ) { %>
-        <li><a>...</a></li>
+        <% if (page_end < totalPage ) {%>
+        <li>... <a href=""><%=totalPage%></a> </li>
         <% } %>
 
         <%if(pageInfo.currentPage != totalPage){%>
-            <li><a href="<%=localUrl%>—<%=totalPage%>.html<%=param%>">»</a></li>
-        <%}%>
+            <li><a href="<%=localUrl%>/<%=param%>">»</a></li>
+        <%}
+        %>
     </ul>
 </div>

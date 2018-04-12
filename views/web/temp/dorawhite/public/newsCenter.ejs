@@ -2,7 +2,7 @@
     <div class="innerBanner" style="display:none;"><img src="/themes/<%=staticforder%>/images/newsCenter.jpg" style="width:100%; margin:20px 0 0 0 ;"></div>
     <h2 class="pageIntro"><a href="/picNews___VkhdrsWpl">图片新闻</a></h2>
     <div class="row areaPicNews">
-            <%picNews.forEach(function(item){%>
+        <%contentLists.forEach(function(item){%>
             <div class="col-xs-6 col-md-4">
                 <div class="picDiv">
                     <a title="<%=item.title%>" href="/details/<%=item._id%>.html">
@@ -13,87 +13,11 @@
                 </div>
             </div>
             <%})%>
-        <%if(noticeNews.length>0){%>
+        <%if(contentLists.length>0){%>
         <%}else{%>
         <li class="text-center">暂无推荐内容...</li>
         <%}%>
+
     </div>
-    <div class="row areaNews2" style="">
-        <div class="col-xs-12 col-md-4 col-lg-4 hotNewListFull">
-            <h3 class="pageIntro" style="background-color:#32936F;"><a href="/noticeNews___NyTJLoWax">通知公告</a></h3>
-            <ul>
-                <%if(noticeNews.length>0){%>
-                    <%noticeNews.forEach(function(item){%>
-                        <li>
-                            <p class="newsTitle"><a title="<%=item.title%>" alt="<%=item.title%>" href="/details/<%=item._id%>.html" target="_blank"><%=item.title%></a></p>  
-                        </li>
-                    <%})%>
-                <%}else{%>
-                    <li class="text-center">暂无内容...</li>
-                <%}%>
-            </ul>
-        </div>
-        <div class="col-xs-12 col-md-4 col-lg-4 hotNewListFull">
-            <h3 class="pageIntro" style="background-color:#2fc3b3;"><a href="/hospitalCulture___NJuucqS6x">医院文化</a></h3>
-            <ul>
-                <%if(hospitalCulture.length>0){%>
-                    <%hospitalCulture.forEach(function(item){%>
-                        <li>
-                            <p class="newsTitle"><a title="<%=item.title%>" alt="<%=item.title%>" href="/details/<%=item._id%>.html" target="_blank"><%=item.title%></a></p>  
-                        </li>
-                    <%})%>
-                <%}else{%>
-                    <li class="text-center">暂无内容...</li>
-                <%}%>
-            </ul>
-        </div>
-        <div class="col-xs-12 col-md-4 col-lg-4 hotNewListFull">
-            <h3 class="pageIntro" style="background-color:#0567ac;"><a href="/nursingArea___41wLq5HTx">护理园地</a></h3>
-            <ul>
-                <%if(nursingArea.length>0){%>
-                    <%nursingArea.forEach(function(item){%>
-                        <li>
-                            <p class="newsTitle"><a title="<%=item.title%>" alt="<%=item.title%>" href="/details/<%=item._id%>.html" target="_blank"><%=item.title%></a></p>  
-                        </li>
-                    <%})%>
-                <%}else{%>
-                    <li class="text-center">暂无内容...</li>
-                <%}%>
-            </ul>
-        </div>
-    </div>
-    <div class="row areaNews3" style="margin-top:30px;">
-        <div class="col-xs-12 col-md-6 col-lg-6 hotNewListFull" style="border:none;">
-            <div style=" width:90%; margin:0 auto;">
-                <h3 class="pageIntro" style="background-color:#ee3248;"><a href="/publicWorks___4ycX9qHTl">党建工作</a></h3>
-                <ul>
-                    <%if(publicWorks.length>0){%>
-                        <%publicWorks.forEach(function(item){%>
-                            <li>
-                                <p class="newsTitle"><a  title="<%=item.title%>" alt="<%=item.title%>" href="/details/<%=item._id%>.html" target="_blank"><%=item.title%></a></p>  
-                            </li>
-                        <%})%>
-                    <%}else{%>
-                        <li class="text-center">暂无内容...</li>
-                    <%}%>
-                </ul>
-            </div>
-        </div>
-        <div class="col-xs-12 col-md-6 col-lg-6 hotNewListFull">
-            <div style=" width:90%; margin:0 auto;">
-                <h3 class="pageIntro" style="background-color:#ddc022;"><a href="/hospitalWorks___Ny2q5crTl">院务公开</a></h3>
-                <ul>
-                    <%if(hospitalWorks.length>0){%>
-                        <%hospitalWorks.forEach(function(item){%>
-                            <li>
-                                <p class="newsTitle"><a  title="<%=item.title%>" alt="<%=item.title%>" href="/details/<%=item._id%>.html" target="_blank"><%=item.title%></a></p>  
-                            </li>
-                        <%})%>
-                    <%}else{%>
-                        <li class="text-center">暂无内容...</li>
-                    <%}%>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <% include pagination %>
 </div>
