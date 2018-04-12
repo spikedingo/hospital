@@ -30,6 +30,7 @@
 			height: 200px;
 			background: rgba(0, 100, 148, 1);
 			box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+			transition: all 0.3s;
 
 			div.info {
 				margin-top: 40px;
@@ -42,7 +43,8 @@
 
 				i.fa {
 					font-size: 70px;
-					color: #ababab;
+					color: #fff;
+					text-shadow: 0px 0px 15px rgba(0,0,0,0.5);
 				}
 			}
 
@@ -51,7 +53,8 @@
 				font-size: 28px;
 				text-align: center;
 				margin-top: 50px;
-				color: #ababab;
+				color: #fff;
+				text-shadow: 0px 0px 15px rgba(0,0,0,0.5);
 			}
 
 			@media only screen and (max-width: 770px){
@@ -69,6 +72,10 @@
 					margin-top: 0.3rem;
 				}
 			}
+		}
+		.fun-block:hover {
+			cursor: pointer;
+			margin-top: -10px;
 		}
 
 		@media only screen and (max-width: 750px){
