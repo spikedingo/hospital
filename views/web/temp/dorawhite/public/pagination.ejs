@@ -27,11 +27,14 @@
         %>
 
         <%if(pageInfo.currentPage != 1){%>
-        <li><a href="<%=localUrl%>/<%=param%>">«</a></li>
+        <li><a href="<%=localUrl%>/<%=param%>"><i class="fa fa-arrow-left"></i></a></li>
         <%}%>
 
         <% if (page_start > 1) { %>
-        <li><a>...</a></li>
+        <li><a href="<%=localUrl%>/<%=param%>">1</a> </li>
+            <% if ((page_start - 1) > 1) { %>
+                <li><a class="fa fa-ellipsis-h"></a></li>
+            <% } %>
         <% } %>
 
         <%for(var i=page_start;i<=page_end;i++){%>
@@ -43,11 +46,15 @@
         <%}%>
 
         <% if (page_end < totalPage ) {%>
-        <li>... <a href=""><%=totalPage%></a> </li>
+
+            <% if ((totalPage - page_end) > 1) { %>
+                <li><a class="fa fa-ellipsis-h"></a></li>
+            <% } %>
+            <li><a href="<%=localUrl%>/<%=totalPage%><%=param%>"><%=totalPage%></a> </li>
         <% } %>
 
         <%if(pageInfo.currentPage != totalPage){%>
-            <li><a href="<%=localUrl%>/<%=param%>">»</a></li>
+            <li><a href="<%=localUrl%>/<%=totalPage%><%=param%>"><i class="fa fa-arrow-right"></i></a></li>
         <%}
         %>
     </ul>

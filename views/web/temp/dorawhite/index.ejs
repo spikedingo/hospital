@@ -65,15 +65,16 @@
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
             <div class="news-block">
                 <a class="image">
-                    <img src="/themes/<%=staticforder%>/images/news2.jpg" alt="">
+                    <!-- <img src="/themes/<%=staticforder%>/images/news2.jpg" alt=""> -->
+                    <img src="<%=picNews[0].sImg%>" alt="">
                 </a>
                 <div class="content">
                     <div class="category">
                         <h4>最新动态
-                            <span class="fr">查看更多</span>
+                            <span class="fr"><a href="/contentList/hospitalNews">查看更多</a></span>
                         </h4>
                         <ul>
-                            <li>
+<!--                             <li>
                                 <a class="ellipsis" href="">2018年清明、五一、端午节日门诊工作安排</a>
                             </li>
                             <li>
@@ -90,7 +91,16 @@
                             </li>
                             <li>
                                 <a class="ellipsis" href="">2018年旌德县人民医院内分泌科骨质疏松症健康</a>
-                            </li>
+                            </li> -->
+                            <% if(picNews.length>0){ %>
+                            <% picNews.forEach(function(item){ %>
+                                    <li>
+                                        <a href="/details/<%=item._id%>.html" class="ellipsis"><%=item.title%></a>
+                                    </li>
+                                <% }) %>
+                            <% }else{ %>
+                                <li class="text-center">暂无推荐内容...</li>
+                            <% } %>
                         </ul>
                     </div>
                 </div>
