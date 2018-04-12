@@ -25,6 +25,10 @@ body {
     color: #333;
 }
 
+table {
+	width: 100%;
+}
+
 i, b, strong {
     font-style: normal;
     font-weight: normal;
@@ -72,6 +76,7 @@ h3.title {
 
 .header-wrap {
 	border: 1px solid #ddd;
+	background: white;
 
 	.top-nav {
 		height: 40px;
@@ -174,6 +179,38 @@ h3.title {
 					}
 				}
 			}
+		}
+	}
+}
+
+.pagenation {
+	margin-bottom: 30px;
+	font-size: 20px;
+
+	ul {
+		li {
+			width: 30px;
+			height: 30px;
+			line-height: 30px;
+			display: inline-block;
+			*display: inline;
+			*zoom: 1;
+			font-weight: normal;
+
+			a {
+				line-height: 30px;
+			}
+		}
+
+		li:hover {
+			cursor: pointer;
+		}
+
+		li.active {
+			font-weight: normal !important;
+			border-radius: 15px;
+			background: #458caf;
+			a { color: white; }
 		}
 	}
 }
