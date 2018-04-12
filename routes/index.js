@@ -88,8 +88,48 @@ router.get('/aboutHospital',function (req,res,next){
 });
 
 router.get('/newsCenter',function (req,res,next){
-    siteFunc.renderToTargetPageByType(req,res,'newsCenter',{info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
+    console.log('getting')
+    siteFunc.renderToTargetPageByType(req,res,{type:'newsCenter', category: 'Pic_News'},{info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
 });
+
+router.get('/contentList/:category',function(req,res,next) {
+    console.log(req.params,'in router get')
+    var category = req.params.category,keyName
+    if (category == 'newsCenter') {
+        keyName = 'Pic_News'
+    }
+
+    var categoryInfos = {
+        type: 'contentList',
+        category: category
+    }
+
+    console.log(categoryInfos, 'categoryInfos in router get')
+    siteFunc.renderToTargetPageByType(req,res,categoryInfos,{info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
+})
+
+router.get('/contentList/:category/:page',function(req,res,next) {
+    console.log(req.params,'in router get')
+    var category = req.params.category,keyName,page
+    if (category == 'newsCenter') {
+        keyName = 'Pic_News'
+    }
+    var page = req.params.page ? req.params.page : null
+
+    var categoryInfos = {
+        type: 'contentList',
+        category: category
+    }
+
+    if (page) {
+        categoryInfos.page = page
+    }
+
+    console.log(categoryInfos, 'categoryInfos in router get')
+    siteFunc.renderToTargetPageByType(req,res,categoryInfos,{info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
+})
+
+
 
 router.get('/aboutPatients',function (req,res,next){
     siteFunc.renderToTargetPageByType(req,res,'aboutPatients',{info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
@@ -159,8 +199,6 @@ router.get('/:forder/:defaultUrl', function (req, res, next) {
     }else{
         next();
     }
-
-
 });
 
 //分类页面路由设置

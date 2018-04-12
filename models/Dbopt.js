@@ -157,12 +157,14 @@ var DbOpt = {
         })
     },
 
-    getPaginationResult : function(obj,req,res,q,filed){// 通用查询，带分页，注意参数传递格式,filed为指定字段
+    getPaginationResult : function(obj,req,res,q,field,params){// 通用查询，带分页，注意参数传递格式,field为指定字段
+        console.log(req.query, 'field')
         var searchKey = req.query.searchKey;
-        var page = parseInt(req.query.page);
-        var limit = parseInt(req.query.limit);
+        var params = params || {}
+        var page = parseInt(req.query.page) || params.page;
+        var limit = parseInt(req.query.limit) || params.limit;
         if (!page) page = 1;
-        if (!limit) limit = 15;
+        if (!limit) limit = 10;
         var order = req.query.order;
         var sq = {}, Str, A = 'problemID', B = 'asc';
         if (order) {    //是否有排序请求
@@ -177,11 +179,11 @@ var DbOpt = {
         var resultList;
         var resultNum;
         if(q && q.length > 1){ // 多条件只要其中一条符合
-            resultList = obj.find({}).or(q,filed).sort(sq).skip(startNum).limit(limit);
-            resultNum = obj.find({}).or(q,filed).count();
+            resultList = obj.find({}).or(q,field).sort(sq).skip(startNum).limit(limit);
+            resultNum = obj.find({}).or(q,field).count();
         }else{
-            resultList = obj.find(q,filed).sort(sq).skip(startNum).limit(limit);
-            resultNum = obj.find(q,filed).count();
+            resultList = obj.find(q,field).sort(sq).skip(startNum).limit(limit);
+            resultNum = obj.find(q,field).count();
         }
         //        分页参数
         var pageInfo = {

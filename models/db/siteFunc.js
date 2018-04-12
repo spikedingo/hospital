@@ -120,11 +120,20 @@ var siteFunc = {
         return Content.find(q,'title dateSeted').sort({'dateSeted': -1}).skip(0).limit(10);
     },
 
+    getContentLists: function(category, q) {
+        console.log(category, 'in getContentLists')
+
+        var contents = Content.find({ 'keyName' : category },'title discription date sImg dateSeted').sort({'dateSeted': -1}).skip(0).limit(q).exec(function(err,data) {
+            console.log(data, 'in getContentLists')
+        });
+        return contents
+    },
+
     getPicNews: function(q){
         console.log(q,'这是查询图片新闻')
         var contents = Content.find({ 'keyName' : 'Pic_News' },'title discription date sImg dateSeted').sort({'dateSeted': -1}).skip(0).limit(q).exec(function(err,data) {
-            console.log(data, 'query data')
         });
+        console.log(contents, 'in getPicNews')
         return contents
     },
 
@@ -302,6 +311,49 @@ var siteFunc = {
             nursingArea: this.getNursingArea(),
             publicWorks: this.getPublicWorks(),
             staticforder: staticforder,
+            layout: defaultTempPath
+        }
+    },
+
+    // setDataForContentList: function(req, res, params, category, staticforder, defaultTempPath) {
+    //     var requireField = 'stitle sImg date discription keyName';
+    //     console.log(category, 'category in getting data')
+    //     var contentLists = this.getContentLists(category, 10)
+    //     var contentLists1 = DbOpt.getPaginationResult(Content, req, res, category, requireField);
+    //     console.log(contentLists, 'contentLists')
+    //     return {
+    //         siteConfig:this.siteInfos('新闻中心'),
+    //         contentLists: contentLists1.docs,
+    //         pageInfo: contentLists1.pageInfo,
+    //         staticforder: staticforder,
+    //         layout: defaultTempPath
+    //     }
+    // },
+
+    setDataForContentList: function (req, res, categoryInfos, params, staticforder, defaultTempPath) {
+        var requireField = 'title date commentNum discription clickNum isTop sImg tags';
+
+        var params = { limit: 1 }
+        if (categoryInfos.page) {
+            params.page = categoryInfos.page
+        }
+
+        var documentList = DbOpt.getPaginationResult(Content, req, res, {'keyName': categoryInfos.category }, requireField, params);
+        //var tagsData = DbOpt.getDatasByParam(ContentTags, req, res, {});
+        return {
+            siteConfig: this.siteInfos("首页"),
+            contentLists: documentList.docs,
+            hotItemListData: this.getHotItemListData({}),
+            hotItemListDataFull: this.getHotItemListDataFull({}),
+            pageInfo: documentList.pageInfo,
+            picNews: this.getPicNews(5),
+            noticeNews: this.getNoticeNews(),
+            departments:this.getDepartments(),
+            doctorList:this.getDoctorList({'departmentType' : 3},0,6),
+            pageType: 'contentList',
+            category: categoryInfos.category,
+            logined: isLogined(req),
+            staticforder : staticforder,
             layout: defaultTempPath
         }
     },
@@ -536,26 +588,28 @@ var siteFunc = {
     },
 
     //根据模板获取跳转链接
-    renderToTargetPageByType : function(req,res,type,params){
+    renderToTargetPageByType : function(req,res,categoryInfos,params){
+        var oType = categoryInfos.type || categoryInfos
+        console.log(categoryInfos, oType, 'type')
         this.getFrontTemplate(req,res,function(temp) {
             var targetPath;
             if (temp) {
                 var defaultTempPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/defaultTemp';
                 var topicTempPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/topicTemp';
-                if(type == 'index'){
+                if(oType == 'index'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/index';
-                    res.render(targetPath , siteFunc.setDataForIndex(req, res, {'type': 'content','state' : true} , temp.alias, defaultTempPath));
-                }else if(type == 'sitemap'){
+                    res.render(targetPath , siteFunc.setDataForIndex(req, res, {'oType': 'content','state' : true} , temp.alias, defaultTempPath));
+                }else if(oType == 'sitemap'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/sitemap';
                     res.render(targetPath , siteFunc.setDataForHtmlSiteMap(req, res, params , temp.alias, defaultTempPath));
-                }else if(type == 'contentList'){
+                }else if(oType == 'contentList1'){
                     if(params.result.contentTemp){
                         targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/' + params.result.contentTemp.forder + '/contentList';
                     }else{
                         targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/' + siteFunc.getDefaultTempItem(temp) + '/contentList';
                     }
                     res.render(targetPath, siteFunc.setDataForCate(req, res, params, temp.alias, topicTempPath));
-                }else if(type == 'detail'){
+                }else if(oType == 'detail'){
                     if(params.detail.category.contentTemp){
                         var targetForder = siteFunc.getTempItemById(temp,params.detail.category.contentTemp);
                         targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/' + targetForder + '/detail';
@@ -563,39 +617,40 @@ var siteFunc = {
                         targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/' + siteFunc.getDefaultTempItem(temp) + '/detail';
                     }
                     res.render(targetPath , siteFunc.setDetailInfo(req, res, params , temp.alias, defaultTempPath));
-                }else if(type == 'user'){
+                }else if(oType == 'user'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/users/' + params.page;
                     res.render(targetPath, siteFunc.setDataForUser(req, res, params , temp.alias, defaultTempPath));
-                }else if(type == 'userNotice'){
+                }else if(oType == 'userNotice'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/users/' + params.page;
                     res.render(targetPath, siteFunc.setDataForUserNotice(req, res, params, temp.alias, defaultTempPath));
-                }else if(type == 'userInfo'){
+                }else if(oType == 'userInfo'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/users/' + params.page;
                     res.render(targetPath, siteFunc.setDataForInfo(params, temp.alias, defaultTempPath));
-                }else if(type == 'userReply'){
+                }else if(oType == 'userReply'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/users/' + params.page;
                     res.render(targetPath, siteFunc.setDataForUserReply(req, res, params, temp.alias, defaultTempPath));
-                }else if(type == 'search'){
+                }else if(oType == 'search'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/' + params.page;
                     res.render(targetPath, siteFunc.setDataForSearch(req, res, params, temp.alias, defaultTempPath));
-                }else if(type == 'error'){
+                }else if(oType == 'error'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/' + params.page;
                     res.render(targetPath, siteFunc.setDataForError(req, res,  params, temp.alias, defaultTempPath));
-                }else if(type == 'aboutHospital'){
+                }else if(oType == 'aboutHospital'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/aboutHospital';
                     res.render(targetPath, siteFunc.setDataForTopicPage(req, res,  params, temp.alias, topicTempPath,'医院概况'));
-                }else if(type == 'aboutPatients'){
+                }else if(oType == 'aboutPatients'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/aboutPatients';
                     res.render(targetPath, siteFunc.setDataForTopicPage(req, res,  params, temp.alias, topicTempPath,'患者服务'));
-                }else if(type == 'aboutDoctors'){
+                }else if(oType == 'aboutDoctors'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/aboutDoctors';
                     res.render(targetPath, siteFunc.setDataForAboutDoctors(req, res,  params, temp.alias, topicTempPath,'医护团队'));
-                }else if(type == 'aboutDepartments'){
+                }else if(oType == 'aboutDepartments'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/aboutDepartments';
                     res.render(targetPath, siteFunc.setDataForAboutDepartments(req, res,  params, temp.alias, topicTempPath,'科室一览'));
-                }else if(type == 'newsCenter'){
+                }else if(oType == 'contentList'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/newsCenter';
-                    res.render(targetPath, siteFunc.setDataForNewsCenter(req, res,  params, temp.alias, topicTempPath,'新闻中心'));
+                    console.log(targetPath, 'targetPath')
+                    res.render(targetPath, siteFunc.setDataForContentList(req, res, categoryInfos, params, temp.alias, topicTempPath,'新闻中心'));
                 }
 
             }else{
