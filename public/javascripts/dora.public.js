@@ -385,7 +385,7 @@ function getMoreDoctors($obj,cellType,skipNum){
                                         <h3><span style=" color:#ff8c42;">专长：</span>'+
                                         result[i].professional +'</h3>\
                                         <p><span style=" color:#1A535C;">医生简介：</span>'+
-                                        result[i].discription +'</p>\
+                                        result[i].description +'</p>\
                                     </div>\
                                 </div>\
                             </div>';

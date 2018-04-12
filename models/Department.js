@@ -19,7 +19,7 @@ var DepartmentSchema = new Schema({
     tags : String, // 标签
     keywords : String,
     sImg : { type: String, default: "/upload/images/defaultImg.jpg" }, // 文章小图
-    discription : String,
+    description : String,
     mainDoctor : String,
     updateDate: { type: Date, default: Date.now } // 更新时间
 });

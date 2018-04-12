@@ -123,7 +123,7 @@ var siteFunc = {
     getContentLists: function(category, q) {
         console.log(category, 'in getContentLists')
 
-        var contents = Content.find({ 'keyName' : category },'title discription date sImg dateSeted').sort({'dateSeted': -1}).skip(0).limit(q).exec(function(err,data) {
+        var contents = Content.find({ 'keyName' : category },'title description date sImg dateSeted').sort({'dateSeted': -1}).skip(0).limit(q).exec(function(err,data) {
             console.log(data, 'in getContentLists')
         });
         return contents
@@ -131,7 +131,7 @@ var siteFunc = {
 
     getPicNews: function(q){
         console.log(q,'这是查询图片新闻')
-        var contents = Content.find({ 'keyName' : 'Pic_News' },'title discription date sImg dateSeted').sort({'dateSeted': -1}).skip(0).limit(q).exec(function(err,data) {
+        var contents = Content.find({ 'keyName' : 'hospitalNews' },'title description date sImg dateSeted').sort({'dateSeted': -1}).skip(0).limit(q).exec(function(err,data) {
         });
         console.log(contents, 'in getPicNews')
         return contents
@@ -158,17 +158,17 @@ var siteFunc = {
     },  
 
     getExpertIntro: function(){
-        return Content.find({ 'category' : '4y80KqHTg' },'title stitle dateSeted sImg discription').sort({'dateSeted': -1}).skip(0).limit(10);
+        return Content.find({ 'category' : '4y80KqHTg' },'title stitle dateSeted sImg description').sort({'dateSeted': -1}).skip(0).limit(10);
     },  
 
     //获取文档接口结束
 
     getDepartments: function(){
-        return Department.find({},'department mainDoctor discription');
+        return Department.find({},'department mainDoctor description');
     },
 
     getDoctorList: function(q,s,l){
-        return Doctor.find(q,'doctor department departmentType skillLevel sImg discription professional').skip(Number(s)).limit(l);
+        return Doctor.find(q,'doctor department departmentType skillLevel sImg description professional').skip(Number(s)).limit(l);
     },
 
     getNewItemListData : function(q){
@@ -212,7 +212,7 @@ var siteFunc = {
     },
 
     setDataForIndex: function (req, res, params ,staticforder, defaultTempPath) {
-        var requireField = 'title date commentNum discription clickNum isTop sImg tags';
+        var requireField = 'title date commentNum description clickNum isTop sImg tags';
         var documentList = DbOpt.getPaginationResult(Content, req, res, params, requireField);
         var tagsData = DbOpt.getDatasByParam(ContentTags, req, res, {});
         return {
@@ -221,7 +221,7 @@ var siteFunc = {
             hotItemListData: this.getHotItemListData({}),
             hotItemListDataFull: this.getHotItemListDataFull({}),
 
-            picNews: this.getPicNews(5),
+            picNews: this.getPicNews(6),
             noticeNews: this.getNoticeNews(),
             departments:this.getDepartments(),
             doctorList:this.getDoctorList({'departmentType' : 3},0,6),
@@ -233,7 +233,7 @@ var siteFunc = {
     },
 
     setDataForTopicPage: function (req, res, params ,staticforder, defaultTempPath,siteInfo) {
-        var requireField = 'title date commentNum discription clickNum isTop sImg tags';
+        var requireField = 'title date commentNum description clickNum isTop sImg tags';
         var documentList = DbOpt.getPaginationResult(Content, req, res, params, requireField);
         var tagsData = DbOpt.getDatasByParam(ContentTags, req, res, {});
         return {
@@ -258,7 +258,7 @@ var siteFunc = {
     },
 
     setDataForCate: function (req, res, params ,staticforder, defaultTempPath) {
-        var requireField = 'title date commentNum discription clickNum comments isTop sImg';
+        var requireField = 'title date commentNum description clickNum comments isTop sImg';
         var documentList = DbOpt.getPaginationResult(Content, req, res, params.contentQuery, requireField);
         var currentCateList = ContentCategory.find(params.cateQuery).sort({'sortId': 1});
         var tagsData = DbOpt.getDatasByParam(ContentTags, req, res, {});
@@ -280,7 +280,7 @@ var siteFunc = {
     },
 
     setDataForAboutDoctors: function(req, res, params ,staticforder, defaultTempPath) {
-        var requireField = 'doctor department departmentType skillLevel sImg discription professional';
+        var requireField = 'doctor department departmentType skillLevel sImg description professional';
         return {
             siteConfig: this.siteInfos("医护团队"),
             doctorList: this.getDoctorList({},0),
@@ -290,7 +290,7 @@ var siteFunc = {
     },
 
     setDataForAboutDepartments: function(req, res, params ,staticforder, defaultTempPath) {
-        var requireField = 'department mainDoctor discription';
+        var requireField = 'department mainDoctor description';
         return {
             siteConfig: this.siteInfos("科室一览"),
             departmentsList: this.getDepartments(),
@@ -300,7 +300,7 @@ var siteFunc = {
     },
 
     setDataForNewsCenter:function(req, res, params ,staticforder, defaultTempPath){
-        var requireField = 'stitle sImg date discription';
+        var requireField = 'stitle sImg date description';
         console.log("getting newsCenter")
         return {
             siteConfig:this.siteInfos('新闻中心'),
@@ -316,7 +316,7 @@ var siteFunc = {
     },
 
     // setDataForContentList: function(req, res, params, category, staticforder, defaultTempPath) {
-    //     var requireField = 'stitle sImg date discription keyName';
+    //     var requireField = 'stitle sImg date description keyName';
     //     console.log(category, 'category in getting data')
     //     var contentLists = this.getContentLists(category, 10)
     //     var contentLists1 = DbOpt.getPaginationResult(Content, req, res, category, requireField);
@@ -331,9 +331,9 @@ var siteFunc = {
     // },
 
     setDataForContentList: function (req, res, categoryInfos, params, staticforder, defaultTempPath) {
-        var requireField = 'title date commentNum discription clickNum isTop sImg tags';
+        var requireField = 'title date commentNum description clickNum isTop sImg tags';
 
-        var params = { limit: 1 }
+        var params = { limit: 9 }
         if (categoryInfos.page) {
             params.page = categoryInfos.page
         }
@@ -362,7 +362,7 @@ var siteFunc = {
         var currentCateList = ContentCategory.find(params.cateQuery).sort({'sortId': 1});
         //var tagsData = DbOpt.getDatasByParam(ContentTags, req, res, {});
         return {
-            siteConfig: this.siteInfos(params.detail.title, params.detail.discription, params.detail.keywords),
+            siteConfig: this.siteInfos(params.detail.title, params.detail.description, params.detail.keywords),
             cateTypes: this.getCategoryList(),
             currentCateList: currentCateList,
             hotItemListData: this.getHotItemListData({}),
@@ -380,7 +380,7 @@ var siteFunc = {
 
     setDataForSearch: function (req, res, params, staticforder, defaultTempPath) {
         req.query.searchKey = params.searchKey;
-        var requireField = 'title date commentNum discription clickNum sImg';
+        var requireField = 'title date commentNum description clickNum sImg';
         var documentList = DbOpt.getPaginationResult(Content, req, res, params.query, requireField);
         return {
             siteConfig: this.siteInfos("文档搜索"),

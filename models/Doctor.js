@@ -21,7 +21,7 @@ var DoctorSchema = new Schema({
     sImg : { type: String, default: "/upload/images/defaultImg.jpg" }, // 文章小图
     professional : String,
     skillLevel: String,
-    discription : String,
+    description : String,
     updateDate: { type: Date, default: Date.now } // 更新时间
 });
 

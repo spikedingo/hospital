@@ -289,7 +289,7 @@ doraApp.controller("addAds",['$scope','$http','pageData','getItemService',functi
                 contentArray = editArrImg;
                 for(var i=0;i<editArrImg.length;i++){
                     var item = JSON.parse(editArrImg[i]);
-                    var newItem = getImgInfo(item.sImg,item.link,item.width,item.height,item.target,item.discription);
+                    var newItem = getImgInfo(item.sImg,item.link,item.width,item.height,item.target,item.description);
                     $("#imgInfolist").append(newItem);
                     //  添加关闭按钮的监听事件
                     initCloseBtn($scope,contentArray);
@@ -306,7 +306,7 @@ doraApp.controller("addAds",['$scope','$http','pageData','getItemService',functi
         // 获取demo下元素个数
         var demoLength = $('#imgInfolist').children('.alert').length;
         // 在demo树下添加元素
-        var newItem = getImgInfo($scope.formData.contentItem.sImg,$scope.formData.contentItem.link,$scope.formData.contentItem.width,$scope.formData.contentItem.height,$scope.formData.contentItem.target,$scope.formData.contentItem.discription);
+        var newItem = getImgInfo($scope.formData.contentItem.sImg,$scope.formData.contentItem.link,$scope.formData.contentItem.width,$scope.formData.contentItem.height,$scope.formData.contentItem.target,$scope.formData.contentItem.description);
         $("#imgInfolist").append(newItem);
         // 添加关闭按钮的监听事件
         initCloseBtn($scope,contentArray);

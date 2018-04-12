@@ -24,7 +24,7 @@ var PublicContentSchema = new Schema({
     tags : String, // 标签
     keywords : String,
     sImg : { type: String, default: "/upload/images/defaultImg.jpg" }, // 文章小图
-    discription : String,
+    description : String,
     date: { type: Date, default: Date.now },
     dateSeted: String, //设置时间
     updateDate: { type: Date, default: Date.now }, // 更新时间
