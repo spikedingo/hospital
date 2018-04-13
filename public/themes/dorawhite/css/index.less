@@ -18,7 +18,7 @@
 			margin-bottom: 40px;
 		}
 
-		@media (max-width: 1199px) { 
+		@media (max-width: 992px) { 
 			>div {
 				padding: 0;
 			} 
@@ -73,11 +73,15 @@
 				}
 			}
 		}
-		.fun-block:hover {
-			cursor: pointer;
-			margin-top: -10px;
-		}
 
+		@media only screen and (min-width: 750px){
+			.fun-block:hover {
+				cursor: pointer;
+				margin-top: -10px;
+			}
+
+		}
+		
 		@media only screen and (max-width: 750px){
 			.fun-block {
 			    height: 2.4rem;
@@ -95,11 +99,11 @@
 			margin-bottom: 0;
 		}
 
-		@media (max-width: 1199px) { 
-			>div {
-				padding: 0;
-			} 
-		}
+		// @media (max-width: 1199px) { 
+		// 	>div {
+		// 		padding: 0;
+		// 	} 
+		// }
 
 		.news-block {
 			float: left;
