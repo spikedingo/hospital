@@ -1,11 +1,16 @@
 body {
-	background: #f5f5f5;
 }
 
 .content-list-wrap {
+	background: #f5f5f5;
 
 	.hospital-news {
 		min-height: 900px;
+
+		h5.position {
+			font-weight: normal;
+			padding: 10px 15px;
+		}
 	}
 
 	h2.page-intro {
@@ -45,13 +50,20 @@ body {
 			}
 
 			.text-wrap {
-				padding: 15px 10px;
+				padding: 15px 12px;
 
 				a.title {
 					display: block;
 					font-size: 20px;
 					margin-bottom: 15px;
 					line-height: 22px;
+					color: #4c4c4c;
+				}
+
+				h5 {
+					font-weight: normal;
+					color: #a9a9a9;
+					font-size: 14px;
 				}
 
 				p.intro {
@@ -62,3 +74,164 @@ body {
 		}
 	}
 }
+
+.detail-page-wrap {
+	//background: #f5f5f5;
+	padding-top: 40px;
+
+	.left-frame {
+
+		.post {
+			img {
+			    max-width: 100%;
+			}
+
+			h2 {
+			}
+
+			.post-title {
+				line-height: 45px;
+			    margin: 0;
+				font-weight: normal;
+				margin-bottom: 20px;
+			    color: #555;
+			    text-align: left;
+
+			    a {
+				    color: #555555
+				}
+			}
+
+			.post-meta {
+			    color: #999;
+			    margin: 9px 0 0;
+			    padding: 0;
+			    text-align: left;
+
+			    li {
+				    display: inline-block;
+				    margin-right: 10px;
+				    font-size: 14px;
+
+				    i {
+	    			    font-size: 14px;
+	    			}
+				}
+			}
+
+			.post-content {
+			    color: #444;
+			    font-size: 15px;
+			    line-height: 1.715;
+			    padding-top: 10px;
+			}
+		}
+
+		.recommend-list-wrap {
+			margin-bottom: 30px;
+
+			h4 {
+				padding: 0 15px;
+			}
+
+			.single-content {
+
+				@media screen and ( max-width: 770px ) {
+					padding: 0;
+				}
+			}
+		}
+	}
+	
+	.right-frame {
+
+		@media screen and ( min-width: 992px ) {
+			padding-right: 0;
+		}
+
+		.left-block-wrap {
+			box-shadow:  0px 0px 10px rgba(0,0,0,0.3);
+			padding: 20px 20px;
+			margin-bottom: 20px;
+
+			h3 {
+				box-sizing: content-box;
+				font-size: 16px;
+				height: 30px;
+				font-weight: normal;
+				line-height: 30px;
+				padding-left: 15px;
+				border: none;
+				border-left: 3px solid #529fc3;
+				margin-bottom: 10px;
+				color: #333;
+			}
+
+			li.single-nav {
+				padding-left: 10px;
+				a {
+					font-size: 16px;
+					color: #4e4e4e;
+				}
+
+				a:hover {
+					color: #529fc3;
+				}
+			}
+
+			li.single-content {
+				padding-left: 10px;
+				margin-bottom: 15px;
+
+				a {
+					font-size: 15px;
+					color: #4e4e4e;
+				}
+
+				a:hover {
+					color: #529fc3;
+				}
+
+				span {
+					display: block;
+					color: #a9a9a9;
+					font-size: 13px;
+				}
+			}
+		}
+
+		@media screen and ( max-width: 992px ) {
+			.searchBoard {
+				display: none;
+			}
+			.nav-list-wrap {
+				display: none;
+			}
+			.item-list-wrap {
+				box-shadow: none;
+				padding: 0;
+
+				h3 {
+					padding-left: 0;
+					padding-bottom: 10px;
+					border: none;
+					border-bottom: 3px solid #ccc;
+				}
+
+				li.single-content {
+					padding-left: 0;
+				}
+			}
+		}
+	}
+}
+
+.rich-text-container {
+	color: #ccc;
+
+	table {
+		width: 100% !important;
+		text-align: center;
+	}
+}
+
