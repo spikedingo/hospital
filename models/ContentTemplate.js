@@ -18,7 +18,7 @@ var ContentTemplateSchema = new Schema({
     version : String,
     items : [{ type: String , ref: 'TemplateItems' }],
     sImg: { type: String, default: '/stylesheets/backstage/img/screenshot.png' },
-    author: { type: String , default: "doramart" }, // 主题作者
+    author: { type: String , default: "旌德县人民医院" }, // 主题作者
     using : { type : Boolean , default : false }, // 是否被启用
     date: { type: Date, default: Date.now },
     comment : String // 主题描述

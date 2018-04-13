@@ -359,7 +359,8 @@ var siteFunc = {
     },
 
     setDetailInfo: function (req, res, params ,staticforder, defaultTempPath) {
-        var currentCateList = ContentCategory.find(params.cateQuery).sort({'sortId': 1});
+        console.log(params.cateQuery, 'cateQuery')
+        var currentCateList = ContentCategory.find({}).sort({'sortId': 1});
         //var tagsData = DbOpt.getDatasByParam(ContentTags, req, res, {});
         return {
             siteConfig: this.siteInfos(params.detail.title, params.detail.description, params.detail.keywords),
