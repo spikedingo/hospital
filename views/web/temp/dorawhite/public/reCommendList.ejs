@@ -1,16 +1,19 @@
 <!--文章推荐模块-->
-<div class="row reCommendList">
+<div class="row recommend-list-wrap">
+    <h4>推荐阅读:</h4>
+
     <%if(reCommendListData.length>0){%>
         <%reCommendListData.forEach(function(item){%>
-        <dl class="col-xs-6 col-md-3">
-            <dt>
+        <div class="single-content col-xs-12 col-sm-6 col-md-6 col-lg-3">
+            <a title="<%=item.title%>" href="/details/<%=item._id%>.html">
+                <img class="img-responsive" alt="<%=item.title%>" src="<%=item.sImg%>">
+            </a>
+            <h5>
                 <a title="<%=item.title%>" href="/details/<%=item._id%>.html">
-                    <img class="img-responsive" alt="<%=item.title%>" src="<%=item.sImg%>">
+                    <%=item.title%>
                 </a>
-            </dt>
-            <dd><a title="<%=item.title%>" href="/details/<%=item._id%>.html"><%=item.title%></a>
-            </dd>
-        </dl>
+            </h5>
+        </div>
         <%})%>
     <%}else{%>
     <li class="text-center">暂无推荐内容...</li>

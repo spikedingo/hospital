@@ -9,9 +9,17 @@
             <a class="title ellipsis" alt="<%=item.title%>" title="<%=item.title%>" href="/details/<%=item._id%>.html">
                 <%=item.title%>
             </a>
+            <h5 class="clearfix">
+                <span class="fl">
+                    作者：旌德县人民医院
+                </span>
+                <span class="fr">
+                    <%=myDateFormat(item.date)%>
+                </span>
+            </h5>
             <p class="intro">
-                <%=item.description.slice(0,70)%>
-                <%=item.description.length > 70 ? '......' : ''%>
+                <%=item.description && item.description.slice(0,70)%>
+                <%=item.description && item.description.length > 70 ? '......' : ''%>
             </p>
         </div>
     </div>
