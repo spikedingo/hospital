@@ -21,38 +21,36 @@
             })();
         </script> -->
         <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-9 left-frame">
-                    <div class="post">
-                        <h2 class="post-title"><%=documentInfo.title%>
-                            <%if(documentInfo.from == '2'){%>
-                            &nbsp;<span class="badge">转</span>
-                            <%}%>
-                        </h2>
-                        <ul class="post-meta">
-                            <li>
-                                <i class="fa fa-user" aria-hidden="true"></i>&nbsp;<%=documentInfo.author.name%>
-                            </li>
-                            <li>
-                                <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;<%=myDateFormat(documentInfo.date)%>
-                            </li>
-                            <li>
-                                <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;阅读(<%=documentInfo.clickNum%>)
-                            </li>
-                        </ul>
-
-                        <div class="post-content rich-text-container">
-                            <%- documentInfo.comments%>
-                        </div>
-                    </div>
-
-                    <% include ../public/reCommendList %>
+            <div class="col-md-9 left-frame">
+                <div class="post">
+                    <h2 class="post-title"><%=documentInfo.title%>
+                        <%if(documentInfo.from == '2'){%>
+                        &nbsp;<span class="badge">转</span>
+                        <%}%>
+                    </h2>
+                    <ul class="post-meta">
+                        <li>
+                            <i class="fa fa-user" aria-hidden="true"></i>&nbsp;<%=documentInfo.author.name%>
+                        </li>
+                        <li>
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;<%=myDateFormat(documentInfo.date)%>
+                        </li>
+                        <li>
+                            <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;阅读(<%=documentInfo.clickNum%>)
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-md-3 right-frame">
-                    <% include ../public/searchBoard %>
-                    <% include ../public/leftNav %>
-                    <% include ../public/newItemList %>
+
+                <div class="post-content rich-text-container">
+                    <%- documentInfo.comments%>
                 </div>
+
+                <% include ../public/reCommendList %>
+            </div>
+            <div class="col-md-3 right-frame">
+                <% include ../public/searchBoard %>
+                <% include ../public/leftNav %>
+                <% include ../public/newItemList %>
             </div>
         </div>
     </div>
