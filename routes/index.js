@@ -129,7 +129,9 @@ router.get('/contentList/:category/:page',function(req,res,next) {
     siteFunc.renderToTargetPageByType(req,res,categoryInfos,{info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
 })
 
-
+router.get('/guides',function(req, res, next) {
+    siteFunc.renderToTargetPageByType(req, res, 'guides', {info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
+})
 
 router.get('/aboutPatients',function (req,res,next){
     siteFunc.renderToTargetPageByType(req,res,'aboutPatients',{info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
