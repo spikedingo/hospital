@@ -331,7 +331,7 @@ var siteFunc = {
     // },
 
     setDataForContentList: function (req, res, categoryInfos, params, staticforder, defaultTempPath) {
-        var requireField = 'title date commentNum description clickNum isTop sImg tags';
+        var requireField = 'title date dateSeted commentNum description clickNum isTop sImg tags';
 
         var params = { limit: 9 }
         if (categoryInfos.page) {
@@ -642,6 +642,9 @@ var siteFunc = {
                 }else if(oType == 'aboutPatients'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/aboutPatients';
                     res.render(targetPath, siteFunc.setDataForTopicPage(req, res,  params, temp.alias, topicTempPath,'患者服务'));
+                }else if(oType == 'guides'){
+                    targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/guides';
+                    res.render(targetPath, siteFunc.setDataForTopicPage(req, res,  params, temp.alias, topicTempPath,'患者服务'));
                 }else if(oType == 'aboutDoctors'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/aboutDoctors';
                     res.render(targetPath, siteFunc.setDataForAboutDoctors(req, res,  params, temp.alias, topicTempPath,'医护团队'));
@@ -649,7 +652,7 @@ var siteFunc = {
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/aboutDepartments';
                     res.render(targetPath, siteFunc.setDataForAboutDepartments(req, res,  params, temp.alias, topicTempPath,'科室一览'));
                 }else if(oType == 'contentList'){
-                    targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/newsCenter';
+                    targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/contentTemps/newsCenter';
                     console.log(targetPath, 'targetPath')
                     res.render(targetPath, siteFunc.setDataForContentList(req, res, categoryInfos, params, temp.alias, topicTempPath,'新闻中心'));
                 }
