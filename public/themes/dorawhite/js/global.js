@@ -26,3 +26,31 @@ $(function() {
 		})
 	})
 })
+
+//导航页板块切换
+$(function() {
+	$('.single-guide').click(function(e) {
+		var page = $(this).data('for')
+
+		$('.sections-wrap').removeClass('active')
+		$('.sections-wrap.'+page).addClass('active')
+
+		$('.single-guide').removeClass('active')
+		$(this).addClass('active')
+	})
+})
+
+//导航页文章切换
+$(function() {
+	$('li.single-list').click(function(e) {
+		var contentsWrap = $(this).parents('.sections-wrap').find('.right-section')
+
+		contentsWrap.find('.single-content').hide()
+		contentsWrap.find('.single-content').eq($(this).index()).show()
+		
+		$('li.single-list').removeClass('active')
+		$(this).addClass("active");
+	})
+})
+
+

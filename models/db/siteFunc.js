@@ -244,6 +244,18 @@ var siteFunc = {
         }
     },
 
+    setDataForGuidePage: function (req, res, params ,staticforder, defaultTempPath,siteInfo) {
+        //var requireField = 'title date commentNum description clickNum isTop sImg tags';
+        //var documentList = DbOpt.getPaginationResult(Content, req, res, params, requireField);
+        //var tagsData = DbOpt.getDatasByParam(ContentTags, req, res, {});
+        return {
+            siteConfig: this.siteInfos(siteInfo),
+            //logined: isLogined(req),
+            staticforder : staticforder,
+            layout: defaultTempPath
+        }
+    },
+
     setDataForHtmlSiteMap : function(req, res, params ,staticforder, defaultTempPath){
 
         return {
@@ -617,7 +629,7 @@ var siteFunc = {
                     }else{
                         targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/' + siteFunc.getDefaultTempItem(temp) + '/detail';
                     }
-                    res.render(targetPath , siteFunc.setDetailInfo(req, res, params , temp.alias, defaultTempPath));
+                    res.render(targetPath , siteFunc.setDetailInfo(req, res, params , temp.alias, topicTempPath));
                 }else if(oType == 'user'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/users/' + params.page;
                     res.render(targetPath, siteFunc.setDataForUser(req, res, params , temp.alias, defaultTempPath));
@@ -644,7 +656,7 @@ var siteFunc = {
                     res.render(targetPath, siteFunc.setDataForTopicPage(req, res,  params, temp.alias, topicTempPath,'患者服务'));
                 }else if(oType == 'guides'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/guides';
-                    res.render(targetPath, siteFunc.setDataForTopicPage(req, res,  params, temp.alias, topicTempPath,'患者服务'));
+                    res.render(targetPath, siteFunc.setDataForGuidePage(req, res,  params, temp.alias, defaultTempPath,'患者服务'));
                 }else if(oType == 'aboutDoctors'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/aboutDoctors';
                     res.render(targetPath, siteFunc.setDataForAboutDoctors(req, res,  params, temp.alias, topicTempPath,'医护团队'));
