@@ -80,7 +80,6 @@ router.get('/details/:url', function (req, res, next) {
     }else{
         siteFunc.renderToTargetPageByType(req,res,'error',{info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
     }
-
 });
 
 router.get('/aboutHospital',function (req,res,next){
@@ -143,6 +142,11 @@ router.get('/aboutDoctors',function (req,res,next){
 
 router.get('/departments',function (req,res,next){
     siteFunc.renderToTargetPageByType(req,res,'aboutDepartments',{info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
+});
+
+// 科室详情页
+router.get('/department/:id',function (req,res,next){
+    siteFunc.renderToTargetPageByType(req,res,'departmentDetail',{info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
 });
 
 //获取医生

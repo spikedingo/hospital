@@ -20,7 +20,9 @@ var DepartmentSchema = new Schema({
     keywords : String,
     sImg : { type: String, default: "/upload/images/defaultImg.jpg" }, // 文章小图
     description : String,
-    mainDoctor : String,
+    departmentType: {type: Number, default: 1}, // 科室类型，1 临床 2 医技
+    subDepartment: Array,
+    subjects: Array,
     updateDate: { type: Date, default: Date.now } // 更新时间
 });
 
