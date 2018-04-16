@@ -1,36 +1,127 @@
-<script type="text/javascript">
-    function textBeautiful(obj){
-        
-        $(obj).find('.dDescription').each(function(i,x){
-            var splitedText = x.innerHTML.split('br');
-            $(x).html(splitedText.join('<br/>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp'));
-        });
-    }
-    window.onload = function(){
-        textBeautiful($('.depTable'));
-    }
-</script>
+<link rel="stylesheet" href="/themes/<%=staticforder%>/css/department_nav.css?vesion=<%=siteConfig.version%>">
+<div class="about-departments-wrap">
+    <div class="department-nav container">
+        <h5 class="position">您现在的位置：<a href>首页</a> > <a href="">科室导航</a></h5>
+    <!--         <div class="innerBanner" style="display:none;">
+            <img src="/themes/<%=staticforder%>/images/newsCenter.jpg" style="width:100%; margin:20px 0 0 0 ;">
+        </div> -->
 
-<div class="aboutDepartments container">
-    <div class="innerBanner" style="display:none;"><img src="/themes/<%=staticforder%>/images/aboutDepartments.jpg" style="width:100%; margin:20px 0 20px 0 ;"></div>
-    <div class="table-responsive tableDiv">
-            <tbody>
-                <%if(departmentsList.length>0){%>
-                    <%departmentsList.forEach(function(item){%>
-                        <div style="margin-bottom:20px;">
-                            <table class="table table-bordered depTable">
-                                <tr>
-                                    <td rowspan="2" class="depType" style="background-color:#6298ed; color:white; width:100px;"><%=item.department%></td>
-                                    <td style="background-color:#4b77bc; color:white;"><%=item.mainDoctor%></td>
-                                </tr>
-                                <tr>
-                                    <td class="dDescription" style="text-align:left; font-size:14px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<%=item.description%></td>
-                                </tr>
-                            </table>
+        <div class="page-intro">
+            <h2>
+                科室导航
+            </h2>
+            <h4>
+                介绍本院各个科室的入口
+            </h4>
+        </div>
+
+        <div class="row whole-departments">
+            <div class="right col-md-12 col-sm-12">
+                <div class="row special-departments">
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="special">
+                            <img src="/themes/<%=staticforder%>/images/chinese_med.jpg" alt="">
                         </div>
-                    <%})%>
-                <%}%>
-            </tbody>
-        <p class="pageIntro" style=""><a href="/aboutDoctors" style="color:white;">点击查看医护团队</a></p>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="special">
+                            <img src="/themes/<%=staticforder%>/images/express.jpg" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="special">
+                            <img src="/themes/<%=staticforder%>/images/equipments.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+
+<!--                 <div class="nav-line">
+                    <ul class="row">
+                        <li class="col-md-3 col-sm-3 col-xs-3">
+                            <a data-target="expert" class="nav-btn active" href="javascript:;">专家门诊<i></i></a>
+                        </li>
+                        <li class="col-md-3 col-sm-3 col-xs-3">
+                            <a data-target="clinical" style="background: #55a5aa;" class="nav-btn" href="javascript:;">临床科室<i style="border-top: 13px solid#55a5aa;"></i></a>
+                        </li>
+                        <li class="col-md-3 col-sm-3 col-xs-3">
+                            <a data-target="skill" style="background: #e5ca8f;" class="nav-btn" href="javascript:;">医技科室<i style="border-top: 13px solid #e5ca8f;"></i></a>
+                        </li>
+                        <li class="col-md-3 col-sm-3 col-xs-3">
+                            <a style="background: #01763a;" class="nav-btn" href="">更多科室</a>
+                        </li>
+                    </ul>
+                </div> -->
+                <div class="department-line">
+                    <div class="department-group expert active">
+                        <a data-target="clinical" class="department-title active" href="javascript:;">
+                            专家门诊
+                            <i></i>
+                        </a>
+
+                        <ul class="row">
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
+                        </ul>
+                    </div>
+                    <div class="department-group clinical">
+
+                        <a data-target="clinical" style="background: #55a5aa;" class="department-title active" href="javascript:;">
+                            临床科室
+                            <i style="border-top: 13px solid#55a5aa;"></i>
+                        </a>
+
+                        <ul class="row">
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+                        </ul>
+                    </div>
+                    <div class="department-group skill">
+                        <a data-target="clinical" style="background: #e5ca8f;" class="department-title active" href="javascript:;">
+                            医技科室
+                            <i style="border-top: 13px solid #e5ca8f;"></i>
+                        </a>
+
+                        <ul class="row">
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">化验室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">B超室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">胃镜室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">医技科室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">医技科室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">医技科室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">医技科室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">医技科室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">医技科室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">医技科室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">医技科室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">医技科室</a></li>
+                            <li class="department col-md-2 col-sm-3 col-xs-3"><a href="#">医技科室</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+

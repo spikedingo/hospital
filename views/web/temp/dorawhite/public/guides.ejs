@@ -1,8 +1,7 @@
 <link href="/themes/<%=staticforder%>/css/guides.css?vesion=<%=siteConfig.version%>" rel="stylesheet">
-<link rel="stylesheet" href="/plugins/jquery-scrollbar/jquery.mCustomScrollbar.min.css">
 <div class="guides-wrap">
 	<div class="container">
-		<h5 class="position">您现在的位置：<a href>首页</a> > <a href="">就医指南</a></h5>
+		<!-- <h5 class="position">您现在的位置：<a href>首页</a> > <a href="">就医指南</a></h5> -->
 
 		<h2 class="page-intro t-center">
 		    就医指南
@@ -11,22 +10,22 @@
 		<div class="guide-nav-wrap row">
 			<ul class="row">
 				<li class="col-md-2 col-sm-2 col-xs-6">
-					<a data-for="tips" class="single-guide active" href="#">就医须知</a>
+					<a data-for="tips" class="single-guide tips active" href="#tips">就医须知</a>
 				</li>
 				<li class="col-md-2 col-sm-2 col-xs-6">
-					<a data-for="insurance" class="single-guide" href="#">医保指南</a>
+					<a data-for="insurance" class="single-guide insurance" href="#insurance">医保指南</a>
 				</li>
 				<li class="col-md-2 col-sm-2 col-xs-6">
-					<a data-for="position" class="single-guide" href="#">医院位置</a>
+					<a data-for="position" class="single-guide position" href="#position">医院位置</a>
 				</li>
 				<li class="col-md-2 col-sm-2 col-xs-6">
-					<a data-for="inside" class="single-guide" href="#">院内导航</a>
+					<a data-for="inside" class="single-guide inside" href="#inside">院内导航</a>
 				</li>
 				<li class="col-md-2 col-sm-2 col-xs-6">
-					<a data-for="price" class="single-guide" href="#">价格公示</a>
+					<a data-for="price" class="single-guide price" href="#price">价格公示</a>
 				</li>
 				<li class="col-md-2 col-sm-2 col-xs-6">
-					<a data-for="thanks" class="single-guide" href="#">感谢信</a>
+					<a data-for="thanks" class="single-guide thanks" href="#thanks">感谢信</a>
 				</li>
 			</ul>
 		</div>
@@ -34,32 +33,21 @@
 		<div class="guides-type-wrap">
 			<% include guidesTemps/tipsTemp %>
 			<% include guidesTemps/insuranceTemp %>
-			<div class="sections-wrap position">
-				<div class="row">
-					<div class="left-section col-md-4 col-sm-4 col-xs-12"></div>
-					<div class="right-section col-md-8 col-sm-8 col-xs-12"></div>
-				</div>
-			</div>
-			<div class="sections-wrap inside">
-				<div class="row">
-					<div class="left-section col-md-4 col-sm-4 col-xs-12"></div>
-					<div class="right-section col-md-8 col-sm-8 col-xs-12"></div>
-				</div>
-			</div>
-			<div class="sections-wrap price">
-				<div class="row">
-					<div class="left-section col-md-4 col-sm-4 col-xs-12"></div>
-					<div class="right-section col-md-8 col-sm-8 col-xs-12"></div>
-				</div>
-			</div>
-			<div class="sections-wrap thanks">
-				<div class="row">
-					<div class="left-section col-md-4 col-sm-12"></div>
-					<div class="right-section col-md-8 col-sm-12"></div>
-				</div>
-			</div>
+			<% include guidesTemps/positionTemp %>
+			<% include guidesTemps/insideTemp %>
+			<% include guidesTemps/priceTemp %>
+			<% include guidesTemps/thanksTemp %>
 		</div>
 	</div>
 </div>
 
-<script type="text/javascript" src="/plugins/jquery-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		var location = window.location.href.split('#')[1]
+		console.log(location,'location')
+
+		if (location) {
+			changeGuideBlocks(location)
+		}
+	})
+</script>
