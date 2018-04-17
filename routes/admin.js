@@ -1052,7 +1052,6 @@ var returnAdminRouter = function(io) {
 
 //文档标签管理（list）
     router.get('/manage/contentTags', function(req, res, next) {
-
         adminFunc.renderToManagePage(req, res,'manage/contentTags',settings.CONTENTTAGS);
 
     });
@@ -1074,7 +1073,7 @@ var returnAdminRouter = function(io) {
         var errors;
         var name = req.body.name;
         var alias = req.body.alias;
-        var query=ContentTags.find({}).or([{'name' : name},{alias : alias}]);
+        var query=ContentTags.find({}).or([{'name' : name}]);
 //    标签或别名不允许重复
         query.exec(function(err,tags){
             if(tags.length > 0){

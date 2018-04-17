@@ -531,6 +531,7 @@ doraApp.controller("addContent",['$scope','$http','pageData','getItemService',fu
 
 
     $scope.formData.from = "1"
+    $scope.formData.state = 'true'
     console.log($scope.formData)
 
     $('#content-from').change(function() {

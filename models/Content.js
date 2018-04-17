@@ -29,7 +29,7 @@ var ContentSchema = new Schema({
     dateSeted: String, //设置时间
     updateDate: { type: Date, default: Date.now }, // 更新时间
     author : { type: String , ref : 'AdminUser'}, // 文档作者
-    state : { type: Boolean, default: true },  // 是否在前台显示，默认显示
+    state : { type: String, default: 'true' },  // 是否在前台显示，默认显示
     isTop : { type: Number, default: 0 },  // 是否推荐，默认不推荐 0为不推荐，1为推荐
     clickNum : { type: Number, default: 1 },
     comments : {},

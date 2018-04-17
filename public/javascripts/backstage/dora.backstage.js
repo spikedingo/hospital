@@ -8,7 +8,6 @@ $(function(){
 
 //初始化alert,dialog等容器位置
 function setContainerPosition(obj){
-
     var uitype = $(obj).attr('ui-type');
     if(uitype == 'alert' || uitype == 'tips' || uitype == 'block'){
         var $clone = $(obj).clone().css('display', 'block').appendTo('body');
@@ -22,10 +21,7 @@ function setContainerPosition(obj){
             "left" : left
         });
     }
-
 }
-
-
 
 //将后台获取的list解析为tree对象所需的json数据
 function changeToTreeJson(result,key,oldValue){
@@ -221,8 +217,6 @@ function getPageInfos($scope,$http,url,reqType){
 
     })
 }
-
-
 
 //新增广告中的图片信息模型
 
@@ -587,59 +581,137 @@ function getTreeParams($scope,type){
 
 //初始化文档标签tags
 function initContentTags($scope,$http){
-    $http.get("/admin/manage/contentTags/list").success(function(result){
-        var oldTags = $scope.formData.tags;
-        if(!oldTags){
-            oldTags = "0";
-        }
-        var tagsTree = changeToTreeJson(result,"tags",oldTags);
-        var setting = {
-            check: {
-                enable: true,
-                chkboxType: {"Y":"", "N":""}
-            },
-            view: {
-                dblClickExpand: false
-            },
-            data: {
-                simpleData: {
-                    enable: true
-                }
-            },
-            callback: {
-                beforeClick: beforeTagsClick,
-                onCheck: onTagsCheck
-            }
-        };
-        var zNodes = tagsTree;
-        $.fn.zTree.init($("#tagsTree"), setting, zNodes);
+    $.ajax({
+        url: '/admin/manage/contentTags/list',
+        type: 'get',
+        success: function(result) {
 
-        function beforeTagsClick(treeId, treeNode) {
-            var zTree = $.fn.zTree.getZTreeObj("tagsTree");
-            zTree.checkNode(treeNode, !treeNode.checked, null, true);
-            return false;
-        }
+            var oldTags = [];
+            $('ul.tags-wrap').find('li').each(function(i,x) {
+                oldTags.push($(x).text())
+            })
+            if(!oldTags){
+                oldTags = [];
+            }
 
-        function onTagsCheck(e, treeId, treeNode) {
-            var zTree = $.fn.zTree.getZTreeObj("tagsTree"),
-                nodes = zTree.getCheckedNodes(true),
-                v = "";
-            for (var i=0, l=nodes.length; i<l; i++) {
-                if(i > 3){
-                    return;
-                }
-                v += nodes[i].name + ",";
-            }
-            if (v.length > 0 ) {
-                v = v.substring(0, v.length-1);
-            }
-            var tagObj = $("#tagSel");
-            tagObj.val("");
-            tagObj.val(v);
-            tagObj.attr("value", v);
-            $scope.formData.tags = v;
+            
+            var $tagsTree = $(result.reduce(function(s,x,i) {
+                s += '<li class="tag">'+$.trim(x.name)+'</li>'
+                return s
+            },''))
+
+            console.log($tagsTree, '$tagsTree')
+
+            $('#tagsTree').append($tagsTree)
+            // function beforeTagsClick(treeId, treeNode) {
+            //     var zTree = $.fn.zTree.getZTreeObj("tagsTree");
+            //     zTree.checkNode(treeNode, !treeNode.checked, null, true);
+            //     return false;
+            // }
+
+            // function onTagsCheck(e, treeId, treeNode) {
+            //     var zTree = $.fn.zTree.getZTreeObj("tagsTree"),
+            //         nodes = zTree.getCheckedNodes(true),
+            //         v = "";
+            //     for (var i=0, l=nodes.length; i<l; i++) {
+            //         if(i > 3){
+            //             return;
+            //         }
+            //         v += nodes[i].name + ",";
+            //     }
+            //     if (v.length > 0 ) {
+            //         v = v.substring(0, v.length-1);
+            //     }
+            //     var tagObj = $("#tagSel");
+            //     tagObj.val("");
+            //     tagObj.val(v);
+            //     tagObj.attr("value", v);
+            //     $scope.formData.tags = v;
+            // }
         }
     })
+}
+
+// function handleAddTags(tag) {
+//     console.log(e)
+// }
+
+
+function inputEvt(evt,obj){
+    var reg = /\s$/;
+    var reg2 = /^[a-zA-Z0-9\s\u4e00-\u9fa5]*$/;
+    var tagValue;
+    var $new_tag;
+
+    // 禁止换行/空格
+    if (evt.keyCode === 13 ) {
+        evt.preventDefault();
+    }
+
+    setTimeout(function(){
+        tagValue = $(obj).val();
+            if ( tagValue.replace(/\s+/g, '').length > 16 ){
+                $(obj).next('span').hide();
+                $(obj).nextAll('.msg').text('不能超过16个字符').show();
+            } else {
+                $(obj).nextAll('.msg').text('').hide();
+                $(obj).next('span').show();
+
+                if (evt.keyCode === 13 || reg.test(tagValue) || $(evt.currentTarget).hasClass('icon-plusicon')) {
+                    if (!reg2.test(tagValue)) {
+                        $(obj).nextAll('.field-missing-notice').text('只能输入中文、英文字母和数字').show();
+                    }else{
+                        console.log(tagValue+'!','tagValue')
+                        $tagVal = tagValue.replace(/\s/g,'');
+                        console.log($tagVal+'!','tagValue')
+                        if ( $tagVal != '' ){
+                            // handle ajax
+                            $.ajax({
+                                url: '/admin/manage/contentManage_tag/addOne',
+                                type: 'POST',
+                                data: {
+                                    name: $.trim($tagVal)
+                                },
+                                success: function(res) {
+                                    console.log(res)
+                                    if (res == 'success') {
+                                        var $newTag = $('<li class="tag">'+$tagVal+'</li>')
+
+                                        var $tagSelected = $('<li>'+$tagVal+'<i class="fa fa-times"></i></li>')
+                                        $('ul#tagsTree').append($newTag)
+                                        $('ul.tags-wrap').append($tagSelected)
+                                    }
+                                }
+                            })
+
+                            // $html = '<li data-value="'+$tag+'">'+$tag+'<b>x</b></li>';
+                            // $new_tag = $($html);
+                            // $(obj).parent().next('.input-tags-list').append($new_tag);
+                            // $(obj).val('');
+
+                            // $('.input-tags-list').show();
+                            // if ( $(obj).parent().next('.input-tags-list').children('li').length >= 5 ){
+                            //     $(obj).attr('disabled', 'disabled');
+                            // } else {
+                            //     $(obj).remove('disabled');
+                            // }
+                        }else{
+                            $(obj).val('');
+                            $(obj).nextAll('.msg').text('请输入至少一个标签！').show();
+                            evt.preventDefault;
+                            return false;
+                        }
+
+                        if (evt.keyCode === 13 || reg.test(tagValue)){
+                            $(obj).val('');
+                            if (typeof added == 'function') {
+                                added($new_tag[0]);
+                            }  
+                        }
+                    }
+                }
+            }
+    }, 0);
 }
 
 function showTagsMenu() {
@@ -653,9 +725,45 @@ function hideTagsMenu() {
     $("#menuContent").fadeOut("fast");
     $("body").unbind("mousedown", onBodyDown);
 }
+
+$(function() {
+    $('.tag-input-form').on('keypress',function(e) {
+        console.log(e, e.keyCode)
+        inputEvt(e, this)
+    })
+
+    $(document).on({
+        'click': function(e) {
+            var tagName = $(this).text()
+            var added = false
+            $('ul.tags-wrap').find('li').each(function(i,x) {
+                if ($(x).text() == tagName) {
+                    added = true
+                }
+            })
+
+            if (added) {
+                alert('已经选择了这个标签')
+            }else{
+                var $newTag = $('<li>'+ tagName +'<i class="fa fa-times"></i></li>')
+                $('ul.tags-wrap').append($newTag)
+            }
+        }
+    },'#tagsTree li.tag')
+
+    $(document).on({
+        'click': function(e) {
+            $(this).parent().remove()
+        }
+    },'ul.tags-wrap li i.fa')
+    // $('ul.tags-wrap').find('li i.fa').click(function(e) {
+        
+    // })
+})
+
 function onBodyDown(event) {
     if (!(event.target.id == "menuBtn" || event.target.id == "tagSel" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {
-        hideTagsMenu();
+        //hideTagsMenu();
     }
 }
 
