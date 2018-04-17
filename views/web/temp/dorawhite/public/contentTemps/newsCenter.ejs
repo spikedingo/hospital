@@ -17,7 +17,9 @@
         <div class="row areaPicNews">
             <% if(contentLists.length>0){ %>
             <% contentLists.forEach(function(item){ %>
+                    <% if(item.state){ %>
                     <% include contentPost %>
+                    <%}%>
                 <% }) %>
             <% }else{ %>
                 <li class="text-center">暂无推荐内容...</li>

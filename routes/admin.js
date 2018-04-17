@@ -330,11 +330,11 @@ var returnAdminRouter = function(io) {
             }else if(targetObj == ContentCategory){
                 ContentCategory.updateCategoryTemps(req,res,params.query.uid);
             }
+            console.log(targetObj, req, 'in modifying')
             DbOpt.updateOneByID(targetObj,req, res,"update one obj success")
         }else{
             res.end('对不起，您无权执行该操作！');
         }
-
     });
 
 

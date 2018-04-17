@@ -581,11 +581,19 @@ function getTreeParams($scope,type){
 
 //初始化文档标签tags
 function initContentTags($scope,$http){
+    if ($scope.formData.tags) {
+        var arrTags = $scope.formData.tags.split(',')
+        var $tags = $(arrTags.reduce(function(s,x,i) {
+            return s += '<li>'+x+'<i class="fa fa-times"></i></li>'
+        },''))
+        $scope.formData.tags = ''
+        $('ul.tags-wrap').append($tags)
+    }
+
     $.ajax({
         url: '/admin/manage/contentTags/list',
         type: 'get',
         success: function(result) {
-
             var oldTags = [];
             $('ul.tags-wrap').find('li').each(function(i,x) {
                 oldTags.push($(x).text())
@@ -594,47 +602,17 @@ function initContentTags($scope,$http){
                 oldTags = [];
             }
 
-            
             var $tagsTree = $(result.reduce(function(s,x,i) {
                 s += '<li class="tag">'+$.trim(x.name)+'</li>'
                 return s
             },''))
 
-            console.log($tagsTree, '$tagsTree')
-
+            //console.log($tagsTree, '$tagsTree')
+            $('#tagsTree').children().remove()
             $('#tagsTree').append($tagsTree)
-            // function beforeTagsClick(treeId, treeNode) {
-            //     var zTree = $.fn.zTree.getZTreeObj("tagsTree");
-            //     zTree.checkNode(treeNode, !treeNode.checked, null, true);
-            //     return false;
-            // }
-
-            // function onTagsCheck(e, treeId, treeNode) {
-            //     var zTree = $.fn.zTree.getZTreeObj("tagsTree"),
-            //         nodes = zTree.getCheckedNodes(true),
-            //         v = "";
-            //     for (var i=0, l=nodes.length; i<l; i++) {
-            //         if(i > 3){
-            //             return;
-            //         }
-            //         v += nodes[i].name + ",";
-            //     }
-            //     if (v.length > 0 ) {
-            //         v = v.substring(0, v.length-1);
-            //     }
-            //     var tagObj = $("#tagSel");
-            //     tagObj.val("");
-            //     tagObj.val(v);
-            //     tagObj.attr("value", v);
-            //     $scope.formData.tags = v;
-            // }
         }
     })
 }
-
-// function handleAddTags(tag) {
-//     console.log(e)
-// }
 
 
 function inputEvt(evt,obj){
@@ -661,9 +639,7 @@ function inputEvt(evt,obj){
                     if (!reg2.test(tagValue)) {
                         $(obj).nextAll('.field-missing-notice').text('只能输入中文、英文字母和数字').show();
                     }else{
-                        console.log(tagValue+'!','tagValue')
                         $tagVal = tagValue.replace(/\s/g,'');
-                        console.log($tagVal+'!','tagValue')
                         if ( $tagVal != '' ){
                             // handle ajax
                             $.ajax({
@@ -683,18 +659,6 @@ function inputEvt(evt,obj){
                                     }
                                 }
                             })
-
-                            // $html = '<li data-value="'+$tag+'">'+$tag+'<b>x</b></li>';
-                            // $new_tag = $($html);
-                            // $(obj).parent().next('.input-tags-list').append($new_tag);
-                            // $(obj).val('');
-
-                            // $('.input-tags-list').show();
-                            // if ( $(obj).parent().next('.input-tags-list').children('li').length >= 5 ){
-                            //     $(obj).attr('disabled', 'disabled');
-                            // } else {
-                            //     $(obj).remove('disabled');
-                            // }
                         }else{
                             $(obj).val('');
                             $(obj).nextAll('.msg').text('请输入至少一个标签！').show();
@@ -728,7 +692,6 @@ function hideTagsMenu() {
 
 $(function() {
     $('.tag-input-form').on('keypress',function(e) {
-        console.log(e, e.keyCode)
         inputEvt(e, this)
     })
 
@@ -748,6 +711,13 @@ $(function() {
                 var $newTag = $('<li>'+ tagName +'<i class="fa fa-times"></i></li>')
                 $('ul.tags-wrap').append($newTag)
             }
+
+            var tags = [];
+            $('ul.tags-wrap').find('li').each(function(i,x) {
+                tags.push($(x).text())
+            })
+
+            $('.keyword-input').val(tags.join(','))
         }
     },'#tagsTree li.tag')
 
@@ -756,9 +726,6 @@ $(function() {
             $(this).parent().remove()
         }
     },'ul.tags-wrap li i.fa')
-    // $('ul.tags-wrap').find('li i.fa').click(function(e) {
-        
-    // })
 })
 
 function onBodyDown(event) {

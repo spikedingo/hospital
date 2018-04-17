@@ -12,30 +12,31 @@
                 <form role="form" class="form-horizontal" name="myForm" ng-submit="processForm(myForm.$valid)" novalidate>
                     <div class="form-group clearfix">
                         <label class="control-label">文章标题</label>
-                        <div class="input-area">
+                        <div class="input-area clearfix">
                             <input type="text" class="form-control input-sm title" name="title" ng-minlength="5" ng-maxlength="50" ng-model="formData.title" required/>
                             <label for="inputError" class="control-label err-label text-danger" ng-show="myForm.title.$invalid && !myForm.title.$pristine"><i class="fa fa-times-circle-o"></i> 5-50个非特殊字符</label>
-
+                            <span class="must">*</span>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label">简短标题</label>
-                        <div class="input-area">
+                        <div class="input-area clearfix">
                             <input type="text" class="form-control input-sm" name="stitle" ng-minlength="5" ng-maxlength="40" ng-model="formData.stitle" required/>
                             <label for="inputError" class="control-label err-label text-danger" ng-show="myForm.stitle.$invalid && !myForm.stitle.$pristine"><i class="fa fa-times-circle-o"></i> 5-40个非特殊字符</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label">设置时间</label>
-                        <div class="input-area">
+                        <div class="input-area clearfix">
                             <input type="text" class="form-control input-sm" name="dateSeted" ng-minlength="2" ng-maxlength="40" ng-model="formData.dateSeted" required/>
                             <label for="inputError" class="control-label err-label text-danger" ng-show="myForm.dateSeted.$invalid && !myForm.dateSeted.$pristine"><i class="fa fa-times-circle-o"></i>请按年-月-日格式设置时间</label>
+                            <span class="must">*</span>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label">文章类别</label>
-                        <div class="input-area">
+                        <div class="input-area clearfix">
                             <div class="dropdown">
                                 <button id="dLabel" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i id="categoryName">请选择文章类别</i>
@@ -44,13 +45,14 @@
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" id="cateTree" class="ztree">
                                     <li role="presentation"><a href="#">test</a></li>
                                 </ul>
+                                <span class="must">*</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label">来源</label>
-                        <div class="radio input-area">
+                        <div class="radio input-area clearfix">
                             <select id="content-from" name="from" ng-model="formData.from">
                                 <option selected="true" value="1">原创</option>
                                 <option value="2">转载</option>
@@ -61,27 +63,28 @@
 
                     <div ng-show="formData.from == 3" class="form-group">
                         <label class="control-label">来源URL</label>
-                        <div class="input-area">
-                            <input type="text" class="form-control input-sm" name="originUrl" ng-minlength="2" ng-model="formData.originUrl"/>
+                        <div class="input-area clearfix">
+                            <input type="text" class="form-control input-sm input-origin-url" name="originUrl" ng-minlength="2" ng-model="formData.originUrl"/>
                             <label for="inputError" class="control-label err-label text-danger" ng-show="myForm.originUrl.$invalid && !myForm.originUrl.$pristine"><i class="fa fa-times-circle-o"></i> 5-40个非特殊字符</label>
+                            <span class="must">*</span>
                         </div>
                     </div>
 
-                    <div class="form-group">
+<!--                     <div class="form-group">
                         <label class="control-label">发布</label>
-                        <div class="radio input-area">
+                        <div class="radio input-area clearfix">
                             <select id="if-send" name="state" ng-model="formData.state">
                                 <option selected="true" value="true">发布</option>
                                 <option value="false">存档</option>
                             </select>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
                         <label class="control-label">TAG标签</label>
-                        <div class="input-area tag-input-wrap">
+                        <div class="input-area clearfix tag-input-wrap">
                             <div class="tag-input clearfix">
-                                <input type="text" class="form-control tag-input-form" name="tags" id="tagSel" ng-minlength="2" ng-maxlength="27" ng-model="formData.tags" onclick="showTagsMenu()" required/>
+                                <input type="text" class="form-control tag-input-form" name="tags" id="tagSel" ng-minlength="2" ng-maxlength="27" ng-model="formData.tags" onclick="showTagsMenu()"/>
                                 
                                 <div class="input-group-btn">
                                     <button type="button" class="btn btn-default dropdown-toggle"  id="menuBtn" onclick="showTagsMenu(); return false;">选择 <span class="fa fa-caret-down"></span></button>
@@ -90,6 +93,7 @@
                                     </div>
                                 </div><!-- /btn-group -->
                             </div>
+                            <span class="must">*</span>
                             <ul class="tags-wrap clearfix">
                             </ul>
                             <label for="inputError" class="control-label err-label text-danger" ng-show="myForm.tags.$invalid && !myForm.tags.$pristine"><i class="fa fa-times-circle-o"></i>标签用逗号隔开，单个标签不可超过6个字，不得超过4个标签</label>
@@ -98,7 +102,7 @@
 
                     <div class="form-group">
                         <label class="control-label">缩略图</label>
-                        <div class="input-area">
+                        <div class="input-area clearfix">
                             <div name="uploadify" id="uploadContentImg"></div>
                             <img src="" alt="" width="120" height="120" class="img-thumbnail" id="myImg">
                         </div>
@@ -106,31 +110,32 @@
 
                     <div ng-hide="formData.from == 3" class="form-group">
                         <label class="control-label">关键字</label>
-                        <div class="input-area">
-                            <input type="text" class="form-control input-sm" name="keywords" ng-minlength="2" ng-maxlength="60" ng-model="formData.keywords"/>
+                        <div class="input-area clearfix">
+                            <input type="text" class="keyword-input form-control input-sm" name="keywords" ng-minlength="2" ng-maxlength="60" ng-model="formData.keywords"/>
                             <label for="inputError" class="control-label err-label text-danger" ng-show="myForm.keywords.$invalid && !myForm.keywords.$pristine"><i class="fa fa-times-circle-o"></i>60个字以内，多个关键字之间用逗号隔开</label>
                         </div>
                     </div>
                     
                     <div ng-hide="formData.from == 3" class="form-group">
                         <label class="control-label">内容摘要</label>
-                        <div class="input-area">
-                            <textarea class="form-control input-sm" name="description" ng-model="formData.description" ng-minlength="15" ng-maxlength="140" id="" cols="30" rows="6"></textarea>
-                            <label for="inputError" class="control-label err-label text-danger" ng-show="myForm.description.$invalid && !myForm.description.$pristine"><i class="fa fa-times-circle-o"></i> 15-140个非特殊字符</label>
+                        <div class="input-area clearfix">
+                            <textarea class="description-textarea form-control input-sm" name="description" ng-model="formData.description" ng-minlength="15" ng-maxlength="140" id="" cols="30" rows="6"></textarea>
+                            <label style="top: 120px;" for="inputError" class="control-label err-label text-danger" ng-show="myForm.description.$invalid && !myForm.description.$pristine"><i class="fa fa-times-circle-o"></i> 15-140个非特殊字符</label>
                         </div>
                     </div>
+
                     <div ng-hide="formData.from == 3" class="form-group">
                         <label class="control-label">文章详情</label>
-                        <div class="input-area">
-                            <textarea class="" name="comments" ng-model="formData.comments" id="container" ng-minlength="50" placeholder="请输入文章详情" ueditor>{{formData.comments}}</textarea>
+                        <div class="input-area clearfix">
+                            <textarea class="comments-textarea" name="comments" ng-model="formData.comments" id="container" ng-minlength="50" placeholder="请输入文章详情" ueditor>{{formData.comments}}</textarea>
                             <label for="inputError" class="control-label err-label text-danger" ng-show="myForm.comments.$invalid && !myForm.comments.$pristine"><i class="fa fa-times-circle-o"></i>内容不得少于50个字</label>
 
                         </div>
                     </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" ng-show="getContentState()" ng-click="saveAsDraft()">存为草稿</button>
                         <button type="submit" class="btn btn-primary" ng-disabled="myForm.$invalid">发布</button>
-                        <button id="show-form"></button>
                     </div>
                 </form>
 

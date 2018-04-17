@@ -343,7 +343,7 @@ var siteFunc = {
     // },
 
     setDataForContentList: function (req, res, categoryInfos, params, staticforder, defaultTempPath) {
-        var requireField = 'title date dateSeted commentNum description clickNum isTop sImg tags';
+        var requireField = 'title date dateSeted state commentNum description clickNum isTop sImg tags';
 
         var params = { limit: 9 }
         if (categoryInfos.page) {

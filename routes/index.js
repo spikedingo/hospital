@@ -82,6 +82,37 @@ router.get('/details/:url', function (req, res, next) {
     }
 });
 
+router.get('/previews/:url', function (req, res, next) {
+    console.log('gettingg')
+    var url = req.params.url;
+    var currentId = url.split('.')[0];
+    if(shortid.isValid(currentId)){
+        Content.findOne({ '_id': currentId , 'state' : false}).populate('category').populate('author').exec(function(err,result){
+            if (err) {
+                console.log(err)
+            } else {
+                if (result) {
+//                更新访问量
+                    result.clickNum = result.clickNum + 1;
+                    result.save(function(){
+                        var cateParentId = result.sortPath.split(',')[1];
+                        var cateQuery = {'sortPath': { $regex: new RegExp(cateParentId, 'i') }};
+
+                        siteFunc.getContentsCount(req,res,cateParentId,cateQuery,function(count){
+                            siteFunc.renderToTargetPageByType(req,res,'detail',{count : count, cateQuery : cateQuery, detail : result});
+                        });
+
+                    })
+                } else {
+                    siteFunc.renderToTargetPageByType(req,res,'error',{info : '非法操作!',message : settings.system_illegal_param, page : 'do404'});
+                }
+            }
+        });
+    }else{
+        siteFunc.renderToTargetPageByType(req,res,'error',{info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
+    }
+});
+
 router.get('/aboutHospital',function (req,res,next){
     siteFunc.renderToTargetPageByType(req,res,'aboutHospital',{info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
 });

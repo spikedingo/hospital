@@ -109,8 +109,9 @@
 
 ul.tags-wrap {
     padding-left: 0;
-    margin-top: 10px;
+    margin-top: 50px;
     margin-bottom: 0;
+    clear: both;
 
     li {
         list-style: none;
@@ -165,12 +166,24 @@ ul.tags-wrap {
             position: relative;
             margin-left: 140px;
 
+            input,button#dLabel,select,div.tag-input {
+                float: left;
+            }
+
             label.err-label {
                 position: absolute;
                 top: 30px;
                 display: block;
                 width: auto !important;
                 font-size: 12px;
+            }
+
+            span.must {
+                float: left;  
+                line-height: 36px;
+                font-size: 20px;
+                color: red;
+                margin-left: 10px;
             }
         }
 
@@ -185,10 +198,20 @@ ul.tags-wrap {
         select {
             height: 36px;
             border-color: #d2d6de;
+            width: 100px;
+            font-size: 13px;
+
+            option {
+                font-size: 13px;
+            };
         }
 
         input.title {
             width: 500px;
+        }
+
+        input.input-origin-url {
+            width: 500px;   
         }
         
         div.tag-input-wrap {
@@ -218,6 +241,13 @@ ul.tags-wrap {
             .uploadify-progress {
                 width: 200px !important;
             }
+        }
+
+        .description-textarea {
+            width: 50%;
+        }
+        .comments-textarea {
+            width: 90%; 
         }
     }
 }

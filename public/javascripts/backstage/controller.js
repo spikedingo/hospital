@@ -500,6 +500,9 @@ doraApp.controller("systemLogs",['$scope','$http',function($scope,$http){
 //文档新增/编辑
 doraApp.controller("addContent",['$scope','$http','pageData','getItemService',function($scope,$http,pageData,getItemService){
     console.log('adding contenat')
+
+    console.log($scope, 'start formData')
+
     $scope.formData = {};
     // 初始化文章分类
     initTreeDataByType($scope,$http,"contentCategories");
@@ -515,7 +518,6 @@ doraApp.controller("addContent",['$scope','$http','pageData','getItemService',fu
                 $scope.formData.sImg = data;
             }
         });
-
     });
 
     // 通过访问地址获取文章id
@@ -534,7 +536,7 @@ doraApp.controller("addContent",['$scope','$http','pageData','getItemService',fu
     $scope.formData.state = 'true'
     console.log($scope.formData)
 
-    $('#content-from').change(function() {
+    $('#if-send').change(function() {
         console.log($scope.formData)
     })
     
@@ -588,14 +590,27 @@ doraApp.controller("addContent",['$scope','$http','pageData','getItemService',fu
             }
         }
 
+        var finalTags = [];
+        $('ul.tags-wrap').find('li').each(function(i,x) {
+            finalTags.push($(x).text())
+        })
+        var keyWords = $('.keyword-input').val()
+
+        $scope.formData.tags = finalTags.join(',')
+        $scope.formData.keywords = keyWords || finalTags.join(',')
+
+        console.log($scope.formData, 'before process formData')
+        //return false
         angularHttpPost($http,isValid,getTargetPostUrl($scope,pageData.bigCategory),$scope.formData,function(data){
-            //window.location = "/admin/manage/contentList";
+            window.location = "/admin/manage/contentList";
         });
     };
     //  存草稿
     $scope.saveAsDraft = function(){
+
         $scope.formData.state = false;
         var errors;
+
         if(!$scope.formData.title){
             errors = '文档标题必须填写';
         }
@@ -611,6 +626,14 @@ doraApp.controller("addContent",['$scope','$http','pageData','getItemService',fu
                 }
             });
         }else{
+            var finalTags = [];
+            $('ul.tags-wrap').find('li').each(function(i,x) {
+                finalTags.push($(x).text())
+            })
+            var keyWords = $('.keyword-input').val()
+            $scope.formData.tags = finalTags.join(',')
+            $scope.formData.keywords = keyWords || finalTags.join(',')
+
             angularHttpPost($http,true,getTargetPostUrl($scope,pageData.bigCategory),$scope.formData,function(data){
                 window.location = "/admin/manage/contentList";
             });
@@ -618,12 +641,13 @@ doraApp.controller("addContent",['$scope','$http','pageData','getItemService',fu
     };
 
     $scope.getContentState = function(){
+        console.log(!$scope.formData.state , $scope.targetID, 'getting content state')
         if(!$scope.formData.state && $scope.targetID){
             return true;
         }else if($scope.targetID == undefined){
             return true;
         }else{
-            return false;
+            return true;
         }
     }
 }]);

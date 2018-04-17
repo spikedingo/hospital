@@ -21,8 +21,8 @@ var DepartmentSchema = new Schema({
     sImg : { type: String, default: "/upload/images/defaultImg.jpg" }, // 文章小图
     description : String,
     departmentType: {type: Number, default: 1}, // 科室类型，1 临床 2 医技
-    subDepartment: Array,
-    subjects: Array,
+    subDepartment: String,
+    subjects: String,
     updateDate: { type: Date, default: Date.now } // 更新时间
 });
 
