@@ -598,9 +598,13 @@ doraApp.controller("addContent",['$scope','$http','pageData','getItemService',fu
 
         $scope.formData.tags = finalTags.join(',')
         $scope.formData.keywords = keyWords || finalTags.join(',')
+        if (!$scope.formData.description) {
+            var description = window.ueditor.getContentTxt().slice(0,70)
+            $scope.formData.description = description.length < 70 ? description : description + '...'
+        }
 
         console.log($scope.formData, 'before process formData')
-        //return false
+
         angularHttpPost($http,isValid,getTargetPostUrl($scope,pageData.bigCategory),$scope.formData,function(data){
             window.location = "/admin/manage/contentList";
         });
@@ -665,6 +669,7 @@ doraApp.controller('departmentList',['$scope','$http',function($scope,$http){
 //科室新增/编辑
 doraApp.controller("addDepartment",['$scope','$http','pageData','getItemService',function($scope,$http,pageData,getItemService){
     $scope.formData = {};
+
     initUploadFyBtn('uploadDepartmentImg','images',"roomImg",function(data){
         $.tipsShow({
             message : '上传成功',
@@ -690,11 +695,29 @@ doraApp.controller("addDepartment",['$scope','$http','pageData','getItemService'
         })
     }
 
-    // 添加或修改文章
+    $scope.formData.departmentType = "1"
+
+    // 添加科室
     $scope.processForm = function(isValid){
-        $scope.formData.state = true;
+        //$scope.formData.state = true;
+        if ($('div.subjects').next('.value-container').find('li').length) {
+            var subjects = []
+            $('div.subjects').next('.value-container').find('li').each(function(i,x) {
+                subjects.push($(x).text())
+            })
+            $scope.formData.subjects = subjects.join(',')
+        }
+
+        if ($('div.subDepartments').next('.value-container').find('li').length) {
+            var subDepartments = []
+            $('div.subDepartments').next('.value-container').find('li').each(function(i,x) {
+                subDepartments.push($(x).text())
+            })
+            $scope.formData.subDepartments = subDepartments.join(',')
+        }
+
         angularHttpPost($http,isValid,getTargetPostUrl($scope,pageData.bigCategory),$scope.formData,function(data){
-            window.location = "/admin/manage/departmentList";
+            // window.location = "/admin/manage/departmentList";
         });
     }
 }]);
@@ -711,7 +734,34 @@ doraApp.controller('doctorList',['$scope','$http',function($scope,$http){
 
 //医生新增/编辑 --> addDoctor.ejs 
 doraApp.controller("addDoctor",['$scope','$http','pageData','getItemService',function($scope,$http,pageData,getItemService){
+
+    console.log($scope, 'begin addDoctor')
     $scope.formData = {};
+    initDepartmentLists($scope, $http, function() {
+        $scope.targetID = window.location.href.split("/")[7];
+        if ($scope.targetID == 'doctor') {
+            $scope.targetID = null;
+        };
+
+
+        console.log($scope.targetID , 'targetID')
+        if($scope.targetID){
+            getItemService.itemInfo(pageData.bigCategory,$scope.targetID).success(function(result){
+                console.log(result, 'editing')
+                $scope.formData = result;
+                $("#myImg").attr("src",$scope.formData.sImg)
+
+                var arrPros = $scope.formData.professional.split(',')
+                console.log(arrPros,'arrPros')
+                var $pros = $(arrPros.reduce(function(s,x,i) {
+                    return s += '<li>'+x+'<i class="fa fa-times"></i></li>'
+                },''))
+                console.log($pros,'arrPros')
+                $scope.formData.professional = ''
+                $('div.professional').nextAll('.value-container').append($pros)
+            })
+        }
+    })
     initUploadFyBtn('uploadDoctorImg','images',"docImg",function(data){
         $.tipsShow({
             message : '上传成功',
@@ -723,23 +773,22 @@ doraApp.controller("addDoctor",['$scope','$http','pageData','getItemService',fun
         });
     });
     // 通过访问地址获取文章id
-    $scope.targetID = window.location.href.split("/")[7];
-    
-    if ($scope.targetID == 'doctor') {
-        $scope.targetID = null;
-    };
 
-    if($scope.targetID){
-        getItemService.itemInfo(pageData.bigCategory,$scope.targetID).success(function(result){
-            $scope.formData = result;
-            initContentTags($scope,$http);
-            $("#myImg").attr("src",$scope.formData.sImg)
-        })
-    }
+    console.log($scope.formData)
+    //$scope.formData.department = $scope.formData.department || '0'
+    $scope.formData.department = '0'
 
-    // 添加或修改文章
+    // 添加医生
     $scope.processForm = function(isValid){
-        $scope.formData.state = true;
+        //$scope.formData.state = true;
+        if ($('div.professional').nextAll('.value-container').find('li').length) {
+            var professional = []
+            $('div.professional').nextAll('.value-container').find('li').each(function(i,x) {
+                professional.push($(x).text())
+            })
+            $scope.formData.professional = professional.join(',')
+        }
+
         angularHttpPost($http,isValid,getTargetPostUrl($scope,pageData.bigCategory),$scope.formData,function(data){
             window.location = "/admin/manage/doctorList";
         });

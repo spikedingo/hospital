@@ -1,6 +1,6 @@
 <div class="row" ng-controller="addContent">
     <div class="col-xs-12">
-        <div class="box box-default content-input-wrap">
+        <div class="box box-default form-input-wrap">
             <div class="box-header">
                 <div class="alert alert-success alert-dismissable fade in hide" role="alert" id="addSuccess">
                     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
@@ -36,7 +36,7 @@
 
                     <div class="form-group">
                         <label class="control-label">文章类别</label>
-                        <div class="input-area clearfix">
+                        <div class="input-area type-select clearfix">
                             <div class="dropdown">
                                 <button id="dLabel" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i id="categoryName">请选择文章类别</i>
@@ -129,7 +129,6 @@
                         <div class="input-area clearfix">
                             <textarea class="comments-textarea" name="comments" ng-model="formData.comments" id="container" ng-minlength="50" placeholder="请输入文章详情" ueditor>{{formData.comments}}</textarea>
                             <label for="inputError" class="control-label err-label text-danger" ng-show="myForm.comments.$invalid && !myForm.comments.$pristine"><i class="fa fa-times-circle-o"></i>内容不得少于50个字</label>
-
                         </div>
                     </div>
 

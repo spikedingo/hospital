@@ -15,12 +15,9 @@ var DoctorSchema = new Schema({
         'default': shortid.generate
     },
     doctor:  String,
-    keywords : String,
     department: String,
-    departmentType: Number,
-    sImg : { type: String, default: "/upload/images/defaultImg.jpg" }, // 文章小图
     professional : String,
-    skillLevel: String,
+    sImg : { type: String, default: "/upload/images/defaultDoctor.jpg" }, // 文章小图
     description : String,
     updateDate: { type: Date, default: Date.now } // 更新时间
 });

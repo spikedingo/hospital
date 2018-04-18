@@ -987,6 +987,16 @@ var returnAdminRouter = function(io) {
 
     });
 
+//所有科室列表
+    router.get('/manage/department/list', function(req, res, next) {
+        if(adminFunc.checkAdminPower(req,settings.CONTENTTAGS[0] + '_view')){
+            DbOpt.findAll(Department,req, res,"request Department List")
+        }else{
+            return res.json({});
+        }
+
+    });
+
 //添加科室页面
 
     router.get('/manage/department/add/:key', function(req, res, next) {

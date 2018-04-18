@@ -614,8 +614,27 @@ function initContentTags($scope,$http){
     })
 }
 
+//初始化文档标签tags
+function initDepartmentLists($scope,$http,callback){
+    $.ajax({
+        url: '/admin/manage/department/list',
+        type: 'get',
+        success: function(result) {
 
-function inputEvt(evt,obj){
+            var $departments = $(result.reduce(function(s,x,i) {
+                s += '<option value="'+x.department+'">'+x.department+'</option>'
+                return s
+            },''))
+
+            $('#department-type').append($departments)
+            console.log(1)
+            callback && callback()
+        }
+    })
+}
+
+
+function inputTags(evt, obj){
     var reg = /\s$/;
     var reg2 = /^[a-zA-Z0-9\s\u4e00-\u9fa5]*$/;
     var tagValue;
@@ -692,8 +711,24 @@ function hideTagsMenu() {
 
 $(function() {
     $('.tag-input-form').on('keypress',function(e) {
-        inputEvt(e, this)
+        inputTags(e, this)
     })
+
+    $(document).on({
+        'click': function(e) {
+            $(this).parent().remove()
+        }
+    },'ul.tags-wrap li i.fa')
+
+    $('.normal-input-form').on('keypress',function(e) {
+        inputEvent(e, this, 'value-container')
+    })
+
+    $(document).on({
+        'click': function(e) {
+            $(this).parent().remove()
+        }
+    },'ul.value-container li i.fa')
 
     $(document).on({
         'click': function(e) {
@@ -720,13 +755,50 @@ $(function() {
             $('.keyword-input').val(tags.join(','))
         }
     },'#tagsTree li.tag')
-
-    $(document).on({
-        'click': function(e) {
-            $(this).parent().remove()
-        }
-    },'ul.tags-wrap li i.fa')
 })
+
+function inputEvent(evt, obj, container){
+    var reg = /\s$/;
+    var reg2 = /^[a-zA-Z0-9\s\u4e00-\u9fa5]*$/;
+    var inputValue;
+    var $newValue;
+
+    // 禁止换行/空格
+    if (evt.keyCode === 13 ) {
+        evt.preventDefault();
+    }
+
+    setTimeout(function(){
+        inputValue = $(obj).val();
+            if ( inputValue.replace(/\s+/g, '').length > 16 ){
+                $(obj).nextAll('.label').text('不能超过16个字符').show();
+            } else {
+                $(obj).nextAll('.msg').text('').hide();
+
+                if (evt.keyCode === 13 || reg.test(inputValue) || $(evt.currentTarget).hasClass('icon-plusicon')) {
+                    if (!reg2.test(inputValue)) {
+                        $(obj).nextAll('label').text('只能输入中文、英文字母和数字').show();
+                    }else{
+                        $val = inputValue.replace(/\s/g,'');
+                        if ( $val != '' ){
+                            var $newTag = $('<li>'+$val+'<i class="fa fa-times"></i></li>')
+                            console.log($newTag, $(obj).parents('.input-area'), $(obj).parents('.input-area').find('ul.'+container))
+                            $(obj).parents('.input-area').find('ul.'+container).append($newTag)
+                        }else{
+                            $(obj).val('');
+                            $(obj).nextAll('label').text('请输入至少一个标签！').show();
+                            evt.preventDefault;
+                            return false;
+                        }
+
+                        if (evt.keyCode === 13 || reg.test(inputValue)){
+                            $(obj).val('');
+                        }
+                    }
+                }
+            }
+    }, 0);
+}
 
 function onBodyDown(event) {
     if (!(event.target.id == "menuBtn" || event.target.id == "tagSel" || event.target.id == "menuContent" || $(event.target).parents("#menuContent").length>0)) {

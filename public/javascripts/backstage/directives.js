@@ -34,6 +34,7 @@ doraApp.directive('ueditor', ['$timeout',function ($timeout) { //angular绑定ue
                 initialFrameHeight: '500',
                 autoHeightEnabled: true
             });
+            window.ueditor = ue
             ue.ready(function () {
                 ue.addListener('contentChange', function () {
                     ctrl.$setViewValue(ue.getContent());

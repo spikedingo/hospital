@@ -1,6 +1,6 @@
 <div class="row" ng-controller="addDepartment">
     <div class="col-xs-12">
-        <div class="box box-default">
+        <div class="box box-default form-input-wrap">
             <div class="box-header">
                 <div class="alert alert-success alert-dismissable fade in hide" role="alert" id="addSuccess">
                     <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
@@ -11,43 +11,81 @@
             <div class="box-body">
                 <form role="form" class="form-horizontal" name="myForm" ng-submit="processForm(myForm.$valid)" novalidate>
                     <div class="form-group">
-                        <label class="control-label col-sm-3">科室名称</label>
-                        <div class="col-sm-5">
+                        <label class="control-label">科室名称</label>
+                        <div class="input-area">
                             <input type="text" class="form-control input-sm" name="department" ng-minlength="2" ng-maxlength="10" ng-model="formData.department" required/>
-                            <label for="inputError" class="control-label text-danger" ng-show="myForm.department.$invalid && !myForm.department.$pristine"><i class="fa fa-times-circle-o"></i> 2-10个非特殊字符</label>
+                            <label for="inputError" class="err-label control-label text-danger" ng-show="myForm.department.$invalid && !myForm.department.$pristine"><i class="fa fa-times-circle-o"></i> 2-10个非特殊字符</label>
+                            <span class="must">*</span>
+                        </div>
+                    </div>
 
+                    <div class="form-group">
+                        <label class="control-label">来源</label>
+                        <div class="radio input-area clearfix">
+                            <select id="department-type" name="departmentType" ng-model="formData.departmentType">
+                                <option selected="true" value="1">临床</option>
+                                <option value="2">医技</option>
+                            </select>
+                            <span class="must">*</span>
                         </div>
                     </div>
+
                     <div class="form-group">
-                        <label class="control-label col-sm-3">主要人员</label>
-                        <div class="col-sm-3">
-                            <input type="text" class="form-control input-sm" name="mainDoctor" ng-minlength="2" ng-maxlength="50" ng-model="formData.mainDoctor" required/>
-                            <label for="inputError" class="control-label text-danger" ng-show="myForm.mainDoctor.$invalid && !myForm.mainDoctor.$pristine"><i class="fa fa-times-circle-o"></i> 2-50个非特殊字符</label>
+                        <label class="control-label">子科室</label>
+                        <div class="input-area clearfix tag-input-wrap">
+                            <div class="tag-input clearfix subDepartments">
+                                <input type="text" class="form-control normal-input-form" name="tags" ng-minlength="2" ng-maxlength="27" ng-model="formData.subDepartments"/>
+                            </div>
+                            <ul class="value-container clearfix">
+                            </ul>
+                            <label for="inputError" class="err-label control-label err-label text-danger" ng-show="myForm.tags.$invalid && !myForm.tags.$pristine"><i class="fa fa-times-circle-o"></i>子科室名字不可超过6个字</label>
                         </div>
                     </div>
+
                     <div class="form-group">
-                        <label class="control-label col-sm-3">缩略图</label>
-                        <div class="col-sm-3">
-                            <input type="file" name="uploadify" id="uploadDepartmentImg" />
+                        <label class="control-label">缩略图</label>
+                        <div class="input-area clearfix">
+                            <div name="uploadify" id="uploadDepartmentImg"></div>
                             <img src="" alt="" width="120" height="120" class="img-thumbnail" id="myImg">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-3">关键字</label>
-                        <div class="col-sm-5">
+
+  <!--                   <div class="form-group">
+                        <label class="control-label">关键字</label>
+                        <div class="input-area">
                             <input type="text" class="form-control input-sm" name="keywords" ng-minlength="2" ng-maxlength="60" ng-model="formData.keywords" required/>
-                            <label for="inputError" class="control-label text-danger" ng-show="myForm.keywords.$invalid && !myForm.keywords.$pristine"><i class="fa fa-times-circle-o"></i>60个字以内，多个关键字之间用逗号隔开</label>
+                            <label for="inputError" class="err-label control-label text-danger" ng-show="myForm.keywords.$invalid && !myForm.keywords.$pristine"><i class="fa fa-times-circle-o"></i>60个字以内，多个关键字之间用逗号隔开</label>
                         </div>
-                    </div>
+                    </div> -->
+
                     <div class="form-group">
-                        <label class="control-label col-sm-3">介绍</label>
-                        <div class="col-sm-6">
-                            <textarea class="form-control input-sm" name="description" ng-model="formData.description" ng-minlength="2" ng-maxlength="1000" required id="" cols="30" rows="6"></textarea>
-                            <label for="inputError" class="control-label text-danger" ng-show="myForm.description.$invalid"><i class="fa fa-times-circle-o"></i> 2-1000个非特殊字符</label>
+                        <label class="control-label">科室特色</label>
+                        <div class="input-area clearfix tag-input-wrap">
+                            <div class="tag-input clearfix subjects">
+                                <input type="text" class="form-control normal-input-form" name="tags" ng-minlength="2" ng-maxlength="27" ng-model="formData.subjects"/>
+                                
+                                <!-- <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default dropdown-toggle"  id="menuBtn" onclick="showTagsMenu(); return false;">选择 <span class="fa fa-caret-down"></span></button>
+                                    <div id="menuContent" class="menuContent dropdown-menu tag-sel-menu" style="display:none; position: absolute;z-index: 999">
+                                        <ul class="ztree" id="tagsTree" style=""></ul>
+                                    </div>
+                                </div> --><!-- /btn-group -->
+                            </div>
+                            <ul class="value-container clearfix">
+                            </ul>
+                            <label for="inputError" class="err-label control-label err-label text-danger" ng-show="myForm.tags.$invalid && !myForm.tags.$pristine"><i class="fa fa-times-circle-o"></i>单个关键字不可超过6个字</label>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label class="control-label">介绍</label>
+                        <div class="input-area">
+                            <textarea style="width: 70%;" class="form-control input-sm" name="description" ng-model="formData.description" ng-minlength="2" ng-maxlength="1000" required id="" cols="30" rows="6"></textarea>
+                            <label style="top: 120px;" for="inputError" class="err-label control-label text-danger" ng-show="myForm.description.$invalid"><i class="fa fa-times-circle-o"></i> 2-1000个非特殊字符</label>
+                        </div>
+                    </div>
+
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default" ng-show="getContentState()" ng-click="saveAsDraft()">存为草稿</button>
                         <button type="submit" class="btn btn-primary" ng-disabled="myForm.$invalid">发布</button>
                     </div>
                 </form>
