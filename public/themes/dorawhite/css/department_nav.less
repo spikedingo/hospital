@@ -1,3 +1,5 @@
+@blue: #1b98e0;
+
 .department-nav {
 
 	@media (max-width: 1199px) {
@@ -200,6 +202,57 @@
 
 		img {
 			width: 100%;
+		}
+	}
+}
+
+.department-detail {
+	.department-intro {
+		.department-photo {
+			img {
+				width: 100%;
+			}
+		}
+
+		.department-info {
+			h3 {
+				margin-top: 0;
+				font-size: 36px;
+				margin-bottom: 15px;
+				padding-bottom: 15px;
+				border-bottom: 2px solid #1b98e0;
+			}
+
+			p {
+				font-size: 16px;
+				line-height: 24px;
+				border-bottom: 2px solid @blue;
+				padding-bottom: 15px;
+			}
+
+			.subjects-wrap {
+				h5 {
+					font-size: 18px;
+					line-height: 30px;
+				}
+
+				li.subject {
+					padding: 5px 10px;
+					color: @blue;
+					border: 1px solid @blue;
+					border-radius: 10px;
+					float: left;
+					font-size: 15px;
+					margin-right: 10px;
+					margin-bottom: 10px;
+				}
+			}
+		}
+	}
+
+	.doctors {
+		h3 {
+			padding: 15px;
 		}
 	}
 }

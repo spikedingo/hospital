@@ -5,6 +5,8 @@ var router = express.Router();
 var DbOpt = require("../models/Dbopt");
 // 文档对象
 var Content = require("../models/Content");
+// 科室对象
+var Department = require("../models/Department");
 //文章类别对象
 var ContentCategory = require("../models/ContentCategory");
 //短id
@@ -82,6 +84,7 @@ router.get('/details/:url', function (req, res, next) {
     }
 });
 
+// 预览文章页面
 router.get('/previews/:url', function (req, res, next) {
     console.log('gettingg')
     var url = req.params.url;
@@ -112,6 +115,39 @@ router.get('/previews/:url', function (req, res, next) {
         siteFunc.renderToTargetPageByType(req,res,'error',{info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
     }
 });
+
+// 科室详情页
+router.get('/department/:url', function (req, res, next) {
+
+    var url = req.params.url;
+    var currentId = url.split('.')[0];
+    if(shortid.isValid(currentId)){
+        Department.findOne({ '_id': currentId }).exec(function(err,result){
+            if (err) {
+                console.log(err)
+            } else {
+                console.log(result, 'result')
+                if (result) {
+//                更新访问量
+                    result.save(function(){
+                        //var cateParentId = result.sortPath.split(',')[1];
+                        //var cateQuery = {'sortPath': { $regex: new RegExp(cateParentId, 'i') }};
+
+                        //siteFunc.getContentsCount(req,res,cateParentId,cateQuery,function(count){});
+                        siteFunc.renderToTargetPageByType(req,res,'departmentDetail',{department : result});
+
+                    })
+                } else {
+                    siteFunc.renderToTargetPageByType(req,res,'error',{info : '非法操作!',message : settings.system_illegal_param, page : 'do404'});
+                }
+            }
+        });
+    }else{
+        siteFunc.renderToTargetPageByType(req,res,'error',{info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
+    }
+});
+
+
 
 router.get('/aboutHospital',function (req,res,next){
     siteFunc.renderToTargetPageByType(req,res,'aboutHospital',{info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
@@ -176,9 +212,9 @@ router.get('/departments',function (req,res,next){
 });
 
 // 科室详情页
-router.get('/department/:id',function (req,res,next){
-    siteFunc.renderToTargetPageByType(req,res,'departmentDetail',{info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
-});
+// router.get('/department/:id',function (req,res,next){
+//     siteFunc.renderToTargetPageByType(req,res,'departmentDetail',{info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
+// });
 
 //获取医生
 router.get('/addDoctors',function(req,res,next){

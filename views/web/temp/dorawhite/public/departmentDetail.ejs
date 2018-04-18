@@ -1,0 +1,63 @@
+<link rel="stylesheet" href="/themes/<%=staticforder%>/css/department_nav.css?vesion=<%=siteConfig.version%>">
+
+<div class="department-detail">
+	<div class="container">
+		<p><%=departmentInfo.subDepartments%></p>
+		<p><%=departmentInfo.subjects%></p>
+		<p><%=departmentInfo.departmentType%></p>
+		<p><%=doctors[0]%></p>
+		<p><%=articles[0]%></p>
+
+		<div class="department-intro row">
+			<div class="department-photo col-lg-5 col-md-6 col-sm-12 col-xs-12">
+				<div class="rImg65">
+					<img src="<%=departmentInfo.sImg%>" />
+				</div>
+			</div>
+			<div class="department-info col-lg-7 col-md-6 col-sm-12 col-xs-12">
+				<h3><%=departmentInfo.department%></h3>
+				<p><%=departmentInfo.description%><%=departmentInfo.description%></p>
+				<% if(departmentInfo.subjects != ''){ %>
+				<div class="subjects-wrap">
+					<h5>科室特色</h5>
+					<ul class="clearfix">
+						<% departmentInfo.subjects.split(',').forEach(function(item){ %>
+						    <li class="subject"><%=item%></li>
+						<%})%>
+						<% departmentInfo.subjects.split(',').forEach(function(item){ %>
+						    <li class="subject"><%=item%></li>
+						<%})%>
+						<% departmentInfo.subjects.split(',').forEach(function(item){ %>
+						    <li class="subject"><%=item%></li>
+						<%})%>
+					</ul>
+				</div>
+				<%}%>
+			</div>
+		</div>
+
+		<% if(doctors.length){ %>
+		<div class="doctors">
+			<h3>科室医生</h3>
+			<div class="doctors-wrap row">
+				<% doctors.forEach(function(doctor){ %>
+				    <div class="single-doctor col-md-3 col-sm-3 col-xs-4">
+				    	<div class="rImgDoc">
+				    		<img src="<%=doctor.sImg%>" alt="">
+				    	</div>
+				    </div>
+				<%})%>
+			</div>
+		</div>
+		<%}%>
+
+		<div class="news-line row">
+			<% if(departmentInfo.subDepartments.split(',').length){ %>
+			<div class="sub-departments-wrap col-md-5"></div>
+			<%}%>
+			<div class="sub-departments-wrap col-md-7">
+				
+			</div>
+		</div>
+	</div>
+</div>

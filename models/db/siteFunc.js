@@ -124,7 +124,6 @@ var siteFunc = {
         console.log(category, 'in getContentLists')
 
         var contents = Content.find({ 'keyName' : category },'title description date sImg dateSeted').sort({'dateSeted': -1}).skip(0).limit(q).exec(function(err,data) {
-            console.log(data, 'in getContentLists')
         });
         return contents
     },
@@ -165,6 +164,16 @@ var siteFunc = {
 
     getDepartments: function(){
         return Department.find({},'department mainDoctor description');
+    },
+
+    getRelatedDoctors: function(dep) {
+        return Doctor.find({'department': new RegExp(dep)},'department description doctor professional sImg');
+
+    },
+
+    getRelatedDocuments: function(dep) {
+        return Content.find({'tags': new RegExp(dep)},'title stitle dateSeted sImg description').sort({'dateSeted': -1}).skip(0).limit(10);;
+
     },
 
     getDoctorList: function(q,s,l){
@@ -391,6 +400,26 @@ var siteFunc = {
         }
     },
 
+    setDepartmentInfo: function (req, res, params ,staticforder, defaultTempPath) {
+        console.log(params.cateQuery, 'cateQuery')
+        //var currentCateList = ContentCategory.find({}).sort({'sortId': 1});
+        //var tagsData = DbOpt.getDatasByParam(ContentTags, req, res, {});
+        console.log(params)
+        return {
+            siteConfig: this.siteInfos('科室介绍——'+params.department.department, params.department.description, params.department.subjects),
+            //cateTypes: this.getCategoryList(),
+            //reCommendListData : this.getRecommendListData(params.cateQuery,params.count),
+            departmentInfo: params.department,
+            //messageList : this.getMessageList(params.department._id),
+            doctors: this.getRelatedDoctors(params.department.department),
+            articles: this.getRelatedDocuments(params.department.department),
+            pageType: 'department',
+            logined: isLogined(req),
+            staticforder : staticforder,
+            layout: defaultTempPath
+        }
+    },
+
     setDataForSearch: function (req, res, params, staticforder, defaultTempPath) {
         req.query.searchKey = params.searchKey;
         var requireField = 'title date commentNum description clickNum sImg';
@@ -531,7 +560,6 @@ var siteFunc = {
     },
     //缓存文章总数，避免多次查询
     getContentsCount : function(req,res,cateParentId,cateQuery,callBack){
-
         cache.get(settings.session_secret + '_' + cateParentId + '_contentCount',function(contentCount){
             if(contentCount) {
                 callBack(contentCount);
@@ -547,6 +575,25 @@ var siteFunc = {
             }
         });
     },
+
+    //缓存科室总数，避免多次查询
+    getContentsCount : function(req,res,cateParentId,cateQuery,callBack){
+        cache.get(settings.session_secret + '_' + cateParentId + '_contentCount',function(contentCount){
+            if(contentCount) {
+                callBack(contentCount);
+            }else{
+                Content.count(cateQuery,function(err,count){
+                    if(err){
+                        res.end(err);
+                    }else{
+                        cache.set(settings.session_secret +  '_' + cateParentId + '_contentCount', count, 1000 * 60 * 60 * 24); // 缓存一天
+                        callBack(count)
+                    }
+                })
+            }
+        });
+    },
+
     //根据id获取模板单元的forder
     getTempItemById : function(defatulTemp,id){
         var targetForder = '';
@@ -630,6 +677,9 @@ var siteFunc = {
                         targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/' + siteFunc.getDefaultTempItem(temp) + '/detail';
                     }
                     res.render(targetPath , siteFunc.setDetailInfo(req, res, params , temp.alias, topicTempPath));
+                }else if(oType == 'departmentDetail'){
+                    targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/departmentDetail';
+                    res.render(targetPath , siteFunc.setDepartmentInfo(req, res, params , temp.alias, defaultTempPath));
                 }else if(oType == 'user'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/users/' + params.page;
                     res.render(targetPath, siteFunc.setDataForUser(req, res, params , temp.alias, defaultTempPath));
