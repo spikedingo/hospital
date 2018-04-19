@@ -2,37 +2,25 @@
 
 <div class="department-detail">
 	<div class="container">
-		<p><%=departmentInfo.subDepartments%></p>
-		<p><%=departmentInfo.subjects%></p>
-		<p><%=departmentInfo.departmentType%></p>
-		<p><%=doctors[0]%></p>
-		<p><%=articles[0]%></p>
-
 		<div class="department-intro row">
 			<div class="department-photo col-lg-5 col-md-6 col-sm-12 col-xs-12">
 				<div class="rImg65">
 					<img src="<%=departmentInfo.sImg%>" />
 				</div>
 			</div>
-			<div class="department-info col-lg-7 col-md-6 col-sm-12 col-xs-12">
-				<h3><%=departmentInfo.department%></h3>
-				<p><%=departmentInfo.description%><%=departmentInfo.description%></p>
-				<% if(departmentInfo.subjects != ''){ %>
-				<div class="subjects-wrap">
-					<h5>科室特色</h5>
-					<ul class="clearfix">
-						<% departmentInfo.subjects.split(',').forEach(function(item){ %>
-						    <li class="subject"><%=item%></li>
-						<%})%>
-						<% departmentInfo.subjects.split(',').forEach(function(item){ %>
-						    <li class="subject"><%=item%></li>
-						<%})%>
-						<% departmentInfo.subjects.split(',').forEach(function(item){ %>
-						    <li class="subject"><%=item%></li>
-						<%})%>
-					</ul>
-				</div>
-				<%}%>
+			<div class="col-lg-7 col-md-6 col-sm-12 col-xs-12">
+				<div class="department-info box-shadow"><h3><%=departmentInfo.department%></h3>
+					<p><%=departmentInfo.description%></p>
+					<% if(departmentInfo.subjects != ''){ %>
+					<div class="subjects-wrap">
+						<h5>科室特色</h5>
+						<ul class="clearfix">
+							<% departmentInfo.subjects.split(',').forEach(function(item){ %>
+							    <li class="subject"><%=item%></li>
+							<%})%>
+						</ul>
+					</div>
+					<%}%></div>
 			</div>
 		</div>
 
@@ -41,10 +29,49 @@
 			<h3>科室医生</h3>
 			<div class="doctors-wrap row">
 				<% doctors.forEach(function(doctor){ %>
-				    <div class="single-doctor col-md-3 col-sm-3 col-xs-4">
+				    <div class="single-doctor col-md-3 col-sm-4 col-xs-6">
+				    	<a href="javascript:;">
 				    	<div class="rImgDoc">
+					    	<span class="mask">
+					    		<p class="name"><%=doctor.doctor%></p>
+					    		<p class="intro"><%=doctor.professional.split(',').join(' ')%></p>
+					    	</span>
 				    		<img src="<%=doctor.sImg%>" alt="">
 				    	</div>
+				    	</a>
+				    </div>
+				    <div class="single-doctor col-md-3 col-sm-4 col-xs-6">
+				    	<a href="javascript:;">
+				    	<div class="rImgDoc">
+					    	<span class="mask">
+					    		<p class="name"><%=doctor.doctor%></p>
+					    		<p class="intro"><%=doctor.professional.split(',').join(' ')%></p>
+					    	</span>
+				    		<img src="<%=doctor.sImg%>" alt="">
+				    	</div>
+				    	</a>
+				    </div>
+				    <div class="single-doctor col-md-3 col-sm-4 col-xs-6">
+				    	<a href="javascript:;">
+				    	<div class="rImgDoc">
+					    	<span class="mask">
+					    		<p class="name"><%=doctor.doctor%></p>
+					    		<p class="intro"><%=doctor.professional.split(',').join(' ')%></p>
+					    	</span>
+				    		<img src="<%=doctor.sImg%>" alt="">
+				    	</div>
+				    	</a>
+				    </div>
+				    <div class="single-doctor col-md-3 col-sm-4 col-xs-6">
+				    	<a href="javascript:;">
+				    	<div class="rImgDoc">
+					    	<span class="mask">
+					    		<p class="name"><%=doctor.doctor%></p>
+					    		<p class="intro"><%=doctor.professional.split(',').join(' ')%></p>
+					    	</span>
+				    		<img src="<%=doctor.sImg%>" alt="">
+				    	</div>
+				    	</a>
 				    </div>
 				<%})%>
 			</div>
@@ -53,10 +80,49 @@
 
 		<div class="news-line row">
 			<% if(departmentInfo.subDepartments.split(',').length){ %>
-			<div class="sub-departments-wrap col-md-5"></div>
+			<div class="sub-departments-wrap col-md-4">
+				<div class="sub-departments box-shadow">
+					<h4>下属科室</h4>
+					<ul class="clearfix">
+						<% departmentInfo.subDepartments.split(',').forEach(function(department, i){ %>
+							<li class="single-news">
+								<a href="/detail/">
+									<%=department%>
+								</a>
+							</li>
+						<%})%>
+					</ul>
+				</div>
+			</div>
 			<%}%>
-			<div class="sub-departments-wrap col-md-7">
-				
+			<div class="col-md-8">
+				<div class="news-wrap box-shadow">
+					<h4>相关动态</h4>
+					<% if(doctors.length){ %>
+						<ul>
+						<% articles.forEach(function(article, i){ %>
+							<li class="single-news">
+								<% if (article.from == '3') { -%>
+									<a target="_blank" href=<%=article.originUrl%>>
+										<p class="ellipsis"><%=i+1+'、'%><%=article.title%><%=article.title%><%=article.title%>
+											<span class="fr"><%=article.dateSeted%></span>
+										</p>
+										
+									</a>
+								<% } else { -%>
+									<a href=<%='/details/'+article._id%>>
+										<p class="ellipsis"><%=i+1+'、'%><%=article.title%>
+											<span class="fr"><%=article.dateSeted%></span>
+										</p>
+									</a>
+								<% } -%>
+							</li>
+						<%})%>
+						</ul>
+					<%}else{%>
+						<p>暂无相关动态</p>
+					<%}%>
+				</div>
 			</div>
 		</div>
 	</div>

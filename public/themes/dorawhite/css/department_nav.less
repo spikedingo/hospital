@@ -1,7 +1,7 @@
 @blue: #1b98e0;
 
 .department-nav {
-
+	
 	@media (max-width: 1199px) {
 		margin-bottom: 30px;
 		padding: 0;
@@ -207,14 +207,22 @@
 }
 
 .department-detail {
+	padding-top: 50px;
+
 	.department-intro {
+		margin-bottom: 20px;
+
 		.department-photo {
+			margin-bottom: 20px;
+
 			img {
 				width: 100%;
 			}
 		}
 
 		.department-info {
+			padding: 20px;
+
 			h3 {
 				margin-top: 0;
 				font-size: 36px;
@@ -245,14 +253,127 @@
 					font-size: 15px;
 					margin-right: 10px;
 					margin-bottom: 10px;
+					transition: all .3s;
+				}
+
+				li.subject:hover {
+					cursor: pointer;
+					background: @blue;
+					color: white;
+					transition: all .3s;
 				}
 			}
 		}
 	}
 
 	.doctors {
+		margin-bottom: 50px;
+
+		@media screen and (max-width: 992px) {
+			margin-bottom: 20px;
+		}
+
 		h3 {
+			margin: 0;
 			padding: 15px;
+		}
+
+		.single-doctor {
+			margin-bottom: 20px;
+
+			.rImgDoc {
+				position: relative;
+
+				span.mask {
+					position: absolute;
+					width: 100%;
+					display: block;
+					//height: 30%;
+					bottom: 0;
+					background: rgba(0,0,0,0.5);
+					color: white;
+					z-index: 9;
+					text-align: center;
+					padding: 20px 10px;
+					transition: all .3s;
+
+					p.name {
+						//margin-top: 5%;
+						font-size: 18px;
+						margin-bottom: 8%;
+					}
+					p.intro {
+						font-size: 14px;
+						line-height: 18px;
+					}
+				}
+			}
+		}
+		.single-doctor:hover {
+			cursor: pointer;
+
+			span.mask {
+				opacity: 0;
+				transition: all .3s;
+			}
+		}
+	}
+
+	.news-line {
+		margin-bottom: 30px;
+
+		.sub-departments {
+			padding: 15px;
+			margin-bottom: 20px;
+
+			h4 {
+				margin-bottom: 30px;
+			}
+			
+			li.single-news {
+				float: left;
+				font-size: 16px;
+				padding: 8px 10px;
+				color: white;
+				background: @blue;
+				border-radius: 10px;
+				margin-right: 14px;
+				margin-bottom: 14px;
+
+				a {
+					color: white;
+				}
+			}
+		}
+
+		.news-wrap {
+			padding: 15px;
+
+			.single-news {
+				font-size: 15px;
+				line-height: 28px;
+				padding-bottom: 5px;
+				border-bottom: 1px solid #D6D6D6;
+				margin-bottom: 5px;
+				
+				p {
+					position: relative;
+					padding-right: 100px;
+
+					span {
+						position: absolute;
+						right: 0;
+						top: 0;
+					}
+				}
+
+				a:hover {
+					color: @blue;
+				}
+			}
+			.single-news:last-child {
+				border: none;
+			}
 		}
 	}
 }

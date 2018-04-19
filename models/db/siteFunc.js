@@ -31,7 +31,7 @@ var cache = require('../../util/cache');
 //系统消息
 var Notify = require("../Notify");
 function isLogined(req) {
-    return req.session.logined;
+    return req.session && req.session.logined;
 }
 
 var siteFunc = {
@@ -172,7 +172,7 @@ var siteFunc = {
     },
 
     getRelatedDocuments: function(dep) {
-        return Content.find({'tags': new RegExp(dep)},'title stitle dateSeted sImg description').sort({'dateSeted': -1}).skip(0).limit(10);;
+        return Content.find({'tags': new RegExp(dep)},'title stitle dateSeted sImg description from originUrl').sort({'dateSeted': -1}).skip(0).limit(10);;
 
     },
 
@@ -394,7 +394,7 @@ var siteFunc = {
             documentInfo: params.detail,
             messageList : this.getMessageList(params.detail._id),
             pageType: 'detail',
-            logined: isLogined(req),
+            //logined: isLogined(req),
             staticforder : staticforder,
             layout: defaultTempPath
         }
@@ -414,7 +414,7 @@ var siteFunc = {
             doctors: this.getRelatedDoctors(params.department.department),
             articles: this.getRelatedDocuments(params.department.department),
             pageType: 'department',
-            logined: isLogined(req),
+            //logined: isLogined(req),
             staticforder : staticforder,
             layout: defaultTempPath
         }

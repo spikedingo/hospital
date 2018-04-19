@@ -692,6 +692,24 @@ doraApp.controller("addDepartment",['$scope','$http','pageData','getItemService'
             $scope.formData = result;
             initContentTags($scope,$http);
             $("#myImg").attr("src",$scope.formData.sImg)
+
+            var arrSubDeps = $scope.formData.subDepartments.split(',')
+            console.log(arrSubDeps,'arrSubDeps')
+            var $subs = $(arrSubDeps.reduce(function(s,x,i) {
+                return s += '<li>'+x+'<i class="fa fa-times"></i></li>'
+            },''))
+            console.log($subs,'arrSubDeps')
+            $scope.formData.subDepartments = ''
+            $('div.subDepartments').nextAll('.value-container').append($subs)
+
+            var arrSubjects = $scope.formData.subjects.split(',')
+            console.log(arrSubjects,'arrSubjects')
+            var $subjects = $(arrSubjects.reduce(function(s,x,i) {
+                return s += '<li>'+x+'<i class="fa fa-times"></i></li>'
+            },''))
+            console.log($subjects,'arrSubjects')
+            $scope.formData.subjects = ''
+            $('div.subjects').nextAll('.value-container').append($subjects)
         })
     }
 
@@ -739,9 +757,9 @@ doraApp.controller("addDoctor",['$scope','$http','pageData','getItemService',fun
     $scope.formData = {};
     initDepartmentLists($scope, $http, function() {
         $scope.targetID = window.location.href.split("/")[7];
-        if ($scope.targetID == 'doctor') {
-            $scope.targetID = null;
-        };
+        // if ($scope.targetID == 'doctor') {
+        //     $scope.targetID = null;
+        // };
 
 
         console.log($scope.targetID , 'targetID')
