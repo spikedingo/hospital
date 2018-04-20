@@ -166,12 +166,12 @@ var siteFunc = {
         return Department.find({},'department mainDoctor description');
     },
 
-    getRelatedDoctors: function(dep) {
-        return Doctor.find({'department': new RegExp(dep)},'department description doctor professional sImg');
+    getTargetDoctors: function(q) {
+        return Doctor.find(q,'department description doctor professional sImg');
 
     },
 
-    getRelatedDocuments: function(dep) {
+    getTargetDocuments: function(dep) {
         return Content.find({'tags': new RegExp(dep)},'title stitle dateSeted sImg description from originUrl').sort({'dateSeted': -1}).skip(0).limit(10);;
 
     },
@@ -379,6 +379,33 @@ var siteFunc = {
         }
     },
 
+    // 医生列表页数据
+    setDataForDoctorList: function (req, res, params ,staticforder, defaultTempPath) {
+        //var tagsData = DbOpt.getDatasByParam(ContentTags, req, res, {});
+        var emptyDocs = [{name:'外科',docs:[]},{name:'内科',docs:[]},{name:'口腔科',docs:[]}]
+        var doctors = this.getTargetDoctors({})
+        var sortedDocs = Array.from(doctors).reduce(function(s,x,i) {
+            var doc = x
+            return s.map(function(x,i) {return x.name == dep ? x.docs.push(doc) : x })
+        },emptyDocs)
+
+        var docsData = DbOpt.getDatasByParam(Doctor, req, res, {});
+
+        console.log(docsData,'sortedDocs')
+
+        return {
+            siteConfig: this.siteInfos('医生介绍', '介绍各专业科室', '内科、外科、妇产科、儿科'),
+            //cateTypes: this.getCategoryList(),
+            //reCommendListData : this.getRecommendListData(params.cateQuery,params.count),
+            doctors: sortedDocs,
+            //articles: this.getTargetDocuments(params.department.department),
+            pageType: 'doctorList',
+            //logined: isLogined(req),
+            staticforder : staticforder,
+            layout: defaultTempPath
+        }
+    },
+
     setDetailInfo: function (req, res, params ,staticforder, defaultTempPath) {
         console.log(params.cateQuery, 'cateQuery')
         var currentCateList = ContentCategory.find({}).sort({'sortId': 1});
@@ -400,6 +427,7 @@ var siteFunc = {
         }
     },
 
+    // 科室详情页数据
     setDepartmentInfo: function (req, res, params ,staticforder, defaultTempPath) {
         console.log(params.cateQuery, 'cateQuery')
         //var currentCateList = ContentCategory.find({}).sort({'sortId': 1});
@@ -411,8 +439,8 @@ var siteFunc = {
             //reCommendListData : this.getRecommendListData(params.cateQuery,params.count),
             departmentInfo: params.department,
             //messageList : this.getMessageList(params.department._id),
-            doctors: this.getRelatedDoctors(params.department.department),
-            articles: this.getRelatedDocuments(params.department.department),
+            doctors: this.getTargetDoctors({'department': new RegExp(params.department.department)}),
+            articles: this.getTargetDocuments(params.department.department),
             pageType: 'department',
             //logined: isLogined(req),
             staticforder : staticforder,
@@ -709,7 +737,7 @@ var siteFunc = {
                     res.render(targetPath, siteFunc.setDataForGuidePage(req, res,  params, temp.alias, defaultTempPath,'患者服务'));
                 }else if(oType == 'aboutDoctors'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/aboutDoctors';
-                    res.render(targetPath, siteFunc.setDataForAboutDoctors(req, res,  params, temp.alias, topicTempPath,'医护团队'));
+                    res.render(targetPath, siteFunc.setDataForDoctorList(req, res,  params, temp.alias, defaultTempPath,'医护团队'));
                 }else if(oType == 'aboutDepartments'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/aboutDepartments';
                     res.render(targetPath, siteFunc.setDataForAboutDepartments(req, res,  params, temp.alias, topicTempPath,'科室一览'));

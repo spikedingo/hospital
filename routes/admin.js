@@ -1029,7 +1029,6 @@ var returnAdminRouter = function(io) {
     router.get('/manage/doctorList', function(req, res, next) {
 
         adminFunc.renderToManagePage(req, res,'manage/doctorList',settings.DOCTORLIST);
-
     });
 
 //添加医生页面

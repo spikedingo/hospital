@@ -218,8 +218,6 @@ var DbOpt = {
         }else{
             return obj.find(q).sort(sq).skip(0).limit(limit);
         }
-
-
     },
 
     getKeyArrByTokenId : function(tokenId){

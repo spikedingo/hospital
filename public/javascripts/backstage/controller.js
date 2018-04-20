@@ -735,7 +735,7 @@ doraApp.controller("addDepartment",['$scope','$http','pageData','getItemService'
         }
 
         angularHttpPost($http,isValid,getTargetPostUrl($scope,pageData.bigCategory),$scope.formData,function(data){
-            // window.location = "/admin/manage/departmentList";
+            window.location = "/admin/manage/departmentList";
         });
     }
 }]);
@@ -757,9 +757,9 @@ doraApp.controller("addDoctor",['$scope','$http','pageData','getItemService',fun
     $scope.formData = {};
     initDepartmentLists($scope, $http, function() {
         $scope.targetID = window.location.href.split("/")[7];
-        // if ($scope.targetID == 'doctor') {
-        //     $scope.targetID = null;
-        // };
+        if ($scope.targetID == 'doctor') {
+            $scope.targetID = null;
+        };
 
 
         console.log($scope.targetID , 'targetID')
