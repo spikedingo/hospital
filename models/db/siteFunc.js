@@ -120,10 +120,10 @@ var siteFunc = {
         return Content.find(q,'title dateSeted').sort({'dateSeted': -1}).skip(0).limit(10);
     },
 
-    getContentLists: function(category, q) {
+    getContentLists: function(category, count) {
         console.log(category, 'in getContentLists')
 
-        var contents = Content.find({ 'keyName' : category },'title description date sImg dateSeted').sort({'dateSeted': -1}).skip(0).limit(q).exec(function(err,data) {
+        var contents = Content.find({ 'keyName' : category },'title description date sImg dateSeted').sort({'dateSeted': -1}).skip(0).limit(count).exec(function(err,data) {
         });
         return contents
     },
@@ -162,8 +162,8 @@ var siteFunc = {
 
     //获取文档接口结束
 
-    getDepartments: function(){
-        return Department.find({},'department mainDoctor description');
+    getDepartments: function(q){
+        return Department.find(q,'department sImg description departmentType');
     },
 
     getTargetDoctors: function(q) {
@@ -227,13 +227,14 @@ var siteFunc = {
         return {
             siteConfig: this.siteInfos("首页"),
             documentList: documentList.docs,
-            hotItemListData: this.getHotItemListData({}),
-            hotItemListDataFull: this.getHotItemListDataFull({}),
-
-            picNews: this.getPicNews(6),
-            noticeNews: this.getNoticeNews(),
-            departments:this.getDepartments(),
-            doctorList:this.getDoctorList({'departmentType' : 3},0,6),
+            //hotItemListData: this.getHotItemListData({}),
+            //hotItemListDataFull: this.getHotItemListDataFull({}),
+            hospitalNews: this.getContentLists('hospitalNews',6),
+            notices: this.getContentLists('notices',6),
+            hospitalWorks: this.getContentLists('hospitalWorks',6),
+            clinicDeps:this.getDepartments({'departmentType' : '1'}),
+            techDeps:this.getDepartments({'departmentType' : '2'}),
+            //doctorList:this.getDoctorList({'departmentType' : 3},0,6),
             pageType: 'index',
             logined: isLogined(req),
             staticforder : staticforder,
@@ -336,21 +337,6 @@ var siteFunc = {
         }
     },
 
-    // setDataForContentList: function(req, res, params, category, staticforder, defaultTempPath) {
-    //     var requireField = 'stitle sImg date description keyName';
-    //     console.log(category, 'category in getting data')
-    //     var contentLists = this.getContentLists(category, 10)
-    //     var contentLists1 = DbOpt.getPaginationResult(Content, req, res, category, requireField);
-    //     console.log(contentLists, 'contentLists')
-    //     return {
-    //         siteConfig:this.siteInfos('新闻中心'),
-    //         contentLists: contentLists1.docs,
-    //         pageInfo: contentLists1.pageInfo,
-    //         staticforder: staticforder,
-    //         layout: defaultTempPath
-    //     }
-    // },
-
     setDataForContentList: function (req, res, categoryInfos, params, staticforder, defaultTempPath, pageName) {
         var requireField = 'title date dateSeted state commentNum description clickNum isTop sImg tags';
 
@@ -358,22 +344,15 @@ var siteFunc = {
         if (categoryInfos.page) {
             params.page = categoryInfos.page
         }
-        console.log(pageName, 'pageName')
+
         var documentList = DbOpt.getPaginationResult(Content, req, res, {'keyName': categoryInfos.category }, requireField, params);
-        var categoryDetail = ContentCategory.find({'defaultUrl': categoryInfos.category})
-        console.log(categoryDetail,'cateDEtial')
-        //var tagsData = DbOpt.getDatasByParam(ContentTags, req, res, {});
+
+        var categoryDetail = ContentCategory.find({'defaultUrl': categoryInfos.category},'name comments defaultUrl')
         return {
             siteConfig: this.siteInfos(pageName),
             categoryDetail: categoryDetail,
             contentLists: documentList.docs,
-            //hotItemListData: this.getHotItemListData({}),
-            //hotItemListDataFull: this.getHotItemListDataFull({}),
             pageInfo: documentList.pageInfo,
-            //picNews: this.getPicNews(5),
-            //noticeNews: this.getNoticeNews(),
-            //departments:this.getDepartments(),
-            //doctorList:this.getDoctorList({'departmentType' : 3},0,6),
             pageType: 'contentList',
             category: categoryInfos.category,
             logined: isLogined(req),

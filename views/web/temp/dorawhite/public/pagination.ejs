@@ -53,7 +53,7 @@
             <li><a href="<%=localUrl%>/<%=totalPage%><%=param%>"><%=totalPage%></a> </li>
         <% } %>
 
-        <%if(pageInfo.currentPage != totalPage){%>
+        <%if(totalPage != 0 && pageInfo.currentPage != totalPage){%>
             <li><a href="<%=localUrl%>/<%=totalPage%><%=param%>"><i class="fa fa-arrow-right"></i></a></li>
         <%}
         %>

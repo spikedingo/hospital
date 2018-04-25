@@ -16,7 +16,7 @@
 						<li class="col-md-3 col-sm-3 col-xs-3"><a data-target="expert" class="nav-btn active" href="javascript:;">专家门诊<i></i></a></li>
 						<li class="col-md-3 col-sm-3 col-xs-3"><a data-target="clinical" style="background: #55a5aa;" class="nav-btn" href="javascript:;">临床科室<i style="border-top: 13px solid#55a5aa;"></i></a></li>
 						<li class="col-md-3 col-sm-3 col-xs-3"><a data-target="skill" style="background: #e5ca8f;" class="nav-btn" href="javascript:;">医技科室<i style="border-top: 13px solid #e5ca8f;"></i></a></li>
-						<li class="col-md-3 col-sm-3 col-xs-3"><a style="background: #01763a;" class="nav-btn" href="">更多科室</a></li>
+						<li class="col-md-3 col-sm-3 col-xs-3"><a style="background: #01763a;" class="nav-btn" href="/departments">更多科室</a></li>
 					</ul>
 				</div>
 				<div class="department-line">
@@ -30,45 +30,28 @@
 							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
 							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
 							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
 						</ul>
 					</div>
 					<div class="department-group clinical">
 						<ul class="row">
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<%if (clinicDeps.length > 0) {%>
+								<% clinicDeps.forEach(function(dep){ %>
+									<li class="department col-md-3 col-sm-3 col-xs-3">
+										<a href="/department/<%=dep._id%>" class="link ellipsis"><%=dep.department%></a>
+									</li>
+								<% }) %>
+							<%}%>
 						</ul>
 					</div>
 					<div class="department-group skill">
 						<ul class="row">
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">临床科室</a></li>
+							<%if (techDeps.length > 0) {%>
+								<% techDeps.forEach(function(dep){ %>
+									<li class="department col-md-3 col-sm-3 col-xs-3">
+										<a href="/department/<%=dep._id%>" class="link ellipsis"><%=dep.department%></a>
+									</li>
+								<% }) %>
+							<%}%>
 						</ul>
 					</div>
 				</div>
