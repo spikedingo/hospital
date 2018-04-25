@@ -161,9 +161,9 @@ router.get('/newsCenter',function (req,res,next){
 router.get('/contentList/:category',function(req,res,next) {
     console.log(req.params,'in router get')
     var category = req.params.category,keyName
-    if (category == 'newsCenter') {
-        keyName = 'Pic_News'
-    }
+    // if (category == 'newsCenter') {
+    //     keyName = 'Pic_News'
+    // }
 
     var categoryInfos = {
         type: 'contentList',
@@ -177,9 +177,9 @@ router.get('/contentList/:category',function(req,res,next) {
 router.get('/contentList/:category/:page',function(req,res,next) {
     console.log(req.params,'in router get')
     var category = req.params.category,keyName,page
-    if (category == 'newsCenter') {
-        keyName = 'Pic_News'
-    }
+    // if (category == 'newsCenter') {
+    //     keyName = 'Pic_News'
+    // }
     var page = req.params.page ? req.params.page : null
 
     var categoryInfos = {

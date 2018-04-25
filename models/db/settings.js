@@ -89,7 +89,19 @@ module.exports = {
 
 
 //    信息提示相关
-    system_illegal_param : '非法参数'
+    system_illegal_param : '非法参数',
+
+    NEWSCENTER: {
+        'brandNews': '重大新闻',
+        'hospitalNews': '医院动态',
+        'hospitalWorks': '院务公开',
+        'nursingArea': '护理园地',
+        'hospitalCulture': '医院文化',
+        'videoNews': '视频新闻',
+        'notices': '医院公告',
+        'healthTips': '健康科普',
+        'publicWorks': '党建工作'
+    }
 };
 
 

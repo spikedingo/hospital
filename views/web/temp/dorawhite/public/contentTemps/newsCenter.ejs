@@ -1,16 +1,16 @@
 <div class="content-list-wrap">
     <div class="hospital-news container">
-        <h5 class="position">您现在的位置：<a href>首页</a> > <a href="">文章中心</a> > <a href="">医院动态</a></h5>
+        <h5 class="position">您现在的位置：<a href>首页</a> > <a href="">文章中心</a> > <a href=""><%=categoryDetail.name%></a></h5>
 <!--         <div class="innerBanner" style="display:none;">
             <img src="/themes/<%=staticforder%>/images/newsCenter.jpg" style="width:100%; margin:20px 0 0 0 ;">
         </div> -->
 
         <div class="page-intro">
             <h2>
-                医院动态
+                <%=categoryDetail.name%>
             </h2>
             <h4>
-                介绍本院的最新动态
+                <%=categoryDetail.comments%>
             </h4>
         </div>
 

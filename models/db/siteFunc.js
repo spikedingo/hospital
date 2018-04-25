@@ -56,7 +56,7 @@ var siteFunc = {
             title: title + " | " + settings.SITETITLE,
             cmsDescription: discrip,
             keywords: key,
-            siteIcp: settings.SITEICP,
+            siteIcp: settings.SITEICP
             //version : settings.SITEVERSION
         }
     },
@@ -351,7 +351,38 @@ var siteFunc = {
     //     }
     // },
 
-    setDataForContentList: function (req, res, categoryInfos, params, staticforder, defaultTempPath) {
+    setDataForContentList: function (req, res, categoryInfos, params, staticforder, defaultTempPath, pageName) {
+        var requireField = 'title date dateSeted state commentNum description clickNum isTop sImg tags';
+
+        var params = { limit: 9 }
+        if (categoryInfos.page) {
+            params.page = categoryInfos.page
+        }
+        console.log(pageName, 'pageName')
+        var documentList = DbOpt.getPaginationResult(Content, req, res, {'keyName': categoryInfos.category }, requireField, params);
+        var categoryDetail = ContentCategory.find({'defaultUrl': categoryInfos.category})
+        console.log(categoryDetail,'cateDEtial')
+        //var tagsData = DbOpt.getDatasByParam(ContentTags, req, res, {});
+        return {
+            siteConfig: this.siteInfos(pageName),
+            categoryDetail: categoryDetail,
+            contentLists: documentList.docs,
+            //hotItemListData: this.getHotItemListData({}),
+            //hotItemListDataFull: this.getHotItemListDataFull({}),
+            pageInfo: documentList.pageInfo,
+            //picNews: this.getPicNews(5),
+            //noticeNews: this.getNoticeNews(),
+            //departments:this.getDepartments(),
+            //doctorList:this.getDoctorList({'departmentType' : 3},0,6),
+            pageType: 'contentList',
+            category: categoryInfos.category,
+            logined: isLogined(req),
+            staticforder : staticforder,
+            layout: defaultTempPath
+        }
+    },
+
+    setDataForNewsCenter: function (req, res, categoryInfos, params, staticforder, defaultTempPath) {
         var requireField = 'title date dateSeted state commentNum description clickNum isTop sImg tags';
 
         var params = { limit: 9 }
@@ -384,10 +415,10 @@ var siteFunc = {
         //var tagsData = DbOpt.getDatasByParam(ContentTags, req, res, {});
         var emptyDocs = [{name:'外科',docs:[]},{name:'内科',docs:[]},{name:'口腔科',docs:[]}]
         var doctors = this.getTargetDoctors({})
-        var sortedDocs = Array.from(doctors).reduce(function(s,x,i) {
-            var doc = x
-            return s.map(function(x,i) {return x.name == dep ? x.docs.push(doc) : x })
-        },emptyDocs)
+        //var sortedDocs = Array.from(doctors).reduce(function(s,x,i) {
+        //     var doc = x
+        //     return s.map(function(x,i) {return x.name == dep ? x.docs.push(doc) : x })
+        // },emptyDocs)
 
         var docsData = DbOpt.getDatasByParam(Doctor, req, res, {});
 
@@ -397,7 +428,7 @@ var siteFunc = {
             siteConfig: this.siteInfos('医生介绍', '介绍各专业科室', '内科、外科、妇产科、儿科'),
             //cateTypes: this.getCategoryList(),
             //reCommendListData : this.getRecommendListData(params.cateQuery,params.count),
-            doctors: sortedDocs,
+            doctors: doctors,
             //articles: this.getTargetDocuments(params.department.department),
             pageType: 'doctorList',
             //logined: isLogined(req),
@@ -743,8 +774,8 @@ var siteFunc = {
                     res.render(targetPath, siteFunc.setDataForAboutDepartments(req, res,  params, temp.alias, topicTempPath,'科室一览'));
                 }else if(oType == 'contentList'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/contentTemps/newsCenter';
-                    console.log(targetPath, 'targetPath')
-                    res.render(targetPath, siteFunc.setDataForContentList(req, res, categoryInfos, params, temp.alias, topicTempPath,'新闻中心'));
+                    console.log(targetPath, settings.NEWSCENTER[categoryInfos.category] , 'targetPath')
+                    res.render(targetPath, siteFunc.setDataForContentList(req, res, categoryInfos, params, temp.alias, topicTempPath,settings.NEWSCENTER[categoryInfos.category]));
                 }
 
             }else{
