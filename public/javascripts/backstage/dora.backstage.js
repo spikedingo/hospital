@@ -139,6 +139,7 @@ function initPageInfo($scope){
     $scope.startNum = 1;
     $scope.keywords = $('#searchInput').val();
     $scope.area = $('#pageArea').val();
+    $scope.category = $('#subCate').val();
 }
 
 
@@ -184,7 +185,8 @@ function getPageInfos($scope,$http,url,reqType){
         getPageInfos($scope,$http,url);
     };
 
-    $http.get(url+"?limit="+$scope.limit+"&currentPage="+$scope.currentPage+"&searchKey="+$scope.keywords+"&area="+$scope.area).success(function(result){
+    console.log($scope, 'in setPageInfo2')
+    $http.get(url+"?category="+$scope.category+"&limit="+$scope.limit+"&currentPage="+$scope.currentPage+"&searchKey="+$scope.keywords+"&area="+$scope.area).success(function(result){
         console.log("getData success!!");
         if(reqType == 'normalList'){
             $scope.data = result.docs;

@@ -140,7 +140,6 @@ var returnAdminRouter = function(io) {
 
 //对象列表查询
     router.get('/manage/getDocumentList/:defaultUrl',function(req,res,next){
-        console.log(1234)
         var currentPage = req.params.defaultUrl;
         console.log(currentPage, 'admin.js');
         if(adminFunc.checkAdminPower(req,currentPage + '_view')){
@@ -149,7 +148,9 @@ var returnAdminRouter = function(io) {
             var params = url.parse(req.url,true);
             var keywords = params.query.searchKey;
             var area = params.query.area;
+            var category = params.query.category;
             var keyPr = [];
+            var q = {}
 
             if(keywords){
                 var reKey = new RegExp(keywords, 'i');
@@ -170,9 +171,15 @@ var returnAdminRouter = function(io) {
                 }
             }
 
+            if (category) {
+                if (targetObj == Content) {
+                    q.keyName = category
+                }   
+            }
+            console.log(keyPr, 'in admin getting content')
             keyPr = adminFunc.setQueryByArea(req,keyPr,targetObj,area);
-
-            DbOpt.pagination(targetObj,req, res,keyPr);
+            console.log(keyPr, 'in admin getting content')
+            DbOpt.pagination(targetObj,req, res, keyPr, q);
 
         }else{
             return res.json({});
@@ -665,10 +672,12 @@ var returnAdminRouter = function(io) {
     router.get('/manage/contentList', function(req, res, next) {
 
         adminFunc.renderToManagePage(req, res,'manage/contentList',settings.CONTENTLIST);
-
-
     });
 
+    router.get('/manage/contentList/:category', function(req, res, next) {
+
+        adminFunc.renderToManagePage(req, res,'manage/contentList',settings.CONTENTLIST);
+    });
 
 
 //文档添加页面(默认)
@@ -676,16 +685,14 @@ var returnAdminRouter = function(io) {
 
         var contentType = req.params.key;
         var targetPath;
-
+        console.log(contentType, 'in adding router')
         if(contentType == "plug"){
             targetPath = 'manage/addPlugs';
         }else{
             targetPath = 'manage/addContent';
         }
 
-        res.render(targetPath, adminFunc.setPageInfo(req,res,settings.CONTENTLIST));
-
-
+        res.render(targetPath, adminFunc.setInfoForAdding(req,res,settings.CONTENTLIST, contentType));
     });
 
 

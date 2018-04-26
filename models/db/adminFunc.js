@@ -49,7 +49,6 @@ var request = require('request');
 var adminFunc = {
 
     siteInfos : function (description) {
-
         return {
             title : settings.SITETITLE,
             description : description,
@@ -86,10 +85,16 @@ var adminFunc = {
         var searchKey = '';
         //area是为了独立查询一个表其中的部分数据而设立的参数
         var area = '';
+        var category = '';
+
         if(req.url){
             var params = url.parse(req.url,true);
             searchKey = params.query.searchKey;
             area = req.query.area;
+            category = params.query.category
+
+            console.log(params, 'in setPageInfo1')
+            console.log(category, 'in setPageInfo2')
         }
 
         return {
@@ -97,10 +102,40 @@ var adminFunc = {
             bigCategory : module[0],
             searchKey : searchKey,
             area : area,
+            category: category,
+            cateName: category && settings.NEWSCENTER[category],
             currentLink : currentLink,
             layout : 'manage/public/adminTemp'
         }
+    },
 
+    // 文档添加页面数据准备
+    setInfoForAdding : function(req,res,module,category){
+
+        var searchKey = '';
+        //area是为了独立查询一个表其中的部分数据而设立的参数
+        var area = '';
+
+        if(req.url){
+            var params = url.parse(req.url,true);
+            searchKey = params.query.searchKey;
+            area = req.query.area;
+
+            console.log(category, 'in setInfoForAdding')
+        }
+
+        var categoryInfos = ContentCategory.find({'defaultUrl': category})
+
+        return {
+            siteInfo : this.siteInfos(module[1]),
+            bigCategory : module[0],
+            searchKey : searchKey,
+            area : area,
+            category: category,
+            cateName: category && settings.NEWSCENTER[category],
+            categoryInfos: categoryInfos,
+            layout : 'manage/public/adminTemp'
+        }
     },
 
     setDataForInfo : function(infoType,infoContent){
@@ -223,7 +258,6 @@ var adminFunc = {
         }else{
             targetObj = Content;
         }
-        console.log(targetObj, 'targetObj')
         return targetObj
     },
 
@@ -246,7 +280,6 @@ var adminFunc = {
     },
 
     renderToManagePage : function(req,res,url,pageKey){
-
         if(this.checkAdminPower(req,pageKey[0] + '_view')){
             res.render(url, this.setPageInfo(req,res,pageKey,'/admin/'+url));
         }else{

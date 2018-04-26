@@ -154,6 +154,7 @@ Contact: cms@doramart.com
                 <li class="header">Main Menu</li>
                 <!-- Optionally, you can add icons to the links -->
                 <input type="hidden" id="currentCate" value="<%= bigCategory%>"/>
+                <input type="hidden" id="subCate" value="<%=category%>"/>
                 <li class="treeview active" cid="sysTemManage">
                     <a href="#"><span>系统管理</span> <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
@@ -176,17 +177,32 @@ Contact: cms@doramart.com
                 <li class="treeview" cid="contentManage">
                     <a href="#"><span>文档管理</span> <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li cid="contentManage_topicContent">
-                            <a href="/admin/manage/topicContentList"><i class="fa fa-picture-o"></i> 首页新闻</a>
+                        <li cid="brandNews">
+                            <a href="/admin/manage/contentList?category=brandNews"><i class="fa fa-picture-o"></i> 重大新闻</a>
                         </li>
-                        <li cid="">
-                            <a href="/admin/manage/contentList"><i class="fa fa-file-text-o"></i> 普通文章</a>
+                        <li cid="hospitalNews">
+                            <a href="/admin/manage/contentList?category=hospitalNews"><i class="fa fa-file-text-o"></i> 医院动态</a>
                         </li>
-                        <li cid="contentManage_notices">
-                            <a href="/admin/manage/noticesList"><i class="fa fa-bell"></i> 院内通知</a>
+                        <li cid="hospitalWorks">
+                            <a href="/admin/manage/contentList?category=hospitalWorks"><i class="fa fa-briefcase"></i> 院务公开</a>
                         </li>
-                        <li cid="contentManage_notices">
-                            <a href="/admin/manage/noticesList"><i class="fa fa-film"></i> 视频新闻</a>
+                        <li cid="nursingArea">
+                            <a href="/admin/manage/contentList?category=nursingArea"><i class="fa fa-heartbeat"></i> 护理园地</a>
+                        </li>
+                        <li cid="hospitalCulture">
+                            <a href="/admin/manage/contentList?category=hospitalCulture"><i class="fa fa-hospital-o"></i> 医院文化</a>
+                        </li>
+                        <li cid="videoNews">
+                            <a href="/admin/manage/contentList?category=videoNews"><i class="fa fa-film"></i> 视频新闻</a>
+                        </li>
+                        <li cid="notices">
+                            <a href="/admin/manage/contentList?category=notices"><i class="fa fa-bell"></i> 医院公告</a>
+                        </li>
+                        <li cid="healthTips">
+                            <a href="/admin/manage/contentList?category=healthTips"><i class="fa fa-medkit"></i> 健康科普</a>
+                        </li>
+                        <li cid="publicWorks">
+                            <a href="/admin/manage/contentList?category=publicWorks"><i class="fa fa-folder-open"></i>  党建工作</a>
                         </li>
                     </ul>
                 </li>
@@ -244,7 +260,7 @@ Contact: cms@doramart.com
         <section class="content-header">
             <h1>
                 <%= siteInfo.title%>
-                <small><%= siteInfo.description%></small>
+                <small><%= siteInfo.cateName || siteInfo.description %></small>
                 <input type="hidden" id="pageArea" value="<%=area%>">
 
             </h1>
@@ -289,12 +305,18 @@ Contact: cms@doramart.com
 
 <script>
     $(function(){
-        var curerntCate = $("#currentCate").val();
-        var sv = $('li[cid="'+curerntCate+'"]');
+        var currentCate = $("#currentCate").val();
+        var currentSubCate = $('#subCate').val();
+        var $sv;
+        if ($('li[cid="'+currentCate+'"]').length > 0) {
+            $sv = $('li[cid="'+currentCate+'"]')
+        }else if($('li[cid="'+currentSubCate+'"]').length > 0) {
+            $sv = $('li[cid="'+currentSubCate+'"]')
+        }
         $('.treeview-menu').removeClass('open-menu');
         $(".sidebar-menu").find("li").removeClass('active');
-        sv.parents('li').addClass('active');
-        sv.addClass('active').parents('.treeview-menu').addClass('open-menu');
+        $sv.parents('li').addClass('active');
+        $sv.addClass('active').parents('.treeview-menu').addClass('open-menu');
     })
 </script>
 

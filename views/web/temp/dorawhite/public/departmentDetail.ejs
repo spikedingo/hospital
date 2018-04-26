@@ -20,7 +20,8 @@
 							<%})%>
 						</ul>
 					</div>
-					<%}%></div>
+					<%}%>
+				</div>
 			</div>
 		</div>
 
@@ -79,7 +80,7 @@
 		<%}%>
 
 		<div class="news-line row">
-			<% if(departmentInfo.subDepartments.split(',').length){ %>
+			<% if(departmentInfo.subDepartments && departmentInfo.subDepartments != ''){ %>
 			<div class="sub-departments-wrap col-md-4">
 				<div class="sub-departments box-shadow">
 					<h4>下属科室</h4>

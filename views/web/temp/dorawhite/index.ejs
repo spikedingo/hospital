@@ -44,12 +44,14 @@
         </div>
         <div class="block-wrap col-xs-6 col-sm-6 col-md-3 col-lg-3">
             <div style="background: url('/themes/<%=staticforder%>/images/test.jpg') no-repeat center center;" class="fun-block">
-                <div class="info">
-                    <div class="icon">
-                        <i class="fa fa-heartbeat"></i>
+                <a target="_blank" href="https://mp.weixin.qq.com/s/0NlZmAhmFauHN01O-98fzw">
+                    <div class="info">
+                        <div class="icon">
+                            <i class="fa fa-heartbeat"></i>
+                        </div>
+                        <h4>体检中心</h4>
                     </div>
-                    <h4>体检中心</h4>
-                </div>
+                </a>
             </div>
         </div>
         <div class="block-wrap col-xs-6 col-sm-6 col-md-3 col-lg-3">
@@ -120,8 +122,8 @@
                 </a>
                 <div class="content">
                     <div class="category">
-                        <h4>最新动态
-                            <span class="fr"><a class="link" href="/contentList/hospitalNews">查看更多</a></span>
+                        <h4>通知公告
+                            <span class="fr"><a class="link" href="/contentList/notices">查看更多</a></span>
                         </h4>
                         <ul>
                             <% if(notices.length>0){ %>
@@ -150,8 +152,8 @@
                 </a>
                 <div class="content">
                     <div class="category">
-                        <h4>最新动态
-                            <span class="fr"><a class="link" href="/contentList/hospitalNews">查看更多</a></span>
+                        <h4>院务公开
+                            <span class="fr"><a class="link" href="/contentList/hospitalWorks">查看更多</a></span>
                         </h4>
                         <ul>
                             <% if(hospitalWorks.length>0){ %>
@@ -172,63 +174,4 @@
 
     <% include public/departmentNav %>
     <% include public/variousBlocks %>
-
-<!--     <div style="background-color:#fff; padding:20px 0;">
-        <div class="hotNews">
-            <p class="titleIntro">热点新闻</p>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 left-frame">
-                    </div>
-                    <div class="col-md-6 right-frame">
-                        <div style="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div style="background-color:#f9f9f9; padding:20px 0;">
-        <div class="doctors">
-            <p class="titleIntro">医疗骨干</p>
-        </div>
-    </div>
-    <div style="padding:20px 0;">
-        <div class="patientsService">
-            <p class="titleIntro">患者服务</p>
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                        <div class="innerBoard" style="background-color:#d07f81;">
-                            <p>就医流程</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                        <div class="innerBoard" style="background-color:#5e95b5;">
-                            <p>科室分布</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="patientsContent">
-                </div>
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                        <div class="innerBoard" style="background-color:#caa378;">
-                            <p>交通指南</p>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                        <div class="innerBoard" style="background-color:#68b4b5;">
-                            <p>体检中心</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div style="background-color:#f9f9f9; padding:20px 0;">
-        <div class="departments">
-            <p class="titleIntro">科室一览</p>
-        </div>
-    </div> -->
 </div>

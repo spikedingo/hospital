@@ -1,6 +1,18 @@
 <link rel="stylesheet" href="/themes/<%=staticforder%>/css/doctors.css?vesion=<%=siteConfig.version%>">
-<div class="doctors-wrap container">
+<div class="doctors-wrap pt20 container">
     <div class="innerBanner" style="display:none;"><img src="/themes/<%=staticforder%>/images/aboutDoctors.jpg" style="width:100%;"></div>
+    
+    <h5 class="position">您现在的位置：<a href="/">首页</a> > <a href="">医生介绍</a></h5>
+
+    <div class="page-intro">
+        <h2>
+            医生介绍
+        </h2>
+        <h4>
+            介绍本院医生团队
+        </h4>
+    </div>
+
     <%if(doctors.length>0){%>
         <%doctors.forEach(function(doctor){%>
             <%if(doctor.department == '外科'){%>

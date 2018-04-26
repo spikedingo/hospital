@@ -101,7 +101,7 @@ var DbOpt = {
         });
     },
 
-    pagination : function(obj,req,res,conditions){
+    pagination : function(obj,req,res,conditions,q){
 
         var params = url.parse(req.url,true);
         var startNum = (params.query.currentPage - 1)*params.query.limit + 1;
@@ -111,15 +111,16 @@ var DbOpt = {
 
 //    根据条件查询记录(如果有条件传递，则按条件查询)
         var query;
-        console.log(conditions)
+        var searchQ = q ? q : {}
+        console.log(conditions,'conditions')
         if(conditions && conditions.length > 1){
-            query=obj.find({}).or(conditions);
+            query=obj.find(q).or(conditions);
         }
         else if(conditions.length){
             query=obj.find(conditions);
         }
         else{
-            query=obj.find({});
+            query=obj.find(q);
         }
         query.sort({'date': -1});
 

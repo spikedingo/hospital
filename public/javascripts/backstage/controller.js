@@ -534,9 +534,16 @@ doraApp.controller("addContent",['$scope','$http','pageData','getItemService',fu
 
     $scope.formData.from = "1"
     $scope.formData.state = 'true'
-    console.log($scope.formData)
+    if ($('#categoryInfos-container').length) {
+        var cateKeyName = $('#categoryInfos-container').data('keyName')
+        var cateSortPath = $('#categoryInfos-container').data('sortPath')
+        var cateCategory = $('#categoryInfos-container').data('category')
+        $scope.formData.keyName = cateKeyName
+        $scope.formData.sortPath = cateSortPath
+        $scope.formData.category = cateCategory
+    }
 
-    $('#if-send').change(function() {
+    $('#content-from').change(function() {
         console.log($scope.formData)
     })
     
@@ -545,6 +552,7 @@ doraApp.controller("addContent",['$scope','$http','pageData','getItemService',fu
     $scope.processForm = function(isValid){
         $scope.formData.state = true;
         var isWX = $scope.formData.from == 3
+        console.log($scope.formData, 'before process formData')
 
         if (!isValid) {
             $.tipsShow({
@@ -604,7 +612,7 @@ doraApp.controller("addContent",['$scope','$http','pageData','getItemService',fu
         }
 
         console.log($scope.formData, 'before process formData')
-
+        return false
         angularHttpPost($http,isValid,getTargetPostUrl($scope,pageData.bigCategory),$scope.formData,function(data){
             window.location = "/admin/manage/contentList";
         });

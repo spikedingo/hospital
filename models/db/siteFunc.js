@@ -315,7 +315,8 @@ var siteFunc = {
         var requireField = 'department mainDoctor description';
         return {
             siteConfig: this.siteInfos("科室一览"),
-            departmentsList: this.getDepartments(),
+            clinicDeps:this.getDepartments({'departmentType' : '1'}),
+            techDeps:this.getDepartments({'departmentType' : '2'}),
             staticforder : staticforder,
             layout: defaultTempPath
         }
