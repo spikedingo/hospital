@@ -99,13 +99,13 @@
 			<div class="col-md-8">
 				<div class="news-wrap box-shadow">
 					<h4>相关动态</h4>
-					<% if(doctors.length){ %>
+					<% if(articles.length){ %>
 						<ul>
 						<% articles.forEach(function(article, i){ %>
 							<li class="single-news">
 								<% if (article.from == '3') { -%>
 									<a target="_blank" href=<%=article.originUrl%>>
-										<p class="ellipsis"><%=i+1+'、'%><%=article.title%><%=article.title%><%=article.title%>
+										<p class="ellipsis"><%=i+1+'、'%><%=article.title%>
 											<span class="fr"><%=article.dateSeted%></span>
 										</p>
 										

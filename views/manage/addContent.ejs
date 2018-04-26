@@ -15,11 +15,13 @@
                         <label class="control-label">文章类别</label>
                         <div class="input-area type-select clearfix">
                             <%if (categoryInfos.length) {%>
-                            <div 
-                            id="categoryInfos-container" 
-                            data-keyName="<%=categoryInfos[0].defaultUrl%>" 
-                            data-sortPath="<%=categoryInfos[0].sortPath%>"
-                            data-category="<%=categoryInfos[0]._id%>"><%=categoryInfos[0].name%></div>
+                                <span class="category-infos"
+                                id="categoryInfos-container" 
+                                data-keyname="<%=categoryInfos[0].defaultUrl%>" 
+                                data-sortpath="<%=categoryInfos[0].sortPath%>"
+                                data-category="<%=categoryInfos[0]._id%>">
+                                    <%=categoryInfos[0].name%>
+                                </span>
                             <%}else{%>
                                 <div class="dropdown">
                                     <button id="dLabel" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -70,12 +72,12 @@
                         </div>
                     </div>
 
-                    <div ng-show="formData.from == 3" class="form-group">
+                    <div ng-show="formData.from != 1" class="form-group">
                         <label class="control-label">来源URL</label>
                         <div class="input-area clearfix">
                             <input type="text" class="form-control input-sm input-origin-url" name="originUrl" ng-minlength="2" ng-model="formData.originUrl"/>
                             <label for="inputError" class="control-label err-label text-danger" ng-show="myForm.originUrl.$invalid && !myForm.originUrl.$pristine"><i class="fa fa-times-circle-o"></i> 5-40个非特殊字符</label>
-                            <span class="must">*</span>
+                            <span ng-show="formData.from == 3" class="must">*</span>
                         </div>
                     </div>
 

@@ -171,8 +171,11 @@ var siteFunc = {
 
     },
 
-    getTargetDocuments: function(dep) {
-        return Content.find({'tags': new RegExp(dep)},'title stitle dateSeted sImg description from originUrl').sort({'dateSeted': -1}).skip(0).limit(10);;
+    getTargetDocuments: function(q) {
+        console.log(q, 'getTargetDocuments')
+        var contents = Content.find(q,'title stitle dateSeted sImg description from originUrl').sort({'dateSeted': -1}).skip(0).limit(10);;
+        console.log(contents)
+        return contents
 
     },
 
@@ -451,7 +454,7 @@ var siteFunc = {
             departmentInfo: params.department,
             //messageList : this.getMessageList(params.department._id),
             doctors: this.getTargetDoctors({'department': new RegExp(params.department.department)}),
-            articles: this.getTargetDocuments(params.department.department),
+            articles: this.getTargetDocuments({'tags': new RegExp(params.department.department)}),
             pageType: 'department',
             //logined: isLogined(req),
             staticforder : staticforder,

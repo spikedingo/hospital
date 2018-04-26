@@ -83,13 +83,15 @@
     <div class="index-news row clearfix">
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
             <div class="news-block bg-w">
-                <a class="rImg65">
-                    <%if (hospitalNews.length>0) {%>
-                        <a href="/details/<%=hospitalNews[0]._id%>.html"><img src="<%=hospitalNews[0].sImg%>" alt=""></a>
-                    <%}else{%>
+                <%if (hospitalNews.length>0) {%>
+                    <a class="rImg65" href="/details/<%=hospitalNews[0]._id%>.html">
+                        <img src="<%=hospitalNews[0].sImg%>" alt="">
+                    </a>
+                <%}else{%>
+                    <a class="rImg65" href="javascript:;">
                         <img src="/themes/<%=staticforder%>/images/news2.jpg" alt="">
-                    <%}%>
-                </a>
+                    </a>
+                <%}%>
                 <div class="content">
                     <div class="category">
                         <h4>最新动态
@@ -113,13 +115,13 @@
         
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
             <div class="news-block bg-w">
-                <a class="rImg65">
-                    <%if (notices.length>0) {%>
-                        <a href="/details/<%=notices[0]._id%>.html"><img src="<%=notices[0].sImg%>" alt=""></a>
-                    <%}else{%>
+                <%if (notices.length>0) {%>
+                    <a class="rImg65" href="/details/<%=notices[0]._id%>.html"><img src="<%=notices[0].sImg%>" alt=""></a>
+                <%}else{%>
+                    <a class="rImg65" href="javascript:;">
                         <img src="/themes/<%=staticforder%>/images/news1.jpg" alt="">
-                    <%}%>
-                </a>
+                    </a>
+                <%}%>
                 <div class="content">
                     <div class="category">
                         <h4>通知公告
@@ -143,13 +145,15 @@
         
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
             <div class="news-block bg-w">
-                <a class="rImg65">
-                    <%if (hospitalWorks.length>0) {%>
-                        <a href="/details/<%=hospitalWorks[0]._id%>.html"><img src="<%=hospitalWorks[0].sImg%>" alt=""></a>
-                    <%}else{%>
+                <%if (hospitalWorks.length>0) {%>
+                    <a class="rImg65" href="/details/<%=hospitalWorks[0]._id%>.html">
+                        <img src="<%=hospitalWorks[0].sImg%>" alt="">
+                    </a>
+                <%}else{%>
+                    <a class="rImg65" href="javascript:;">
                         <img src="/themes/<%=staticforder%>/images/news3.jpg" alt="">
-                    <%}%>
-                </a>
+                    </a>
+                <%}%>
                 <div class="content">
                     <div class="category">
                         <h4>院务公开

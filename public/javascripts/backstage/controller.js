@@ -535,8 +535,8 @@ doraApp.controller("addContent",['$scope','$http','pageData','getItemService',fu
     $scope.formData.from = "1"
     $scope.formData.state = 'true'
     if ($('#categoryInfos-container').length) {
-        var cateKeyName = $('#categoryInfos-container').data('keyName')
-        var cateSortPath = $('#categoryInfos-container').data('sortPath')
+        var cateKeyName = $('#categoryInfos-container').data('keyname')
+        var cateSortPath = $('#categoryInfos-container').data('sortpath')
         var cateCategory = $('#categoryInfos-container').data('category')
         $scope.formData.keyName = cateKeyName
         $scope.formData.sortPath = cateSortPath
@@ -612,7 +612,6 @@ doraApp.controller("addContent",['$scope','$http','pageData','getItemService',fu
         }
 
         console.log($scope.formData, 'before process formData')
-        return false
         angularHttpPost($http,isValid,getTargetPostUrl($scope,pageData.bigCategory),$scope.formData,function(data){
             window.location = "/admin/manage/contentList";
         });

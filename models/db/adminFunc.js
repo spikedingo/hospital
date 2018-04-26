@@ -91,9 +91,9 @@ var adminFunc = {
             var params = url.parse(req.url,true);
             searchKey = params.query.searchKey;
             area = req.query.area;
-            category = params.query.category
+            category = req.params.category || params.query.category
 
-            console.log(params, 'in setPageInfo1')
+            console.log(req.params, 'in setPageInfo1')
             console.log(category, 'in setPageInfo2')
         }
 
