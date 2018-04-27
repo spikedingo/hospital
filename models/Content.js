@@ -36,7 +36,7 @@ var ContentSchema = new Schema({
     commentNum : { type: Number, default: 0 }, // 评论数
     likeNum : { type: Number, default: 0 }, // 喜欢数
     likeUserIds : String, // 喜欢该文章的用户ID集合
-    originUrl : String,  // 文章来源网址
+    originUrl : { type: String },  // 文章来源网址
     from : { type: String, default: '1' }, // 来源 1为原创 2为转载 3为微信
 });
 

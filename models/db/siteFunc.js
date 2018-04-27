@@ -123,7 +123,7 @@ var siteFunc = {
     getContentLists: function(category, count) {
         console.log(category, 'in getContentLists')
 
-        var contents = Content.find({ 'keyName' : category },'title description date sImg dateSeted').sort({'dateSeted': -1}).skip(0).limit(count).exec(function(err,data) {
+        var contents = Content.find({ 'keyName' : category },'title description date sImg dateSeted originUrl').sort({'dateSeted': -1}).skip(0).limit(count).exec(function(err,data) {
         });
         return contents
     },
@@ -224,7 +224,7 @@ var siteFunc = {
     },
 
     setDataForIndex: function (req, res, params ,staticforder, defaultTempPath) {
-        var requireField = 'title date commentNum description clickNum isTop sImg tags';
+        var requireField = 'title date commentNum description clickNum isTop sImg tags originUrl';
         var documentList = DbOpt.getPaginationResult(Content, req, res, params, requireField);
         var tagsData = DbOpt.getDatasByParam(ContentTags, req, res, {});
         return {
@@ -342,7 +342,7 @@ var siteFunc = {
     },
 
     setDataForContentList: function (req, res, categoryInfos, params, staticforder, defaultTempPath, pageName) {
-        var requireField = 'title date dateSeted state commentNum description clickNum isTop sImg tags';
+        var requireField = 'title date dateSeted state commentNum description clickNum isTop sImg tags originUrl';
 
         var params = { limit: 9 }
         if (categoryInfos.page) {
@@ -757,7 +757,6 @@ var siteFunc = {
                     res.render(targetPath, siteFunc.setDataForAboutDepartments(req, res,  params, temp.alias, topicTempPath,'科室一览'));
                 }else if(oType == 'contentList'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/contentTemps/newsCenter';
-                    console.log(targetPath, settings.NEWSCENTER[categoryInfos.category] , 'targetPath')
                     res.render(targetPath, siteFunc.setDataForContentList(req, res, categoryInfos, params, temp.alias, topicTempPath,settings.NEWSCENTER[categoryInfos.category]));
                 }
 

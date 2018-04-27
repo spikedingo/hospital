@@ -92,12 +92,18 @@ var DbOpt = {
     addOne : function(obj,req,res){
         console.log(obj,req,res)
         var newObj = new obj(req.body);
-        newObj.save(function(err){
+        newObj.save(function(err, obj){
             if(err){
                 res.end(err);
             }else{
                 res.end("success");
             }
+            
+            // if(err){
+            //     res.send({ status: 0, error:err });
+            // }else{
+            //     res.send({ status: 1, data:obj });
+            // }
         });
     },
 

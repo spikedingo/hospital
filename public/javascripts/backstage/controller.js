@@ -613,7 +613,7 @@ doraApp.controller("addContent",['$scope','$http','pageData','getItemService',fu
 
         console.log($scope.formData, 'before process formData')
         angularHttpPost($http,isValid,getTargetPostUrl($scope,pageData.bigCategory),$scope.formData,function(data){
-            window.location = "/admin/manage/contentList";
+            window.location = "/admin/manage/contentList/"+$scope.formData.keyName;
         });
     };
     //  存草稿
@@ -646,7 +646,7 @@ doraApp.controller("addContent",['$scope','$http','pageData','getItemService',fu
             $scope.formData.keywords = keyWords || finalTags.join(',')
 
             angularHttpPost($http,true,getTargetPostUrl($scope,pageData.bigCategory),$scope.formData,function(data){
-                window.location = "/admin/manage/contentList";
+                window.location = "/admin/manage/contentList/"+$scope.formData.keyName;
             });
         }
     };

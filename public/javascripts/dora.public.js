@@ -122,7 +122,7 @@ function angularHttpPost($http,isValid,url,formData,callBack){
 function initUploadFyBtn(id,type,key,callBack){
 
     var typedes = 'Image Files';
-    var filtertype = '*.gif; *.jpg; *.png';
+    var filtertype = '*.bmp; *.gif; *.jpg; *.png';
     var buttonText = '上传图片';
     var uploadApi = '/system/upload';
     var autoUpdate = true;

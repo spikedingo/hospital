@@ -701,13 +701,13 @@ var returnAdminRouter = function(io) {
     router.get('/manage/content/edit/:type/:content', function(req, res, next) {
         var contentType = req.params.type;
         var targetPath;
-
+        console.log(contentType, 'in editing router')
         if(contentType == "plug"){
             targetPath = 'manage/addPlugs';
         }else{
             targetPath = 'manage/addContent';
         }
-        res.render(targetPath, adminFunc.setPageInfo(req,res,settings.CONTENTLIST));
+        res.render(targetPath, adminFunc.setInfoForAdding(req,res,settings.CONTENTLIST, contentType));
 
     });
 

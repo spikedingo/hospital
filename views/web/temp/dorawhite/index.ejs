@@ -84,7 +84,9 @@
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
             <div class="news-block bg-w">
                 <%if (hospitalNews.length>0) {%>
-                    <a class="rImg65" href="/details/<%=hospitalNews[0]._id%>.html">
+                    <a class="rImg65" 
+                       target="<%= hospitalNews[0].originUrl ? '_blank' : '_self'%>" 
+                       href="<%= hospitalNews[0].originUrl || '/details/' + hospitalNews[0]._id + '.html' %>">
                         <img src="<%=hospitalNews[0].sImg%>" alt="">
                     </a>
                 <%}else{%>
@@ -101,7 +103,7 @@
                             <% if(hospitalNews.length>0){ %>
                             <% hospitalNews.forEach(function(item){ %>
                                     <li>
-                                        <a href="/details/<%=item._id%>.html" class="link ellipsis"><%=item.title%></a>
+                                        <a target="<%= item.originUrl ? '_blank' : '_self'%>" href="<%= item.originUrl || '/details/' + item._id + '.html' %>" class="link ellipsis"><%=item.title%></a>
                                     </li>
                                 <% }) %>
                             <% }else{ %>
@@ -116,7 +118,11 @@
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
             <div class="news-block bg-w">
                 <%if (notices.length>0) {%>
-                    <a class="rImg65" href="/details/<%=notices[0]._id%>.html"><img src="<%=notices[0].sImg%>" alt=""></a>
+                    <a class="rImg65" 
+                       target="<%= notices[0].originUrl ? '_blank' : '_self'%>" 
+                       href="<%= notices[0].originUrl || '/details/' + notices[0]._id + '.html' %>">
+                        <img src="<%=notices[0].sImg%>" alt="">
+                    </a>
                 <%}else{%>
                     <a class="rImg65" href="javascript:;">
                         <img src="/themes/<%=staticforder%>/images/news1.jpg" alt="">
@@ -131,7 +137,7 @@
                             <% if(notices.length>0){ %>
                             <% notices.forEach(function(item){ %>
                                     <li>
-                                        <a href="/details/<%=item._id%>.html" class="link ellipsis"><%=item.title%></a>
+                                        <a target="<%= item.originUrl ? '_blank' : '_self'%>" href="<%= item.originUrl || '/details/' + item._id + '.html' %>" class="link ellipsis"><%=item.title%></a>
                                     </li>
                                 <% }) %>
                             <% }else{ %>
@@ -146,7 +152,9 @@
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
             <div class="news-block bg-w">
                 <%if (hospitalWorks.length>0) {%>
-                    <a class="rImg65" href="/details/<%=hospitalWorks[0]._id%>.html">
+                    <a class="rImg65" 
+                       target="<%= hospitalWorks[0].originUrl ? '_blank' : '_self'%>" 
+                       href="<%= hospitalWorks[0].originUrl || '/details/' + hospitalWorks[0]._id + '.html' %>">
                         <img src="<%=hospitalWorks[0].sImg%>" alt="">
                     </a>
                 <%}else{%>
@@ -163,7 +171,7 @@
                             <% if(hospitalWorks.length>0){ %>
                                 <% hospitalWorks.forEach(function(item){ %>
                                     <li>
-                                        <a href="/details/<%=item._id%>.html" class="link ellipsis"><%=item.title%></a>
+                                        <a target="<%= item.originUrl ? '_blank' : '_self'%>" href="<%= item.originUrl || '/details/' + item._id + '.html' %>" class="link ellipsis"><%=item.title%></a>
                                     </li>
                                 <% }) %>
                             <% }else{ %>
