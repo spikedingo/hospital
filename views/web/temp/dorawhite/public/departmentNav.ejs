@@ -22,14 +22,19 @@
 				<div class="department-line">
 					<div class="department-group expert active">
 						<ul class="row">
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
-							<li class="department col-md-3 col-sm-3 col-xs-3"><a href="#">专家门诊</a></li>
+							<%if (expertInfos.length > 0) {%>
+								<% expertInfos.forEach(function(info){ %>
+									<li class="expert-info">
+										<a target="<%= info.originUrl ? '_blank' : '_self'%>" 
+										   href="<%= info.originUrl || '/details/' + info._id + '.html' %>">
+											<%=info.title%>
+											<span class="fr"><%=info.dateSeted%></span>
+										</a>
+									</li>
+								<% }) %>
+							<%}else{%>
+								<p>暂无信息</p>
+							<%}%>
 						</ul>
 					</div>
 					<div class="department-group clinical">

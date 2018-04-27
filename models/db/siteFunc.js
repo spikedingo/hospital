@@ -120,45 +120,11 @@ var siteFunc = {
         return Content.find(q,'title dateSeted').sort({'dateSeted': -1}).skip(0).limit(10);
     },
 
-    getContentLists: function(category, count) {
-        console.log(category, 'in getContentLists')
-
-        var contents = Content.find({ 'keyName' : category },'title description date sImg dateSeted originUrl').sort({'dateSeted': -1}).skip(0).limit(count).exec(function(err,data) {
+    getContentLists: function(q, count) {
+        var contents = Content.find( q, 'title description date sImg dateSeted originUrl').sort({'dateSeted': -1}).skip(0).limit(count).exec(function(err,data) {
         });
         return contents
-    },
-
-    getPicNews: function(q){
-        console.log(q,'这是查询图片新闻')
-        var contents = Content.find({ 'keyName' : 'hospitalNews' },'title description date sImg dateSeted').sort({'dateSeted': -1}).skip(0).limit(q).exec(function(err,data) {
-        });
-        console.log(contents, 'in getPicNews')
-        return contents
-    },
-
-    getNoticeNews: function(){
-        return Content.find({ 'category' : 'NyTJLoWax' },'title stitle dateSeted').sort({'dateSeted': -1}).skip(0).limit(10);
-    },
-
-    getHospitalWorks: function(){
-        return Content.find({ 'category' : 'Ny2q5crTl' },'title stitle dateSeted').sort({'dateSeted': -1}).skip(0).limit(10);
-    },
-
-    getHospitalCulture: function(){
-        return Content.find({ 'category' : 'NJuucqS6x' },'title stitle dateSeted').sort({'dateSeted': -1}).skip(0).limit(10);
-    },     
-
-    getNursingArea: function(){
-        return Content.find({ 'category' : '41wLq5HTx' },'title stitle dateSeted').sort({'dateSeted': -1}).skip(0).limit(10);
-    },
-
-    getPublicWorks: function(){
-        return Content.find({ 'category' : '4ycX9qHTl' },'title stitle dateSeted').sort({'dateSeted': -1}).skip(0).limit(10);
-    },  
-
-    getExpertIntro: function(){
-        return Content.find({ 'category' : '4y80KqHTg' },'title stitle dateSeted sImg description').sort({'dateSeted': -1}).skip(0).limit(10);
-    },  
+    }, 
 
     //获取文档接口结束
 
@@ -230,14 +196,15 @@ var siteFunc = {
         return {
             siteConfig: this.siteInfos("首页"),
             documentList: documentList.docs,
-            //hotItemListData: this.getHotItemListData({}),
-            //hotItemListDataFull: this.getHotItemListDataFull({}),
-            hospitalNews: this.getContentLists('hospitalNews',6),
-            notices: this.getContentLists('notices',6),
-            hospitalWorks: this.getContentLists('hospitalWorks',6),
+
+            hospitalNews: this.getContentLists({'keyName' : 'hospitalNews'},6),
+            notices: this.getContentLists({$or:[{"keyName":"notices"},{"keyName": "hospitalWorks"}]},6),
+            hospitalCultures: this.getContentLists({'keyName' : 'hospitalCulture'},6),
+            expertInfos:this.getContentLists({'tags':new RegExp('专家门诊')}, 6),
+
             clinicDeps:this.getDepartments({'departmentType' : '1'}),
             techDeps:this.getDepartments({'departmentType' : '2'}),
-            //doctorList:this.getDoctorList({'departmentType' : 3},0,6),
+
             pageType: 'index',
             logined: isLogined(req),
             staticforder : staticforder,

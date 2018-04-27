@@ -130,7 +130,7 @@
                 <%}%>
                 <div class="content">
                     <div class="category">
-                        <h4>通知公告
+                        <h4>通知及院务公开
                             <span class="fr"><a class="link" href="/contentList/notices">查看更多</a></span>
                         </h4>
                         <ul>
@@ -151,11 +151,11 @@
         
         <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
             <div class="news-block bg-w">
-                <%if (hospitalWorks.length>0) {%>
+                <%if (hospitalCultures.length>0) {%>
                     <a class="rImg65" 
-                       target="<%= hospitalWorks[0].originUrl ? '_blank' : '_self'%>" 
-                       href="<%= hospitalWorks[0].originUrl || '/details/' + hospitalWorks[0]._id + '.html' %>">
-                        <img src="<%=hospitalWorks[0].sImg%>" alt="">
+                       target="<%= hospitalCultures[0].originUrl ? '_blank' : '_self'%>" 
+                       href="<%= hospitalCultures[0].originUrl || '/details/' + hospitalCultures[0]._id + '.html' %>">
+                        <img src="<%=hospitalCultures[0].sImg%>" alt="">
                     </a>
                 <%}else{%>
                     <a class="rImg65" href="javascript:;">
@@ -164,12 +164,12 @@
                 <%}%>
                 <div class="content">
                     <div class="category">
-                        <h4>院务公开
-                            <span class="fr"><a class="link" href="/contentList/hospitalWorks">查看更多</a></span>
+                        <h4>医院文化
+                            <span class="fr"><a class="link" href="/contentList/hospitalCultures">查看更多</a></span>
                         </h4>
                         <ul>
-                            <% if(hospitalWorks.length>0){ %>
-                                <% hospitalWorks.forEach(function(item){ %>
+                            <% if(hospitalCultures.length>0){ %>
+                                <% hospitalCultures.forEach(function(item){ %>
                                     <li>
                                         <a target="<%= item.originUrl ? '_blank' : '_self'%>" href="<%= item.originUrl || '/details/' + item._id + '.html' %>" class="link ellipsis"><%=item.title%></a>
                                     </li>

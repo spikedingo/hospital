@@ -105,10 +105,10 @@
 							<li class="single-news">
 								<% if (article.from == '3') { -%>
 									<a target="_blank" href=<%=article.originUrl%>>
-										<p class="ellipsis"><%=i+1+'、'%><%=article.title%>
+										<p class="ellipsis">
+											<%=i+1+'、'%><%=article.title%>
 											<span class="fr"><%=article.dateSeted%></span>
 										</p>
-										
 									</a>
 								<% } else { -%>
 									<a href=<%='/details/'+article._id%>>
