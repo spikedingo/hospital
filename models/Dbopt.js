@@ -98,7 +98,7 @@ var DbOpt = {
             }else{
                 res.end("success");
             }
-            
+
             // if(err){
             //     res.send({ status: 0, error:err });
             // }else{
@@ -128,7 +128,12 @@ var DbOpt = {
         else{
             query=obj.find(q);
         }
-        query.sort({'date': -1});
+        
+        if (obj === Content) {
+            query.sort({'dateSeted': -1})
+        }else{
+            query.sort({'date': -1});
+        }
 
         if(obj === Message){
             query.populate('author').populate('replyAuthor').populate('adminAuthor');

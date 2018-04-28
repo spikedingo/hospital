@@ -44,52 +44,7 @@ doraApp.controller('contentList',['$scope','$http',function($scope,$http){
     initDelOption($scope,$http,'您确认要删除选中的文档吗？');
     // 文章推荐
     $scope.topContent = function(id,m){
-        angularHttpGet($http,"/admin/manage/ContentList/topContent?uid="+id+"&isTop="+m,function(){
-            initPagination($scope,$http);
-        });
-    };
-}]);
-
-//首页文档列表
-doraApp.controller('topicContentList',['$scope','$http',function($scope,$http){
-    $scope.formData = {};
-    //获取文档列表信息
-    initPagination($scope,$http);
-    //删除文档
-    initDelOption($scope,$http,'您确认要删除选中的文档吗？');
-    // 文章推荐
-    $scope.topContent = function(id,m){
-        angularHttpGet($http,"/admin/manage/topicContentList/topContent?uid="+id+"&isTop="+m,function(){
-            initPagination($scope,$http);
-        });
-    };
-}]);
-
-//党建文档列表
-doraApp.controller('publicContentList',['$scope','$http',function($scope,$http){
-    $scope.formData = {};
-    //获取文档列表信息
-    initPagination($scope,$http);
-    //删除文档
-    initDelOption($scope,$http,'您确认要删除选中的文档吗？');
-    // 文章推荐
-    $scope.topContent = function(id,m){
-        angularHttpGet($http,"/admin/manage/publicContentList/topContent?uid="+id+"&isTop="+m,function(){
-            initPagination($scope,$http);
-        });
-    };
-}]);
-
-//通知列表
-doraApp.controller('noticesList',['$scope','$http',function($scope,$http){
-    $scope.formData = {};
-    //获取文档列表信息
-    initPagination($scope,$http);
-    //删除文档
-    initDelOption($scope,$http,'您确认要删除选中的文档吗？');
-    // 文章推荐
-    $scope.topContent = function(id,m){
-        angularHttpGet($http,"/admin/manage/Notices/topContent?uid="+id+"&isTop="+m,function(){
+        angularHttpGet($http,"/admin/manage/contentUpdate/topContent?uid="+id+"&isTop="+m,function(){
             initPagination($scope,$http);
         });
     };

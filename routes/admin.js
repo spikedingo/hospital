@@ -173,12 +173,10 @@ var returnAdminRouter = function(io) {
 
             if (category) {
                 if (targetObj == Content) {
-                    q.keyName = category
+                    q.keyName = category;
                 }   
             }
-            console.log(keyPr, 'in admin getting content')
             keyPr = adminFunc.setQueryByArea(req,keyPr,targetObj,area);
-            console.log(keyPr, 'in admin getting content')
             DbOpt.pagination(targetObj,req, res, keyPr, q);
 
         }else{
@@ -714,10 +712,12 @@ var returnAdminRouter = function(io) {
 
 
 //文章置顶
-    router.get('/manage/ContentList/topContent', function(req, res, next) {
+    router.get('/manage/contentUpdate/topContent', function(req, res, next) {
+        console.log('topContent getting')
         var params = url.parse(req.url,true);
         var contentId = params.query.uid;
         var isTop = Number(params.query.isTop);
+
         if(shortid.isValid(contentId)){
             if(adminFunc.checkAdminPower(req,settings.CONTENTLIST[0] + '_top')){
                 Content.update({_id : contentId}, {'isTop' : isTop}, function (err,result) {
@@ -732,138 +732,6 @@ var returnAdminRouter = function(io) {
         }
 
     });
-
-    //------------------------------------------首页文档管理面开始
-    //首页文档列表页面
-        router.get('/manage/topicContentList', function(req, res, next) {
-
-            adminFunc.renderToManagePage(req, res,'manage/topicContentList',settings.TOPICCONTENTLIST);
-
-
-        });
-
-
-
-    //首页文档添加页面(默认)
-        router.get('/manage/topicContent/add/:key', function(req, res, next) {
-
-            var contentType = req.params.key;
-            var targetPath;
-
-            if(contentType == "plug"){
-                targetPath = 'manage/addPlugs';
-            }else{
-                targetPath = 'manage/addTopicContent';
-            }
-
-            res.render(targetPath, adminFunc.setPageInfo(req,res,settings.TOPICCONTENTLIST));
-
-
-        });
-
-
-
-    //首页文档编辑页面
-        router.get('/manage/topicContent/edit/:type/:content', function(req, res, next) {
-            var contentType = req.params.type;
-            var targetPath;
-
-            if(contentType == "plug"){
-                targetPath = 'manage/addPlugs';
-            }else{
-                targetPath = 'manage/addTopicContent';
-            }
-            res.render(targetPath, adminFunc.setPageInfo(req,res,settings.TOPICCONTENTLIST));
-
-        });
-
-
-
-    //首页文章置顶
-        router.get('/manage/topicContentList/topContent', function(req, res, next) {
-            var params = url.parse(req.url,true);
-            var contentId = params.query.uid;
-            var isTop = Number(params.query.isTop);
-            if(shortid.isValid(contentId)){
-                if(adminFunc.checkAdminPower(req,settings.TOPICCONTENTLIST[0] + '_top')){
-                    Content.update({_id : contentId}, {'isTop' : isTop}, function (err,result) {
-                        if(err) throw  err;
-                        res.end("success");
-                    })
-                }else{
-                    res.end('对不起，您无权执行该操作！');
-                }
-            }else{
-                res.end(settings.system_illegal_param);
-            }
-
-        });
-
-    //------------------------------------------党建文档管理面开始
-    //党建文档列表页面
-        router.get('/manage/publicContentList', function(req, res, next) {
-
-            adminFunc.renderToManagePage(req, res,'manage/publicContentList',settings.PUBLICCONTENTLIST);
-
-
-        });
-
-
-
-    //党建文档添加页面(默认)
-        router.get('/manage/publicContent/add/:key', function(req, res, next) {
-
-            var contentType = req.params.key;
-            var targetPath;
-
-            if(contentType == "plug"){
-                targetPath = 'manage/addPlugs';
-            }else{
-                targetPath = 'manage/addPublicContent';
-            }
-
-            res.render(targetPath, adminFunc.setPageInfo(req,res,settings.PUBLICCONTENTLIST));
-
-
-        });
-
-
-
-    //党建文档编辑页面
-        router.get('/manage/publicContent/edit/:type/:content', function(req, res, next) {
-            var contentType = req.params.type;
-            var targetPath;
-
-            if(contentType == "plug"){
-                targetPath = 'manage/addPlugs';
-            }else{
-                targetPath = 'manage/addPublicContent';
-            }
-            res.render(targetPath, adminFunc.setPageInfo(req,res,settings.PUBLICCONTENTLIST));
-
-        });
-
-
-
-    //党建文章置顶
-        router.get('/manage/publicContentList/topContent', function(req, res, next) {
-            var params = url.parse(req.url,true);
-            var contentId = params.query.uid;
-            var isTop = Number(params.query.isTop);
-            if(shortid.isValid(contentId)){
-                if(adminFunc.checkAdminPower(req,settings.PUBLICCONTENTLIST[0] + '_top')){
-                    Content.update({_id : contentId}, {'isTop' : isTop}, function (err,result) {
-                        if(err) throw  err;
-                        res.end("success");
-                    })
-                }else{
-                    res.end('对不起，您无权执行该操作！');
-                }
-            }else{
-                res.end(settings.system_illegal_param);
-            }
-
-        });
 
         //------------------------------------------通知管理面开始
         //通知列表页面

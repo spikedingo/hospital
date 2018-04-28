@@ -121,7 +121,7 @@ var siteFunc = {
     },
 
     getContentLists: function(q, count) {
-        var contents = Content.find( q, 'title description date sImg dateSeted originUrl').sort({'dateSeted': -1}).skip(0).limit(count).exec(function(err,data) {
+        var contents = Content.find( q, 'title description date sImg dateSeted isTop originUrl').sort({'dateSeted': -1}).skip(0).limit(count).exec(function(err,data) {
         });
         return contents
     }, 
@@ -139,7 +139,7 @@ var siteFunc = {
 
     getTargetDocuments: function(q) {
         console.log(q, 'getTargetDocuments')
-        var contents = Content.find(q,'title stitle dateSeted sImg description from originUrl').sort({'dateSeted': -1}).skip(0).limit(10);;
+        var contents = Content.find(q,'title stitle dateSeted sImg description from isTop originUrl').sort({'dateSeted': -1}).skip(0).limit(10);;
         console.log(contents)
         return contents
 
@@ -198,7 +198,8 @@ var siteFunc = {
             documentList: documentList.docs,
 
             hospitalNews: this.getContentLists({'keyName' : 'hospitalNews'},6),
-            notices: this.getContentLists({$or:[{"keyName":"notices"},{"keyName": "hospitalWorks"}]},6),
+            //notices: this.getContentLists({$or:[{"keyName":"notices"},{"keyName": "hospitalWorks"}]},6),
+            notices: this.getContentLists({$or:[{"keyName":"brandNews"},{"keyName": "hospitalWorks"}]},6),
             hospitalCultures: this.getContentLists({'keyName' : 'hospitalCulture'},6),
             expertInfos:this.getContentLists({'tags':new RegExp('专家门诊')}, 6),
 

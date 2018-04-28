@@ -102,8 +102,8 @@
                         <ul>
                             <% if(hospitalNews.length>0){ %>
                             <% hospitalNews.forEach(function(item){ %>
-                                    <li>
-                                        <a target="<%= item.originUrl ? '_blank' : '_self'%>" href="<%= item.originUrl || '/details/' + item._id + '.html' %>" class="link ellipsis"><%=item.title%></a>
+                                    <li title="<%=item.title%>" alt="<%=item.title%>">
+                                        <a target="<%= item.originUrl ? '_blank' : '_self'%>" href="<%= item.originUrl || '/details/' + item._id + '.html' %>" class="link ellipsis <%= item.isTop ? 'top' : '' %>"><%=item.title%></a>
                                     </li>
                                 <% }) %>
                             <% }else{ %>
@@ -130,14 +130,14 @@
                 <%}%>
                 <div class="content">
                     <div class="category">
-                        <h4>通知及院务公开
+                        <h4>院务公开
                             <span class="fr"><a class="link" href="/contentList/notices">查看更多</a></span>
                         </h4>
                         <ul>
                             <% if(notices.length>0){ %>
                             <% notices.forEach(function(item){ %>
-                                    <li>
-                                        <a target="<%= item.originUrl ? '_blank' : '_self'%>" href="<%= item.originUrl || '/details/' + item._id + '.html' %>" class="link ellipsis"><%=item.title%></a>
+                                    <li title="<%=item.title%>" alt="<%=item.title%>">
+                                        <a target="<%= item.originUrl ? '_blank' : '_self'%>" href="<%= item.originUrl || '/details/' + item._id + '.html' %>" class="link ellipsis <%= item.isTop ? 'top' : '' %>"><%=item.title%></a>
                                     </li>
                                 <% }) %>
                             <% }else{ %>
@@ -170,8 +170,8 @@
                         <ul>
                             <% if(hospitalCultures.length>0){ %>
                                 <% hospitalCultures.forEach(function(item){ %>
-                                    <li>
-                                        <a target="<%= item.originUrl ? '_blank' : '_self'%>" href="<%= item.originUrl || '/details/' + item._id + '.html' %>" class="link ellipsis"><%=item.title%></a>
+                                    <li title="<%=item.title%>" alt="<%=item.title%>">
+                                        <a target="<%= item.originUrl ? '_blank' : '_self'%>" href="<%= item.originUrl || '/details/' + item._id + '.html' %>" class="link ellipsis <%= item.isTop ? 'top' : '' %>"><%=item.title%></a>
                                     </li>
                                 <% }) %>
                             <% }else{ %>
@@ -187,3 +187,4 @@
     <% include public/departmentNav %>
     <% include public/variousBlocks %>
 </div>
+
