@@ -20,7 +20,15 @@ html {
 
 	.content-post-wrap {
 		margin-bottom: 40px;
-		min-height: 370px;
+		min-height: 390px;
+
+		@media screen and ( max-width: 1200px ) and ( min-width: 992px ) {
+			min-height: 443px;
+		}
+
+		@media screen and ( max-width: 991px ) {
+			min-height: 390px;
+		}
 
 		@media screen and ( max-width: 770px ) {
 			margin-bottom: 20px;

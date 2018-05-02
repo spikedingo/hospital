@@ -145,18 +145,44 @@ a.link:hover {
 .ratio-img-wrap(~'.rImgDoc', 140%);
 
 .ratio-img-wrap-index {
+
 	max-width: 1920px;
 	width: 100% !important;
 	height: 0 !important;
 	padding-bottom: 40% !important;
 	overflow: hidden !important;
 
-	img {
+	img.wide {
+		display: block;
 		position: absolute !important;
 		left: 0 !important;
 		top: 0 !important;
 		width: 100% !important;
 		min-height: 100% !important;
+	}
+	img.square {
+		display: none;
+	}
+
+	@media only screen and (max-width: 770px) {
+		img.wide {
+			display: none;
+		}
+		
+		max-width: 1920px;
+		width: 100% !important;
+		height: 0 !important;
+		padding-bottom: 75% !important;
+		overflow: hidden !important;
+
+		img.square {
+			display: block;
+			position: absolute !important;
+			left: 0 !important;
+			top: 0 !important;
+			width: 100% !important;
+			min-height: 100% !important;
+		}
 	}
 }
 
@@ -326,6 +352,25 @@ a.link:hover {
 
 					a {
 						color: #000;
+					}
+
+
+					@media screen and (max-width: 991px) {
+						a {
+							font-size: 16px;
+						}
+
+						ul.dropdown-menu {
+							a {
+								font-size: 14px;
+								color: #a9a9a9;
+							}
+						}
+					}
+				}
+				li.first-nav.active {
+					>a {
+						color: @color4;
 					}
 				}
 			}

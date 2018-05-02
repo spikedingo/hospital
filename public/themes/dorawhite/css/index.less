@@ -32,60 +32,91 @@
 			box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
 			transition: all 0.3s;
 
+			>a {
+				z-index: 9;
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				display: block;
+				top: 0;
+				left: 0;
+			}
+
 			div.info {
 				margin-top: 40px;
-			}
 
-			div.icon {
-				height: 40px;
-				margin: 0 auto;
-				text-align: center;
+				div.icon {
+					height: 40px;
+					margin: 0 auto;
+					text-align: center;
 
-				i.fa {
-					font-size: 70px;
-					color: #fff;
-					text-shadow: 0px 0px 15px rgba(0,0,0,0.5);
-				}
-			}
-
-			h4 {
-				font-weight: 400;
-				font-size: 28px;
-				text-align: center;
-				margin-top: 50px;
-				color: #fff;
-				text-shadow: 0px 0px 15px rgba(0,0,0,0.5);
-			}
-
-			@media only screen and (max-width: 770px){
-				div.info {
-					margin-top: 0.5rem;
-				}
-
-				i.fa {
-					font-size: 0.8rem !important;
-					color: #ababab;
+					i.fa {
+						font-size: 70px;
+						color: #fff;
+						text-shadow: 0px 0px 15px rgba(0,0,0,0.5);
+					}
 				}
 
 				h4 {
-					font-size: 0.3rem;
-					margin-top: 0.3rem;
+					font-weight: 400;
+					font-size: 28px;
+					text-align: center;
+					margin-top: 50px;
+					color: #fff;
+					text-shadow: 0px 0px 15px rgba(0,0,0,0.5);
+				}
+
+				@media only screen and (max-width: 1200px) {
+					margin-top: 20px;
+				}
+				@media only screen and (max-width: 992px) {
+					margin-top: 70px;
+				}
+				@media only screen and (max-width: 770px) {
+					margin-top: 16%;
+
+					div.icon {
+						height: 0.6rem;
+
+						i.fa {
+							font-size: 0.8rem !important;
+							color: #ababab;
+						}
+
+						h4 {
+							font-size: 0.3rem;
+							margin-top: 0.4rem;
+						}
+					}
+
+					h4 {
+						font-weight: 400;
+						font-size: 0.4rem;
+						text-align: center;
+						margin-top: 0.5rem;
+						color: #fff;
+						text-shadow: 0px 0px 15px rgba(0,0,0,0.5);
+					}
 				}
 			}
 		}
 
-		@media only screen and (min-width: 750px){
-			.fun-block:hover {
+		@media only screen and (min-width: 992px){
+			.block-wrap {
+				transition: all .3s;
+			}
+			.block-wrap:hover {
 				cursor: pointer;
 				margin-top: -10px;
+				transition: all .3s;
 			}
 
 		}
 		
 		@media only screen and (max-width: 750px){
-			.fun-block {
-			    height: 2.4rem;
-			}
+			// .fun-block {
+			//     height: 2.4rem;
+			// }
 		}
 	}
 
@@ -104,7 +135,7 @@
 		// 		padding: 0;
 		// 	} 
 		// }
-		@media only screen and (max-width: 770px){
+		@media only screen and (max-width: 992px){
 			>div {
 				padding: 0;
 			}

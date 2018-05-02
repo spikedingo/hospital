@@ -26,3 +26,29 @@
     </div>
     <% include ../pagination %>
 </div>
+
+<script>
+    $(function() {
+        var page = window.location.href.split('contentList/')[1]
+        var realPage = page.split('/')[0]
+        console.log(realPage)
+        var target = "newscenter"
+        switch(realPage) {
+            case 'notices' :
+                target = "notices"
+                break;
+            case 'healthTips' :
+                target = "health"
+                break;
+            case 'publicWorks' :
+                target = "publicworks"
+                break;
+            default :
+                target = "newscenter"
+        }
+
+        console.log(target,'target')
+        $('.first-nav.'+ target).addClass('active')
+    })
+</script>
+
