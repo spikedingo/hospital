@@ -5,7 +5,10 @@
         <%if(newItemListData.length>0){%>
             <%newItemListData.forEach(function(item){%>
             <li class="single-content">
-                <a href="/details/<%=item._id%>.html" target="_blank">
+                <a 
+                target="<%= item.originUrl ? '_blank' : '_self'%>" 
+                href="<%= item.originUrl || '/details/' + item._id + '.html' %>"
+                >
                     <%=item.stitle%>
                 </a>
                 <span><i class="fa fa-eye"></i> 555</span>

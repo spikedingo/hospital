@@ -150,7 +150,7 @@ var siteFunc = {
     },
 
     getNewItemListData : function(q){
-        return Content.find(q, 'stitle').sort({'date': -1}).skip(0).limit(10);
+        return Content.find(q, 'title stitle dateSeted sImg description from isTop originUrl').sort({'date': -1}).skip(0).limit(10);
     },
 
     getRecommendListData : function(cateQuery,contentCount){

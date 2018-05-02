@@ -5,11 +5,16 @@
     <%if(reCommendListData.length>0){%>
         <%reCommendListData.forEach(function(item){%>
         <div class="single-content col-xs-12 col-sm-6 col-md-6 col-lg-3">
-            <a class="rImg65"> title="<%=item.title%>" href="/details/<%=item._id%>.html">
+            <a class="rImg65" title="<%=item.title%>" 
+                target="<%= item.originUrl ? '_blank' : '_self'%>" 
+                href="<%= item.originUrl || '/details/' + item._id + '.html' %>">
                 <img class="" alt="<%=item.title%>" src="<%=item.sImg%>">
             </a>
             <h5>
-                <a title="<%=item.title%>" class="ellipsis2" href="/details/<%=item._id%>.html">
+                <a title="<%=item.title%>" class="ellipsis2"
+                    target="<%= item.originUrl ? '_blank' : '_self'%>" 
+                    href="<%= item.originUrl || '/details/' + item._id + '.html' %>"
+                    >
                     <%=item.title%>
                 </a>
             </h5>
