@@ -1,17 +1,177 @@
 <div class="sections-wrap thanks">
 	<div class="row">
 		<div class="left-section col-md-4 col-sm-4 col-xs-12">
-			<div class="lists pd20">
+			<div class="lists box-shadow pd20">
 				<ul>
+					<li class="single-list active">院长信箱</li>
 					<li class="single-list active">感谢信</li>
 				</ul>
 			</div>
 		</div>
-		<div class="right-section pd20 col-md-8 col-sm-8 col-xs-12">
+		<div class="right-section box-shadow pd20 col-md-8 col-sm-8 col-xs-12">
 			<div class="single-content active">
+				<h3>院长信箱</h3>
+				
+				
+				<p>即将开放，敬请期待</p>
+			</div>
+			<div class="single-content">
 				<h3>感谢信</h3>
 				<p>即将开放，敬请期待</p>
 			</div>
 		</div>
 	</div>
 </div>
+
+<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">开始演示模态框</button>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+        	    <div class="single-line">
+        	    	<label>您的姓名</label>
+        			<input class="form-input name-input" type="text" name="name" id="name" value="" placeholder="输入您的姓名，不输入则为匿名" />
+        	    </div>
+
+    	        <div class="single-line">
+    	        	<label>您的身份</label>
+    	    		<select name="from" class="form-input from-input" id="from">
+    	    			<option value="0">请选择您的身份</option>
+    	    			<option value="患者">患者</option>
+    	    			<option value="群众">群众</option>
+    	    			<option value="医院职工">医院职工</option>
+    	    			<option value="其他">其他</option>
+    	    		</select>
+    	        </div>
+
+                <div class="single-line">
+                	<label>邮件标题</label>
+                	<input class="form-input title-input" type="text" name="title" id="title" value="" placeholder="请输入标题" />
+                </div>
+
+                <div class="single-line">
+                	<label>邮件内容</label>
+            		<textarea class="form-input textarea-input" name="text" id="text" cols="30" rows="14"></textarea>
+                </div>
+
+                <div class="single-line">
+                	<label>联系方式</label>
+            		<input class="form-input contact-input" type="text" name="contact" id="contact" value="" placeholder="填入您的手机/微信号，以方便我们回访" />
+                </div>
+            </div>
+
+            <div class="modal-footer">
+            	<span class="tips green fl">邮件将直接发送至院长信箱</span>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button class="btn btn-primary" id="sendmail">发送</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<script>
+	$(function() {
+		function validates(type){
+			switch(type) {
+				case '#from':
+					if ($.trim($('#from').val()) == '0') {
+						$('.from-input').addClass('invalid').removeClass('valid')
+						return false 
+					}else{
+						$('.from-input').removeClass('invalid').addClass('valid')
+						return true
+					}
+					break;
+				case '#title':
+					console.log($('#title').val())
+					if ($.trim($('#title').val()) == '') {
+						$('.title-input').addClass('invalid').removeClass('valid')
+						return false 
+					}else{
+						$('.title-input').removeClass('invalid').addClass('valid')
+						return true
+					}
+					break;
+				case '#text':
+					if ($.trim($('#text').val()) == '') {
+						$('.textarea-input').addClass('invalid').removeClass('valid')
+						return false 
+					}else{
+						$('.textarea-input').removeClass('invalid').addClass('valid')
+						return true
+					}
+					break;
+				default:
+					return true
+			}
+		}
+
+		$('#from').blur(function() {
+			validates('#from')
+		})
+		$('#title').blur(function() {
+			validates('#title')
+		})
+		$('#text').blur(function() {
+			validates('#text')
+		})
+
+		$('#sendmail').click(function() {
+			var name = $('#name').val();
+			var from = $('#from').val();
+			var title = $('#title').val();
+			var html = '';
+			var text = $.trim($('#text').val())
+			var contact = $.trim($('#contact').val())
+
+			var fromValid = validates('#from');
+			var titleValid = validates('#title');
+			var textValid = validates('#text');
+
+			if (fromValid && titleValid && textValid) {
+				text.split(/\n+|\r+/g).forEach(function(x,i) {
+					console.log(x.match(/\s+/g))
+					if ($.trim(x).length) {
+						html += "<p>"+ x +"</p>"
+					}
+				});
+
+				if ($.trim(name) == '') {
+					name = '匿名'
+				}
+
+				$('span.tips').text('发送中......')
+				console.log(name, from , title, html, text, contact)
+
+				return 
+				$.ajax({
+					'url': '/api/mailtest',
+					'type': 'POST',
+					'data': {
+						title: title,
+						text: text,
+						html: html
+					},
+					success: function(res) {
+						console.log(res,'res')
+						if (res.status == 1) {
+
+							$('span.tips').text('发送成功，3s后将关闭本窗口')
+							setTimeout(function(){
+								$('#myModal').modal('hide');
+							},3000)
+						}else{
+							$('span.tips').text('邮件发送失败，请稍后再试').removeClass('green').addClass('red')
+						}
+					}
+				})
+			}else{
+				// handle invalid
+
+
+				$('span.tips').text('您有未填的信息，请填完整再点击发送').removeClass('green').addClass('red')
+			}
+		})
+	})
+</script>

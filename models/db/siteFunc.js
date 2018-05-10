@@ -26,6 +26,7 @@ var DbOpt = require("../Dbopt");
 var UserNotify = require("../UserNotify");
 //时间格式化
 var moment = require('moment');
+var nodemailer = require('nodemailer');
 //缓存
 var cache = require('../../util/cache');
 //系统消息
@@ -33,6 +34,8 @@ var Notify = require("../Notify");
 function isLogined(req) {
     return req.session && req.session.logined;
 }
+
+console.log(nodemailer, 'nodemailer')
 
 var siteFunc = {
 
@@ -657,10 +660,55 @@ var siteFunc = {
 
     },
 
+    sendMailTest: function (req, res, options) {
+        //var mail = req.body.mailaddress;
+        //检测邮箱地址是否为空
+        // if (!mail) {
+        //     return res.render("index", {message: "请输入邮箱地址！"});
+        // }
+        // //检测邮箱地址是否符合规范
+        // var reg = /^[A-Za-z0-9]+([-_.][A-Za-z0-9]+)*@([A-Za-z0-9]+[-.])+[A-Za-z0-9]{2,5}$/;
+        // if (!mail.match(reg)) {
+        //     return res.render("index", {message: "邮箱地址不符合规范，请重新输入！"});
+        // }
+        //邮件发送
+        var transporter = nodemailer.createTransport({
+            service: '163',
+            auth: {
+                user: '13645632112',//你的163邮箱账号
+                pass: 'xxk1062'//你的163邮箱密码
+            }
+        });
+        console.log(options,'options')
+
+        transporter.sendMail(options, function(error, info){
+
+            if(!error){
+                //return res.render("index", {message: "邮件发送成功，请注意查收！"});
+                // res.status(200),
+                // res.json({
+                //     status: 1,
+                //     msg: '邮件发送成功',
+                //     data: req
+                // })
+                console.log(info, 'success');
+            }else{
+                console.log(error);
+                // res.status(200),
+                // res.json({
+                //     status: 0,
+                //     msg: '邮件发送失败，请稍后再试'
+                // })
+                //return res.render("index", {message: "邮件发送失败，请稍后重试！"});
+            }
+
+        });
+    },
+
     //根据模板获取跳转链接
     renderToTargetPageByType : function(req,res,categoryInfos,params){
         var oType = categoryInfos.type || categoryInfos
-        console.log(categoryInfos, oType, 'type')
+        console.log(categoryInfos, oType, 'renderToTargetPageByType')
         this.getFrontTemplate(req,res,function(temp) {
             var targetPath;
             if (temp) {

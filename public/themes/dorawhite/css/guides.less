@@ -190,3 +190,63 @@
 		}
 	}
 }
+
+.modal-dialog {
+	margin-top: 100px;
+	max-width: 750px; 
+	
+	.modal-body {
+		padding: 40px 40px 10px;
+
+		.single-line {
+			margin-bottom: 10px;
+			font-size: 16px;
+
+			label {
+				font-size: 15px;
+				margin-bottom: 10px;
+				color: #818181;
+			}
+
+			input.title-input {
+				height: 35px;
+				display: block;
+			}
+
+			select {
+				display: block;
+				height: 35px;
+				border-color: #ddd;
+			}
+
+			textarea {
+				display: block;
+				line-height: 20px;
+			}
+			.form-input.valid {
+				border-color: #64d264;
+				border-width: 2px;
+			}
+			.form-input.invalid {
+				border-color: #ff9191;
+				border-width: 2px;
+			}
+		}
+	}
+
+	.modal-footer {
+		margin-left: 20px;
+
+		.tips {
+			font-size: 16px;
+			line-height: 35px;
+		}
+
+		.tips.green {
+			color: #64d264;
+		}
+		.tips.red {
+			color: #ff9191;
+		}
+	}
+}

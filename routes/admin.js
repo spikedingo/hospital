@@ -344,7 +344,7 @@ var returnAdminRouter = function(io) {
 
 
 //对象新增
-    router.post('/manage/:defaultUrl/addOne',function(req,res,next){
+    router.get('/manage/:defaultUrl/addOne',function(req,res,next){
 
         var currentPage = req.params.defaultUrl;
         var targetObj = adminFunc.getTargetObj(currentPage);
