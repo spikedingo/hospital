@@ -101,6 +101,21 @@
 					border-bottom: 1px solid @blue;
 					font-weight: 500;
 					margin-top: 0;
+
+					span.fr {
+						display: inline-block;
+						*display: inline;
+						*zoom: 1;
+						padding: 10px;
+						background: @blue;
+						color: white;
+						border-radius: 3px;
+						font-weight: normal;
+						font-size: 13px;
+					}
+					span.fr:hover {
+						cursor: pointer;
+					}
 				}
 
 				h4 {
@@ -154,6 +169,18 @@
 							color: @blue;
 							cursor: pointer;
 						}
+					}
+				}
+
+				ul.mails {
+					li {
+						font-size: 14px;
+						margin-bottom: 10px;
+						padding-bottom: 10px;
+						border-bottom: 1px solid #ccc;
+					}
+					li:last-child {
+						border: none;
 					}
 				}
 			}
@@ -240,13 +267,15 @@
 		.tips {
 			font-size: 16px;
 			line-height: 35px;
+			color: white;
+			padding: 4px 10px;
 		}
 
 		.tips.green {
-			color: #64d264;
+			background-color: #009800;
 		}
 		.tips.red {
-			color: #ff9191;
+			background-color: #ff9191;
 		}
 	}
 }

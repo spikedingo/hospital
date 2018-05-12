@@ -275,6 +275,7 @@ router.get('/:forder/:defaultUrl', function (req, res, next) {
 });
 
 router.post('/api/mailtest', function(req, res, next) {
+
     var mailOptions = {
         from: '13645632112@163.com', // sender address
         to: '641877939@qq.com', // list of receivers
@@ -282,6 +283,7 @@ router.post('/api/mailtest', function(req, res, next) {
         text: req.body.text || 'Nodejs之邮件发送', // plaintext body
         html: req.body.html || "<h2>欢迎关注我的GitHub，一起学习Nodejs。https://github.com/Chen-xy</h2>"
     };
+
     res.send({
         'status': 1,
         'msg': '邮件已由服务器发送成功'

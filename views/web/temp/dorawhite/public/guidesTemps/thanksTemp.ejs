@@ -4,16 +4,20 @@
 			<div class="lists box-shadow pd20">
 				<ul>
 					<li class="single-list active">院长信箱</li>
-					<li class="single-list active">感谢信</li>
 				</ul>
+				<div class="leader">
+				</div>
 			</div>
 		</div>
 		<div class="right-section box-shadow pd20 col-md-8 col-sm-8 col-xs-12">
 			<div class="single-content active">
-				<h3>院长信箱</h3>
+				<h3>院长信箱 来信选登<span class="fr sendmail" data-toggle="modal" data-target="#myModal">给院长写信</span></h3>
 				
 				
-				<p>即将开放，敬请期待</p>
+				<ul class="mails">
+					<li>给院长的一封信<span class="fr">2018-05-11</span></li>
+					<li>给院长的一封信<span class="fr">2018-05-11</span></li>
+				</ul>
 			</div>
 			<div class="single-content">
 				<h3>感谢信</h3>
@@ -22,8 +26,6 @@
 		</div>
 	</div>
 </div>
-
-<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">开始演示模态框</button>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -130,6 +132,15 @@
 			var textValid = validates('#text');
 
 			if (fromValid && titleValid && textValid) {
+				if ($.trim(name) == '') {
+					name = '匿名'
+				}
+				html += '<p class="intro from">身份：<span>'+ from +'</span></p>'
+				html += '<p class="intro name">姓名：<span>'+ name +'</span></p>'
+				if (contact) {
+					html += '<p class="intro contact">联系方式：<span>'+ contact +'</span></p>'
+				}
+
 				text.split(/\n+|\r+/g).forEach(function(x,i) {
 					console.log(x.match(/\s+/g))
 					if ($.trim(x).length) {
@@ -137,14 +148,10 @@
 					}
 				});
 
-				if ($.trim(name) == '') {
-					name = '匿名'
-				}
 
 				$('span.tips').text('发送中......')
 				console.log(name, from , title, html, text, contact)
 
-				return 
 				$.ajax({
 					'url': '/api/mailtest',
 					'type': 'POST',
