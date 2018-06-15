@@ -1,37 +1,43 @@
-<div style="background-color:#fffff1;">
-    <div class="container" style="padding-top:30px;">
-        <h3 class="titleIntro" style="margin-bottom:30px;">医院简介</h3>
-        <div style="height:auto; margin-bottom:30px;">
-            <img style="width:100%;" src="/themes/<%=staticforder%>/images/yuanxun1.jpg">
-        </div>
-        <h3 class="titleIntro" style="margin-bottom:30px;">医院院训</h3>
-        <div style="height:auto;">
-            <img style="width:100%;" src="/themes/<%=staticforder%>/images/yuanxun2.jpg">
-        </div>
-        <div style="padding-bottom:40px;">
-            <h3 class="titleIntro" style="margin-top:30px; margin-bottom:30px;">医院荣誉</h3>
-            <div class="row" style="margin-bottom:20px;">
-                <div class="col-md-4">
-                    <img src="/themes/<%=staticforder%>/images/honor1.jpg" style="width:100%;">
-                </div>
-                <div class="col-md-4">
-                    <img src="/themes/<%=staticforder%>/images/honor2.jpg" style="width:100%;">
-                </div>
-                <div class="col-md-4">
-                    <img src="/themes/<%=staticforder%>/images/honor3.jpg" style="width:100%;">
-                </div>
-            </div>
-            <div class="row" style="margin-bottom:20px;">
-                <div class="col-md-4">
-                    <img src="/themes/<%=staticforder%>/images/honor4.jpg" style="width:100%;">
-                </div>
-                <div class="col-md-4">
-                    <img src="/themes/<%=staticforder%>/images/honor5.jpg" style="width:100%;">
-                </div>
-                <div class="col-md-4">
-                    <img src="/themes/<%=staticforder%>/images/honor6.jpg" style="width:100%;">
-                </div>
-            </div> 
+<link href="/themes/<%=staticforder%>/css/guides.css?vesion=<%=siteConfig.version%>" rel="stylesheet">
+<div class="guides-wrap">
+    <div class="container">
+        <!-- <h5 class="position">您现在的位置：<a href="/">首页</a> > <a href="">就医指南</a></h5> -->
+
+        <h2 class="page-intro t-center">
+            医院概况
+        </h2>
+
+<!--         <div class="guide-nav-wrap row">
+            <ul class="row">
+                <li class="col-md-2 col-sm-2 col-xs-6">
+                    <a data-for="tips" class="single-guide tips active" href="#tips">就医须知</a>
+                </li>
+                <li class="col-md-2 col-sm-2 col-xs-6">
+                    <a data-for="insurance" class="single-guide insurance" href="#insurance">医保指南</a>
+                </li>
+                <li class="col-md-2 col-sm-2 col-xs-6">
+                    <a data-for="position" class="single-guide position" href="#position">医院位置</a>
+                </li>
+                <li class="col-md-2 col-sm-2 col-xs-6">
+                    <a data-for="inside" class="single-guide inside" href="#inside">院内导航</a>
+                </li>
+                <li class="col-md-2 col-sm-2 col-xs-6">
+                    <a data-for="price" class="single-guide price" href="#price">价格公示</a>
+                </li>
+                <li class="col-md-2 col-sm-2 col-xs-6">
+                    <a data-for="thanks" class="single-guide thanks" href="#thanks">感谢信</a>
+                </li>
+            </ul>
+        </div> -->
+
+        <div class="guides-type-wrap">
+            <% include guidesTemps/aboutHospitalTemp %>
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(function() {
+        $('.first-nav.abouthospital').addClass('active')
+    })
+</script>

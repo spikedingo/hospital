@@ -35,6 +35,8 @@ function isLogined(req) {
     return req.session && req.session.logined;
 }
 
+var cdnfolder = "http://p9tuyunjh.bkt.clouddn.com"
+
 console.log(nodemailer, 'nodemailer')
 
 var siteFunc = {
@@ -132,11 +134,11 @@ var siteFunc = {
     //获取文档接口结束
 
     getDepartments: function(q){
-        return Department.find(q,'department sImg description departmentType');
+        return Department.find(q,'department sImg description departmentType').sort('department');
     },
 
     getTargetDoctors: function(q) {
-        return Doctor.find(q,'department description doctor professional sImg');
+        return Doctor.find(q,'department description doctor professional sImg sort').sort('department sort');
 
     },
 
@@ -153,7 +155,7 @@ var siteFunc = {
     },
 
     getNewItemListData : function(q){
-        return Content.find(q, 'title stitle dateSeted sImg description from isTop originUrl').sort({'date': -1}).skip(0).limit(10);
+        return Content.find(q, 'title stitle dateSeted sImg description from isTop originUrl clickNum').sort({'date': -1}).skip(0).limit(10);
     },
 
     getRecommendListData : function(cateQuery,contentCount){
@@ -204,7 +206,7 @@ var siteFunc = {
             //notices: this.getContentLists({$or:[{"keyName":"notices"},{"keyName": "hospitalWorks"}]},6),
             notices: this.getContentLists({$or:[{"keyName":"brandNews"},{"keyName": "hospitalWorks"}]},6),
             hospitalCultures: this.getContentLists({'keyName' : 'hospitalCulture'},6),
-            expertInfos:this.getContentLists({'tags':new RegExp('专家门诊')}, 6),
+            expertInfos:this.getContentLists({'tags':new RegExp('专家门诊')}, 5),
 
             clinicDeps:this.getDepartments({'departmentType' : '1'}),
             techDeps:this.getDepartments({'departmentType' : '2'}),
@@ -212,6 +214,7 @@ var siteFunc = {
             pageType: 'index',
             logined: isLogined(req),
             staticforder : staticforder,
+            cdnfolder : cdnfolder,
             layout: defaultTempPath
         }
     },
@@ -376,7 +379,6 @@ var siteFunc = {
 
         var docsData = DbOpt.getDatasByParam(Doctor, req, res, {});
 
-        console.log(docsData,'sortedDocs')
 
         return {
             siteConfig: this.siteInfos('医生介绍', '介绍各专业科室', '内科、外科、妇产科、儿科'),

@@ -177,6 +177,9 @@ Contact: cms@doramart.com
                 <li class="treeview" cid="contentManage">
                     <a href="#"><span>文档管理</span> <i class="fa fa-angle-left pull-right"></i></a>
                     <ul class="treeview-menu">
+                        <li cid="contentManage_content">
+                            <a href="/admin/manage/contentList"><i class="fa fa-book"></i> 所有新闻</a>
+                        </li>
                         <li cid="brandNews">
                             <a href="/admin/manage/contentList/brandNews"><i class="fa fa-picture-o"></i> 重大新闻</a>
                         </li>
@@ -307,6 +310,7 @@ Contact: cms@doramart.com
     $(function(){
         var currentCate = $("#currentCate").val();
         var currentSubCate = $('#subCate').val();
+        console.log(currentCate,'currentCate')
         var $sv;
         if ($('li[cid="'+currentCate+'"]').length > 0) {
             $sv = $('li[cid="'+currentCate+'"]')

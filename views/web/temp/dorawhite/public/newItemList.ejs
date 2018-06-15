@@ -11,7 +11,7 @@
                 >
                     <%=item.stitle%>
                 </a>
-                <span><i class="fa fa-eye"></i> 555</span>
+                <span><i class="fa fa-eye"></i> <%=item.clickNum < 10 ? item.clickNum + Math.floor(Math.random()*10) : item.clickNum  %></span>
             </li>
             <%})%>
         <%}else{%>

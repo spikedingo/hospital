@@ -767,7 +767,10 @@ doraApp.controller("addDoctor",['$scope','$http','pageData','getItemService',fun
                 professional.push($(x).text())
             })
             $scope.formData.professional = professional.join(',')
+
         }
+
+        console.log($scope.formData, 'final data')
 
         angularHttpPost($http,isValid,getTargetPostUrl($scope,pageData.bigCategory),$scope.formData,function(data){
             window.location = "/admin/manage/doctorList";

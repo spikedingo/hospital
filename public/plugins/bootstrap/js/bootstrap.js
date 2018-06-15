@@ -1155,6 +1155,8 @@ if (typeof jQuery === 'undefined') {
       paddingLeft:  !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : '',
       paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : ''
     })
+
+    console.log(1234)
   }
 
   Modal.prototype.resetAdjustments = function () {

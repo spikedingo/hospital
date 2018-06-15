@@ -66,6 +66,28 @@ $(function() {
 	})
 })
 
+//医生显示简介
+
+$(function() {
+	$('.single-doctor').click(function(e) {
+	    var doctor = $(this).data('doctor')
+	    var professional = $(this).data('professional')
+	    var simg = $(this).data('simg')
+	    var description = $(this).data('description')
+	    var department = $(this).data('department')
+
+	    $('#doctorModal').find('.doctor').html(doctor)
+	    $('#doctorModal').find('.professional').html(professional)
+	    $('#doctorModal').find('.photo').attr('src',simg)
+	    $('#doctorModal').find('.description').html(description)
+	    $('#doctorModal').find('.department').html('所属科室：'+department)
+
+	    console.log(doctor)
+	    $('#doctorModal').modal('show');
+
+	})
+})
+
 function loadJScript(callback) {
     var script = document.createElement("script");
     script.type = "text/javascript";

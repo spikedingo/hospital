@@ -130,11 +130,11 @@ function initPageInfo($scope){
         {name:'100',value : '100'},
         {name:'200',value : '200'}
     ];
-    $scope.limitNum = '10';
+    $scope.limitNum = '30';
     $scope.currentPage = 1;
     $scope.totalPage = 1;
     $scope.totalItems = 1;
-    $scope.limit = 10;
+    $scope.limit = 30;
     $scope.pages = [];
     $scope.startNum = 1;
     $scope.keywords = $('#searchInput').val();
@@ -671,13 +671,14 @@ function inputTags(evt, obj){
                                 },
                                 success: function(res) {
                                     console.log(res)
-                                    if (res == 'success') {
+
+                                    //if (res == 'success') {
                                         var $newTag = $('<li class="tag">'+$tagVal+'</li>')
 
                                         var $tagSelected = $('<li>'+$tagVal+'<i class="fa fa-times"></i></li>')
                                         $('ul#tagsTree').append($newTag)
                                         $('ul.tags-wrap').append($tagSelected)
-                                    }
+                                   // }else if (res == '') {}
                                 }
                             })
                         }else{

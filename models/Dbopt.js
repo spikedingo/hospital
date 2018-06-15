@@ -11,13 +11,14 @@ var Message = require('./Message');
 var AdminUser = require("./AdminUser");
 var UserNotify = require("../models/UserNotify");
 var Content = require("../models/Content");
+var Doctor = require("../models/Doctor");
 var ContentCategory = require("../models/ContentCategory");
 var ContentTemplate = require("../models/ContentTemplate");
 
 //站点配置
 var settings = require("../models/db/settings");
-var db = mongoose.connect(settings.URL);
-//mongoose.connect('mongodb://'+settings.USERNAME+':'+settings.PASSWORD+'@'+settings.HOST+':'+settings.PORT+'/'+settings.DB+'');
+// var db = mongoose.connect(settings.URL);
+var db = mongoose.connect('mongodb://'+settings.USERNAME+':'+settings.PASSWORD+'@'+settings.HOST+':'+settings.PORT+'/'+settings.DB+'');
 
 //信息删除操作
 
@@ -131,9 +132,14 @@ var DbOpt = {
         
         if (obj === Content) {
             query.sort({'dateSeted': -1})
+        }else if (obj === Doctor) {
+            console.log(112233)
+            query.sort('department sort');
         }else{
             query.sort({'date': -1});
         }
+
+
 
         if(obj === Message){
             query.populate('author').populate('replyAuthor').populate('adminAuthor');
