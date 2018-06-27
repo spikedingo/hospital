@@ -256,7 +256,6 @@ router.get('/:defaultUrl', function (req, res, next) {
 
 //分类列表页面  http://127.0.0.1/front-development/AngluarJs___EyW7kj6w
 router.get('/:forder/:defaultUrl', function (req, res, next) {
-
     var defaultUrl = req.params.defaultUrl;
     var url = defaultUrl.split('___')[1];
     var currentUrl = url;

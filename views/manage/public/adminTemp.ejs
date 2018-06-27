@@ -310,12 +310,13 @@ Contact: cms@doramart.com
     $(function(){
         var currentCate = $("#currentCate").val();
         var currentSubCate = $('#subCate').val();
-        console.log(currentCate,'currentCate')
+        console.log(currentCate, currentSubCate, 'currentCate')
         var $sv;
-        if ($('li[cid="'+currentCate+'"]').length > 0) {
-            $sv = $('li[cid="'+currentCate+'"]')
-        }else if($('li[cid="'+currentSubCate+'"]').length > 0) {
+        
+        if($('li[cid="'+currentSubCate+'"]').length > 0) {
             $sv = $('li[cid="'+currentSubCate+'"]')
+        }else if ($('li[cid="'+currentCate+'"]').length > 0) {
+            $sv = $('li[cid="'+currentCate+'"]')
         }
         $('.treeview-menu').removeClass('open-menu');
         $(".sidebar-menu").find("li").removeClass('active');
