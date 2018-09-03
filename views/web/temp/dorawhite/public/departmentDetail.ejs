@@ -2,6 +2,8 @@
 
 <div class="department-detail">
 	<div class="container">
+		<h5 class="position mb20">您现在的位置：<a href="/">首页</a> > <a href="/departments">科室导航</a> > <a href="#"><%=departmentInfo.department%></a></h5>
+
 		<div class="department-intro row">
 			<div class="department-photo col-lg-5 col-md-6 col-sm-12 col-xs-12">
 				<div class="rImg65">
@@ -10,7 +12,7 @@
 			</div>
 			<div class="col-lg-7 col-md-6 col-sm-12 col-xs-12">
 				<div class="department-info box-shadow"><h3><%=departmentInfo.department%></h3>
-					<p><%=departmentInfo.description%></p>
+					<div class="content-wrap"><%-departmentInfo.description%></div>
 					<% if(departmentInfo.subjects != ''){ %>
 					<div class="subjects-wrap">
 						<h5>科室特色</h5>
@@ -30,45 +32,17 @@
 			<h3>科室医生</h3>
 			<div class="doctors-wrap row">
 				<% doctors.forEach(function(doctor){ %>
-				    <div class="single-doctor col-md-3 col-sm-4 col-xs-6">
+				    <div data-description="<%=doctor.description%>"
+			    	     data-department="<%=doctor.department%>"
+			    	     data-doctor="<%=doctor.doctor%>"
+			    	     data-professional="<%=doctor.professional%>"
+			    	     data-simg="<%=doctor.sImg%>" 
+			    	     class="single-doctor col-md-3 col-sm-4 col-xs-6">
 				    	<a href="javascript:;">
 				    	<div class="rImgDoc">
 					    	<span class="mask">
 					    		<p class="name"><%=doctor.doctor%></p>
-					    		<p class="intro"><%=doctor.professional.split(',').join(' ')%></p>
-					    	</span>
-				    		<img src="<%=doctor.sImg%>" alt="">
-				    	</div>
-				    	</a>
-				    </div>
-				    <div class="single-doctor col-md-3 col-sm-4 col-xs-6">
-				    	<a href="javascript:;">
-				    	<div class="rImgDoc">
-					    	<span class="mask">
-					    		<p class="name"><%=doctor.doctor%></p>
-					    		<p class="intro"><%=doctor.professional.split(',').join(' ')%></p>
-					    	</span>
-				    		<img src="<%=doctor.sImg%>" alt="">
-				    	</div>
-				    	</a>
-				    </div>
-				    <div class="single-doctor col-md-3 col-sm-4 col-xs-6">
-				    	<a href="javascript:;">
-				    	<div class="rImgDoc">
-					    	<span class="mask">
-					    		<p class="name"><%=doctor.doctor%></p>
-					    		<p class="intro"><%=doctor.professional.split(',').join(' ')%></p>
-					    	</span>
-				    		<img src="<%=doctor.sImg%>" alt="">
-				    	</div>
-				    	</a>
-				    </div>
-				    <div class="single-doctor col-md-3 col-sm-4 col-xs-6">
-				    	<a href="javascript:;">
-				    	<div class="rImgDoc">
-					    	<span class="mask">
-					    		<p class="name"><%=doctor.doctor%></p>
-					    		<p class="intro"><%=doctor.professional.split(',').join(' ')%></p>
+					    		<p class="intro ellipsis2"><%=doctor.professional.split(',').join('  ')%></p>
 					    	</span>
 				    		<img src="<%=doctor.sImg%>" alt="">
 				    	</div>
@@ -127,4 +101,34 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<div class="modal fade" id="doctorModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row info-wrap">
+                    <div class="col-sm-4">
+                        <img class="photo" src="" alt="">
+                    </div>
+                    <div class="col-sm-8 info-block">
+                        <div class="name-line">
+                            <span class="doctor"></span>
+
+                            <span class="department">所属科室：</span>
+                        </div>
+
+                        <div class="professional-line">
+                            <p class="professional"></p>
+                        </div>
+
+                        <div class="description-line">
+                            <span>简介：</span>
+                            <p class="description"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
 </div>

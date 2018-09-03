@@ -35,6 +35,8 @@ function isLogined(req) {
     return req.session && req.session.logined;
 }
 
+var cdnfolder = "http://p9tuyunjh.bkt.clouddn.com"
+
 console.log(nodemailer, 'nodemailer')
 
 var siteFunc = {
@@ -132,11 +134,11 @@ var siteFunc = {
     //获取文档接口结束
 
     getDepartments: function(q){
-        return Department.find(q,'department sImg description departmentType');
+        return Department.find(q,'department sImg description departmentType').sort('department');
     },
 
     getTargetDoctors: function(q) {
-        return Doctor.find(q,'department description doctor professional sImg');
+        return Doctor.find(q,'department description doctor professional sImg sort').sort('department sort');
 
     },
 
@@ -153,7 +155,7 @@ var siteFunc = {
     },
 
     getNewItemListData : function(q){
-        return Content.find(q, 'title stitle dateSeted sImg description from isTop originUrl').sort({'date': -1}).skip(0).limit(10);
+        return Content.find(q, 'title stitle dateSeted sImg description from isTop originUrl clickNum').sort({'date': -1}).skip(0).limit(10);
     },
 
     getRecommendListData : function(cateQuery,contentCount){
@@ -204,7 +206,7 @@ var siteFunc = {
             //notices: this.getContentLists({$or:[{"keyName":"notices"},{"keyName": "hospitalWorks"}]},6),
             notices: this.getContentLists({$or:[{"keyName":"brandNews"},{"keyName": "hospitalWorks"}]},6),
             hospitalCultures: this.getContentLists({'keyName' : 'hospitalCulture'},6),
-            expertInfos:this.getContentLists({'tags':new RegExp('专家门诊')}, 6),
+            expertInfos:this.getContentLists({'tags':new RegExp('专家门诊')}, 5),
 
             clinicDeps:this.getDepartments({'departmentType' : '1'}),
             techDeps:this.getDepartments({'departmentType' : '2'}),
@@ -212,6 +214,7 @@ var siteFunc = {
             pageType: 'index',
             logined: isLogined(req),
             staticforder : staticforder,
+            cdnfolder : cdnfolder,
             layout: defaultTempPath
         }
     },
@@ -280,6 +283,8 @@ var siteFunc = {
         return {
             siteConfig: this.siteInfos("医护团队"),
             doctorList: this.getDoctorList({},0),
+            clinicDeps:this.getDepartments({'departmentType' : '1'}),
+            techDeps:this.getDepartments({'departmentType' : '2'}),
             staticforder : staticforder,
             layout: defaultTempPath
         }
@@ -366,23 +371,23 @@ var siteFunc = {
 
     // 医生列表页数据
     setDataForDoctorList: function (req, res, params ,staticforder, defaultTempPath) {
-        //var tagsData = DbOpt.getDatasByParam(ContentTags, req, res, {});
-        var emptyDocs = [{name:'外科',docs:[]},{name:'内科',docs:[]},{name:'口腔科',docs:[]}]
-        var doctors = this.getTargetDoctors({})
-        //var sortedDocs = Array.from(doctors).reduce(function(s,x,i) {
-        //     var doc = x
-        //     return s.map(function(x,i) {return x.name == dep ? x.docs.push(doc) : x })
-        // },emptyDocs)
+
+        console.log(req.params, 'req')
+        var department = req.params.department || '中医科'
+
+        var doctors = this.getTargetDoctors({'department': department})
 
         var docsData = DbOpt.getDatasByParam(Doctor, req, res, {});
 
-        console.log(docsData,'sortedDocs')
 
         return {
             siteConfig: this.siteInfos('医生介绍', '介绍各专业科室', '内科、外科、妇产科、儿科'),
             //cateTypes: this.getCategoryList(),
             //reCommendListData : this.getRecommendListData(params.cateQuery,params.count),
             doctors: doctors,
+            department: department,
+            clinicDeps:this.getDepartments({'departmentType' : '1'}),
+            techDeps:this.getDepartments({'departmentType' : '2'}),
             //articles: this.getTargetDocuments(params.department.department),
             pageType: 'doctorList',
             //logined: isLogined(req),
@@ -710,6 +715,7 @@ var siteFunc = {
         var oType = categoryInfos.type || categoryInfos
         console.log(categoryInfos, oType, 'renderToTargetPageByType')
         this.getFrontTemplate(req,res,function(temp) {
+            console.log(temp, 'this is the index page')
             var targetPath;
             if (temp) {
                 var defaultTempPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/defaultTemp';

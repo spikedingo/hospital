@@ -25,7 +25,7 @@
                         <th>医生姓名</th>
                         <th>添加时间</th>
                         <th>所属科室</th>
-                        <th>医生职称</th>
+                        <th>添加顺序</th>
                         <th>专业项目</th>
                     </tr>
                     <tr class="datalist" ng-repeat="doctors in data">
@@ -34,7 +34,7 @@
                         <td ng-switch on="doctors.type"><span ng-switch-default>{{doctors.doctor}}</span></td>
                         <td>{{doctors.updateDate | date : "yyyy-MM-dd"}}</td>
                         <td>{{doctors.department}}</td>
-                        <td>{{doctors.skillLevel}}</td>
+                        <td>{{doctors.sort}}</td>
                         <td>{{doctors.professional}}</td>
                         <td>
                             <a href="/admin/manage/doctor/edit/{{doctors._id}}" role="button"  title="编辑" class="btn btn-primary btn-xs"><i class="fa fa-edit"></i></a>

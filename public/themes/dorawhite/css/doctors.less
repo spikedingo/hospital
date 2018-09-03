@@ -1,14 +1,48 @@
 
 .doctors-wrap {
 	
+	.doctor-intro {
+		display: inline-block;
+		*display: inline;
+		*zoom: 1;
+		margin-left: 15px;
+		padding: 10px 30px;
+		background: #257da7;
+		color: white;
+		margin-bottom: 20px;
+	}
+
 	.single-department {
 
-		
+	}
+}
+
+.doctors-sections {
+	.department-lists {
+		padding: 20px 0;
+
+		li.single-list.single-dep {
+			border-top: none !important;
+			text-align: center;
+		}
+
+		li.single-list.single-dep.active {
+			a { 
+				color: #1b98e0 !important;
+			}
+		}
+	}
+
+	.doctor-lists {
+		padding-bottom: 20px;
+		padding-right: 40px !important;
+
 		.single-doctor {
 			margin-bottom: 20px;
 
 			.rImgDoc {
 				position: relative;
+				border: 1px solid #e5e5e5;
 
 				span.mask {
 					position: absolute;
@@ -45,3 +79,6 @@
 		}
 	}
 }
+
+
+

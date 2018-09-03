@@ -80,7 +80,8 @@
                     <div class="form-group">
                         <label class="control-label">介绍</label>
                         <div class="input-area">
-                            <textarea style="width: 70%;" class="form-control input-sm" name="description" ng-model="formData.description" ng-minlength="2" ng-maxlength="1000" required id="" cols="30" rows="6"></textarea>
+                           
+                            <textarea class="comments-textarea description-textarea" name="description" ng-model="formData.description" id="container" ng-minlength="5" placeholder="请输入文章详情" ueditor>{{formData.description}}</textarea>
                             <label style="top: 120px;" for="inputError" class="err-label control-label text-danger" ng-show="myForm.description.$invalid"><i class="fa fa-times-circle-o"></i> 2-1000个非特殊字符</label>
                         </div>
                     </div>

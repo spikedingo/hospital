@@ -245,7 +245,11 @@
 }
 
 .department-detail {
-	padding-top: 50px;
+	padding-top: 30px;
+
+	.position {
+		padding-left: 15px;
+	}
 
 	.department-intro {
 		margin-bottom: 20px;
@@ -269,11 +273,15 @@
 				border-bottom: 2px solid #1b98e0;
 			}
 
-			p {
-				font-size: 16px;
+			div.content-wrap {
+				font-size: 15px;
 				line-height: 24px;
 				border-bottom: 2px solid @blue;
 				padding-bottom: 15px;
+
+				p {
+					margin-bottom: 6px;
+				}
 			}
 
 			.subjects-wrap {
@@ -332,7 +340,7 @@
 					color: white;
 					z-index: 9;
 					text-align: center;
-					padding: 20px 10px;
+					padding: 15px 10px;
 					transition: all .3s;
 
 					p.name {
@@ -343,6 +351,7 @@
 					p.intro {
 						font-size: 14px;
 						line-height: 18px;
+
 					}
 				}
 			}

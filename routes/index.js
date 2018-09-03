@@ -25,7 +25,7 @@ var cache = require('../util/cache');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-
+    console.log('getting index')
     siteFunc.renderToTargetPageByType(req,res,'index');
 
 });
@@ -207,6 +207,10 @@ router.get('/doctors',function (req,res,next){
     siteFunc.renderToTargetPageByType(req,res,'aboutDoctors',{info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
 });
 
+router.get('/doctors/:department',function (req,res,next){
+    siteFunc.renderToTargetPageByType(req,res,'aboutDoctors',{info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
+});
+
 router.get('/departments',function (req,res,next){
     siteFunc.renderToTargetPageByType(req,res,'aboutDepartments',{info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
 });
@@ -256,7 +260,6 @@ router.get('/:defaultUrl', function (req, res, next) {
 
 //分类列表页面  http://127.0.0.1/front-development/AngluarJs___EyW7kj6w
 router.get('/:forder/:defaultUrl', function (req, res, next) {
-
     var defaultUrl = req.params.defaultUrl;
     var url = defaultUrl.split('___')[1];
     var currentUrl = url;

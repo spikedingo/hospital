@@ -16,6 +16,7 @@ var DoctorSchema = new Schema({
     },
     doctor:  String,
     department: String,
+    sort: { type: String, default: '0' },
     professional : String,
     sImg : { type: String, default: "/upload/images/defaultDoctor.jpg" }, // 文章小图
     description : String,
