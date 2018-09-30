@@ -19,6 +19,7 @@
     "express-session": "^1.11.3",
     "formidable": "^1.0.17",
     "gm": "^1.18.1",
+    "http": "0.0.0",
     "iconv-lite": "^0.4.13",
     "lodash": "^3.10.1",
     "moment": "^2.10.3",
@@ -36,6 +37,7 @@
     "validator": "^3.37.0"
   },
   "devDependencies": {
+    "cheerio": "^1.0.0-rc.2",
     "less": "^3.0.1",
     "less-middleware": "^2.2.1",
     "nodemailer": "^1.11.0"

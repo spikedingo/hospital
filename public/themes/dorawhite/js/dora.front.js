@@ -84,11 +84,11 @@ initSlides.prototype = {
                         var item = JSON.parse(imgList[i]);
                         if(i==0){
                             imgIcons += "<li data-target='#carousel-example-generic' data-slide-to='0' class='active'></li>";
-                            imgItems += "<div class='item active'><a href='"+item.link+"' target='"+item.target+"'><img width='"+item.width+"' height='"+item.height+"' src='"+item.sImg+"' alt='"+item.description+"'></a></div>";
+                            imgItems += "<div class='item active'><a href='"+item.link+"' target='"+item.target+"'><img width='"+item.width+"' height='"+item.height+"' src='"+item.sImg+"' alt='"+item.discription+"'></a></div>";
                         }
                         else{
                             imgIcons += "<li data-target='#carousel-example-generic' data-slide-to='"+i+"'></li>";
-                            imgItems += "<div class='item'><a href='"+item.link+"' target='"+item.target+"'><img width='"+item.width+"' height='"+item.height+"' src='"+item.sImg+"' alt='"+item.description+"'></a></div>";
+                            imgItems += "<div class='item'><a href='"+item.link+"' target='"+item.target+"'><img width='"+item.width+"' height='"+item.height+"' src='"+item.sImg+"' alt='"+item.discription+"'></a></div>";
                         }
                     }
                     adsTemp(imgItems,imgIcons,jsonData,imgList.length);

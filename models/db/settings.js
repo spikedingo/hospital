@@ -3,7 +3,6 @@
  * 创建数据库连接
  * 该模块只会被加载一次
  */
-
 module.exports = {
 
     // debug 为 true 时，用于本地调试

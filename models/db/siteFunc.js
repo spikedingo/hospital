@@ -206,7 +206,7 @@ var siteFunc = {
             //notices: this.getContentLists({$or:[{"keyName":"notices"},{"keyName": "hospitalWorks"}]},6),
             notices: this.getContentLists({$or:[{"keyName":"brandNews"},{"keyName": "hospitalWorks"}]},6),
             hospitalCultures: this.getContentLists({'keyName' : 'hospitalCulture'},6),
-            expertInfos:this.getContentLists({'tags':new RegExp('专家门诊')}, 5),
+            expertInfos:this.getContentLists({'tags':new RegExp('专家门诊|专家坐诊')}, 5),
 
             clinicDeps:this.getDepartments({'departmentType' : '1'}),
             techDeps:this.getDepartments({'departmentType' : '2'}),
@@ -715,7 +715,6 @@ var siteFunc = {
         var oType = categoryInfos.type || categoryInfos
         console.log(categoryInfos, oType, 'renderToTargetPageByType')
         this.getFrontTemplate(req,res,function(temp) {
-            console.log(temp, 'this is the index page')
             var targetPath;
             if (temp) {
                 var defaultTempPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/defaultTemp';

@@ -265,21 +265,22 @@ var system = {
         var dataPath = settings.DATABACKFORDER + ms;
 //        var cmdstr = 'mongodump -o "'+dataPath+'"';
         var cmdstr = settings.MONGODBEVNPATH + 'mongodump -u '+settings.USERNAME+' -p '+settings.PASSWORD+' -d '+settings.DB+' -o "'+dataPath+'"';
-
         var batPath = settings.DATAOPERATION + '/backupData.sh';
         if(!fs.existsSync(settings.DATABACKFORDER)){
             fs.mkdirSync(settings.DATABACKFORDER);
         }
         if (fs.existsSync(dataPath)) {
-
             console.log('已经创建过备份了');
 
         } else {
+
+            console.log('backuping 3')
 
             fs.mkdir(dataPath,0777,function(err1){
                 if (err1) throw err1;
 
                 child.exec(cmdstr,function (error, stdout, stderr) {
+                    console.log(stdout, 'here')
                     if (error !== null) {
                         console.log('exec error: ' + error);
                     }else{

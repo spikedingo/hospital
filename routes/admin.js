@@ -610,6 +610,7 @@ var returnAdminRouter = function(io) {
 
 //备份数据库执行
     router.get('/manage/backupDataManage/backUp', function(req, res, next) {
+        console.log('backuping')
         if(adminFunc.checkAdminPower(req,settings.BACKUPDATA[0] + '_backup')) {
             system.backUpData(res, req);
         }else{
