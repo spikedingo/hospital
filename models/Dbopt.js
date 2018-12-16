@@ -97,6 +97,10 @@ var DbOpt = {
             if(err){
                 res.end(err);
             }else{
+                res.send({
+                    status: 1,
+                    msg: '文章发布成功！'
+                })
                 res.end("success");
             }
 

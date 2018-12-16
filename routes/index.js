@@ -20,69 +20,16 @@ var validator = require("validator");
 var moment = require('moment');
 //站点配置
 var settings = require("../models/db/settings");
+var adminFunc = require("../models/db/adminFunc");
 var siteFunc = require("../models/db/siteFunc");
 var url = require('url');
 //缓存
 var cache = require('../util/cache');
 
-
 /* GET home page. */
 router.get('/', function (req, res, next) {
     console.log('getting index')
     siteFunc.renderToTargetPageByType(req,res,'index');
-});
-
-router.get('/getPage', function(req, res, next) { // 浏览器端发来get请求
-    var page = req.params.page || 1;  //获取get请求中的参数 page
-    console.log("page: "+page);
-    var Res = res;  //保存，防止下边的修改
-    //url 获取信息的页面部分地址
-    // var url = 'https://www.lagou.com/jobs';
-    var url = 'https://mp.weixin.qq.com/s/wNKTa7498h5nze4lrNTB5A'
-
-    https.get(url,function(res){  //通过get方法获取对应地址中的页面信息
-        var chunks = [];
-        var size = 0;
-        res.on('data',function(chunk){   //监听事件 传输
-            chunks.push(chunk);
-            size += chunk.length;
-        });
-        res.on('end',function(){  //数据传输完
-            var data = Buffer.concat(chunks,size);  
-            var html = data.toString();
-            var $ = cheerio.load(html); //cheerio模块开始处理 DOM处理
-
-            console.log($ , 'cheerio');
-            var jobs = [];
-
-            var article = {}
-            var $fullArticle = $("#img-content")
-
-            article.title = $fullArticle.find('#activity-name').text().trim()
-            console.log(article.title, 'article')
-            return false
-            var jobs_list = $(".hot_pos li");
-            $(".hot_pos>li").each(function(){   //对页面岗位栏信息进行处理  每个岗位对应一个 li  ,各标识符到页面进行分析得出
-                var job = {};
-                job.company = $(this).find(".hot_pos_r div").eq(1).find("a").html(); //公司名
-                job.period = $(this).find(".hot_pos_r span").eq(1).html(); //阶段
-                job.scale = $(this).find(".hot_pos_r span").eq(2).html(); //规模
-
-                job.name = $(this).find(".hot_pos_l a").attr("title"); //岗位名
-                job.src = $(this).find(".hot_pos_l a").attr("href"); //岗位链接
-                job.city = $(this).find(".hot_pos_l .c9").html(); //岗位所在城市
-                job.salary = $(this).find(".hot_pos_l span").eq(1).html(); //薪资
-                job.exp = $(this).find(".hot_pos_l span").eq(2).html(); //岗位所需经验
-                job.time = $(this).find(".hot_pos_l span").eq(5).html(); //发布时间
-
-                console.log(job.name);  //控制台输出岗位名
-                jobs.push(job);  
-            });
-            Res.json({  //返回json格式数据给浏览器端
-                jobs:jobs
-            });
-        });
-    });
 });
 
 //缓存站点地图
@@ -254,6 +201,10 @@ router.get('/guides',function(req, res, next) {
     siteFunc.renderToTargetPageByType(req, res, 'guides', {info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
 })
 
+router.get('/addWxContent',function(req, res, next) {
+    siteFunc.renderToTargetPageByType(req, res, 'addWxContent', {info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
+})
+
 router.get('/aboutPatients',function (req,res,next){
     siteFunc.renderToTargetPageByType(req,res,'aboutPatients',{info : '非法操作!',message : settings.system_illegal_param , page : 'do500'});
 });
@@ -329,6 +280,100 @@ router.get('/:forder/:defaultUrl', function (req, res, next) {
         queryCatePage(req, res, currentUrl);
     }else{
         next();
+    }
+});
+
+router.post('/api/getWxArticle', function(req, res, next) { // 浏览器端发来get请求
+    var page = req.params.page || 1;  //获取get请求中的参数 page
+    console.log(req.body.wxUrl , 'url');
+    var Res = res;  //保存，防止下边的修改
+    //url 获取信息的页面部分地址
+    // var url = 'https://www.lagou.com/jobs';
+    var url = req.body.wxUrl; 
+    // 'https://mp.weixin.qq.com/s/wNKTa7498h5nze4lrNTB5A'
+
+    https.get(url,function(res){  //通过get方法获取对应地址中的页面信息
+        var chunks = [];
+        var size = 0;
+        res.on('data',function(chunk){   //监听事件 传输
+            chunks.push(chunk);
+            size += chunk.length;
+        });
+        res.on('end',function(){  //数据传输完
+            var data = Buffer.concat(chunks,size);  
+            var html = data.toString();
+            var $ = cheerio.load(html); //cheerio模块开始处理 DOM处理
+
+            console.log($ , 'cheerio');
+            var jobs = [];
+
+            var article = {}
+            var $fullArticle = $("#img-content")
+
+            article.title = $fullArticle.find('#activity-name').text().trim()
+            // article.time = $.html().match(/ct\=\"(.*)\"\*1/) ? $.html().match(/ct\=\"(.*)\"\*1/)[1] : 
+            article.rawDate = $.html().match(/ct\=\"(.*)\"\*1/)[1]
+            article.date = $.html().match(/var\spublish\_time\s\=\s\"(.*)\"\s\|\|/)[1]
+
+            Res.send({
+                'status': 1,
+                'data': {
+                    title: article.title,
+                    rawDate: article.rawDate,
+                    date: article.date
+                },
+                'msg': '获取信息成功'
+            });
+            Res.end("success");
+
+            return false
+            var data = {
+                category: "SkSad2pnG",
+                dateSeted: article.date,
+                description: article.title,
+                from: "3",
+                keyName: "notices",
+                keywords: "专家坐诊",
+                originUrl: req.body.wxUrl,
+                sortPath: "0,SkSad2pnG",
+                state: true,
+                stitle: article.title,
+                tags: "专家坐诊",
+                title: article.title
+            }
+
+            req.body = data
+            console.log( article.title, article.date, article.rawDate , req.body,  'article')
+
+            DbOpt.addOne(Content, req, Res)
+        });
+    });
+});
+
+router.post('/api/postWxArticle', function(req, res, next) {
+    // var page = req.params.page || 1;  //获取get请求中的参数 page
+
+    // var data = {
+    //     category: "SkSad2pnG",
+    //     dateSeted: req.body.date,
+    //     description: req.body.title,
+    //     from: "3",
+    //     keyName: "notices",
+    //     keywords: "专家坐诊",
+    //     originUrl: req.body.wxUrl,
+    //     sortPath: "0,SkSad2pnG",
+    //     state: true,
+    //     stitle: req.body.title,
+    //     tags: "专家坐诊",
+    //     title: req.body.title
+    // }
+
+    // req.body = data
+    // console.log( article.title, article.date, article.rawDate , req.body,  'article')
+    if (req.body.title) {
+        DbOpt.addOne(Content, req, res)
+    }else{
+        res.end('failed')
     }
 });
 
