@@ -243,6 +243,18 @@ var siteFunc = {
         }
     },
 
+    setDataForAddWx: function (req, res, params ,staticforder, defaultTempPath,siteInfo) {
+        //var requireField = 'title date commentNum description clickNum isTop sImg tags';
+        //var documentList = DbOpt.getPaginationResult(Content, req, res, params, requireField);
+        //var tagsData = DbOpt.getDatasByParam(ContentTags, req, res, {});
+        return {
+            siteConfig: this.siteInfos(siteInfo),
+            //logined: isLogined(req),
+            staticforder : staticforder,
+            layout: defaultTempPath
+        }
+    },
+
     setDataForHtmlSiteMap : function(req, res, params ,staticforder, defaultTempPath){
 
         return {
@@ -770,6 +782,9 @@ var siteFunc = {
                 }else if(oType == 'guides'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/guides';
                     res.render(targetPath, siteFunc.setDataForGuidePage(req, res,  params, temp.alias, defaultTempPath,'患者服务'));
+                }else if(oType == 'addWxContent'){
+                    targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/addWxContent';
+                    res.render(targetPath, siteFunc.setDataForAddWx(req, res,  params, temp.alias, defaultTempPath,'微信文章'));
                 }else if(oType == 'aboutDoctors'){
                     targetPath = settings.SYSTEMTEMPFORDER + temp.alias + '/public/aboutDoctors';
                     res.render(targetPath, siteFunc.setDataForDoctorList(req, res,  params, temp.alias, defaultTempPath,'医护团队'));

@@ -41,7 +41,7 @@
                 <div class="right-section">
                     <p>皖ICP备09022350号 皖公网安备 34182502000016号
                     </p>
-                    <p>Copyright 2018 旌德县人民医院 All Rights Reserved.</p>   
+                    <p>Copyright 2018 旌德县人民医院 All Rights <a class="wx" href="javascript:;">Reserved</a>.</p>   
                     <p>
                         <a href="#">网站建设</a>：
                         <a href="#">旌德县人民医院信息科</a>
@@ -51,4 +51,18 @@
 		</div>
 	</div>
 </div>
+
+<script>
+    $(function() {
+        var wxClicked = 0
+
+        $('.wx').click(function() {
+            wxClicked++
+
+            if (wxClicked == 5) {
+                window.location.href = '/addWxContent'
+            }
+        })
+    })
+</script>
 

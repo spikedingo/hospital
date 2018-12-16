@@ -1,0 +1,171 @@
+<style>
+	.wx-add-container {
+		padding-top: 100px;
+	}
+
+	#wxUrl {
+		line-height: 30px;
+		display: inline-block;
+		width: 70%;
+		vertical-align: top;
+	}
+
+	#getContent {
+		width: 100px;
+		height: 40px;
+		background: #63a485;
+		color: white;
+		line-height: 40px;
+		text-align: center;
+		margin-top: 20px;
+		vertical-align: top;
+		font-size: 18px;
+		cursor: pointer;
+	}
+
+	.content-info .single-line {
+		margin-top: 20px;
+	}
+
+	.content-info .single-line label {
+		width: 100px;
+		display: block;
+		color: #63a485;
+		font-size: 16px;
+	}
+	.content-info .single-line input {
+		line-height: 30px;
+		width: 70%;
+		vertical-align: top;
+		font-size: 15px;
+	}
+
+	.confirm-add {
+		display: inline-block;
+		width: 150px;
+		height: 40px;
+		background: #a9a9a9;
+		color: #fff;
+		line-height: 40px;
+		text-align: center;
+		vertical-align: top;
+		font-size: 16px;
+		margin-top: 40px;
+		margin-bottom: 100px;
+		cursor: pointer;
+	}
+
+	.confirm-add.ok {
+		display: inline-block;
+		width: 150px;
+		height: 40px;
+		background: #006494;
+		color: white;
+		line-height: 40px;
+		text-align: center;
+		vertical-align: top;
+		font-size: 16px;
+		margin-top: 40px;
+		margin-bottom: 100px;
+		cursor: pointer;
+	}
+</style>
+<div class="sections-wrap">
+	<div class="container wx-add-container">
+		<input id="wxUrl" type="text" placeholder="请输入网址">
+		<div id="getContent">读取</div>
+
+		<div class="content-info">
+			<div class="single-line">
+				<label for="title">标题</label>
+				<input type="text" value="" name="title" id="wxTitle">
+			</div>
+
+			<div class="single-line">
+				<label for="date">时间</label>
+				<input type="text" value="" name="time" id="wxTime">
+			</div>
+		</div>
+
+		<div class="confirm-add">
+			确认无误便发布
+		</div>
+	</div>
+</div>
+
+<script>
+	$(function() {
+
+		$('#getContent').click(function() {
+			var url = $('#wxUrl').val()
+
+			if (!url) {
+				alert('没有地址老哥')
+				return false
+			}else{
+				$.ajax({
+					'url': '/api/getWxArticle',
+					'type': 'POST',
+					'data': {
+						wxUrl: url,
+					},
+					success: function(res) {
+						console.log(res,'res')
+						if (res.status == 1) {
+							var title = res.data.title
+							var date = res.data.date
+
+							$('#wxTitle').val(title)
+							$('#wxTime').val(date)
+							$('.confirm-add').addClass('ok')
+						}else{
+							alert('获取失败，傻逼了吧')
+						}
+					}
+				})
+			}
+		})
+
+		$('.confirm-add').click(function(e) {
+			if (!$(this).hasClass("ok")) {
+				alert('没有获取信息，玩儿蛋去吧')
+			}else{
+				var url = $('#wxUrl').val()
+				var title = $('#wxTitle').val()
+				var date = $('#wxTime').val()
+
+				var data = {
+				    'category': "SkSad2pnG",
+				    'dateSeted': date,
+				    'description': title,
+				    'from': "3",
+				    'keyName': "notices",
+				    'keywords': "专家坐诊",
+				    'originUrl': url,
+				    'sortPath': "0,SkSad2pnG",
+				    'state': true,
+				    'stitle': title,
+				    'tags': "专家坐诊",
+				    'title': title
+				}
+
+				$.ajax({
+					'url': '/api/postWxArticle',
+					'data': data,
+					'type': 'POST',
+					success: function(res) {
+						console.log(res,'res')
+						if (res.status == 1) {
+							alert('偷懒成功~')
+							setTimeout(function() {
+								window.location.href = "/contentList/notices"
+							},2000)
+						}else{
+							alert('发布失败，老实手工发吧')
+						}
+					}
+				})
+			}
+		})
+	})
+</script>
