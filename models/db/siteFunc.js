@@ -214,7 +214,7 @@ var siteFunc = {
             pageType: 'index',
             logined: isLogined(req),
             staticforder : staticforder,
-            cdnfolder : cdnfolder,
+            cdnfolder : '/themes/' + staticforder + '/images',
             layout: defaultTempPath
         }
     },
